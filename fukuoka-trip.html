@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f4ee">
+  <meta name="description" content="福岡 5 日旅行手冊：博多、由布院溫泉、糸島海岸與太宰府。可離線閱讀的彈性行程 V2。">
+  <title>FUKUOKA｜福岡 5 日旅行手冊</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23f6f4ee'/%3E%3Ccircle cx='32' cy='32' r='18' fill='%23bc4b35'/%3E%3C/svg%3E">
+  <style>
+    /* 01. Design tokens · all assets and styles are contained in this file. */
+    :root {
+      color-scheme: light;
+      --paper: #f6f4ee;
+      --surface: #fffefa;
+      --ink: #233c47;
+      --muted: #5e6c6b;
+      --line: #dcded5;
+      --accent: #ac432e;
+      --tint: #f3e8df;
+      --serif: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif TC", "PMingLiU", Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.7; -webkit-text-size-adjust: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button, a, input, summary { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+    button:disabled { cursor: default; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+    h1, h2, h3, p { margin: 0; }
+    svg { display: block; max-width: 100%; }
+    [hidden] { display: none !important; }
+    .wrap { width: min(1160px, 100% - 48px); margin-inline: auto; }
+    .eyebrow { font-size: 12px; font-weight: 650; letter-spacing: .19em; text-transform: uppercase; }
+    .muted { color: var(--muted); }
+    .skip { position: fixed; z-index: 100; left: 16px; top: -100px; padding: 12px 20px; background: var(--surface); }
+    .skip:focus { top: 12px; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); padding: 4px 11px; border-radius: 99px; font-size: 14px; }
+    .pending { color: #864a24; background: #f9ecdc; border: 0; }
+    .icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    /* 02. Cover and route diagram */
+    .masthead { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 24px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; letter-spacing: .08em; }
+    .sun { display: inline-block; width: 13px; height: 13px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .edition { color: var(--muted); font-size: 12px; letter-spacing: .12em; }
+    .cover { display: grid; gap: 30px; padding-block: 42px 32px; }
+    .cover-kicker { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; }
+    .cover-kicker::before { content: ""; width: 30px; height: 1px; background: var(--accent); }
+    h1 { font-size: clamp(58px, 10vw, 112px); font-family: Georgia, serif; line-height: .98; font-weight: 400; letter-spacing: -.055em; margin-left: -4px; }
+    .cover-subtitle { font-size: 17px; letter-spacing: .2em; margin-top: 17px; }
+    .cover-copy { font-family: var(--serif); font-size: 22px; margin-block: 23px 13px; letter-spacing: .07em; }
+    .cover-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+    .route-panel { position: relative; background: #e7ece6; border: 1px solid #d6dfd5; border-radius: 4px 48px 4px 4px; overflow: hidden; min-height: 260px; }
+    .route-caption { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 18px 22px 0; }
+    .route-caption span:last-child { font-size: 12px; color: #536863; }
+    .route-panel svg { width: 100%; height: 220px; }
+    .route-panel svg text { font-family: var(--sans); fill: #294c4b; }
+    .route-foot { padding: 0 22px 16px; color: #506962; font-size: 12px; }
+    .overview { padding-bottom: 32px; }
+    .section-label { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .section-label p { font-size: 14px; color: var(--muted); }
+    .day-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .day-card { padding: 18px; min-width: 0; background: var(--card); border: 1px solid var(--line); border-radius: 12px; transition: transform .2s, box-shadow .2s; }
+    .day-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px #233c470b; }
+    .day-card:last-child { grid-column: 1 / -1; }
+    .day-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 20px; }
+    .day-card-number { font: 400 38px/1 Georgia, serif; color: var(--day-accent); }
+    .day-card h3 { font-size: 16px; font-weight: 600; }
+    .day-card p { font-size: 14px; margin-top: 4px; color: var(--muted); }
+    .day-card-bottom { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 14px; font-size: 12px; letter-spacing: .07em; color: var(--muted); }
+    /* 03. Sticky day navigation */
+    .nav-bar { position: sticky; top: 0; z-index: 20; background: #f6f4eef5; border-block: 1px solid var(--line); padding-top: env(safe-area-inset-top, 0px); backdrop-filter: blur(12px); }
+    .nav-inner { display: flex; align-items: center; gap: 24px; }
+    .nav-label { display: none; flex-shrink: 0; font-size: 14px; letter-spacing: .08em; }
+    .day-nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); width: 100%; gap: 4px; }
+    .day-nav a { display: flex; justify-content: center; align-items: center; min-height: 58px; padding: 10px 4px; font-size: 14px; font-weight: 600; border-bottom: 3px solid transparent; }
+    .day-nav a[aria-current="location"] { color: var(--accent); border-bottom-color: var(--accent); }
+    .nav-gift { display: none; font-size: 14px; flex-shrink: 0; min-height: 44px; align-items: center; gap: 7px; }
+    .intro-note { display: flex; align-items: flex-start; gap: 12px; padding-block: 24px 4px; color: var(--muted); font-size: 14px; }
+    .intro-note .icon { margin-top: 3px; }
+    /* 04. Daily sections and expandable itinerary cards */
+    .day-section { padding-block: 50px; border-bottom: 1px solid var(--line); scroll-margin-top: 10px; }
+    .day-header { display: grid; gap: 12px; margin-bottom: 25px; }
+    .day-heading { display: flex; gap: 18px; align-items: flex-start; }
+    .day-index { font: 400 62px/1 Georgia, serif; color: var(--day-accent); letter-spacing: -.06em; padding-top: 3px; }
+    .day-header h2 { font-family: var(--serif); font-size: clamp(25px, 3.5vw, 35px); font-weight: 600; line-height: 1.4; letter-spacing: .04em; margin-block: 5px; word-break: keep-all; }
+    .day-theme { font-size: 14px; color: var(--muted); letter-spacing: .035em; }
+    .day-description { color: var(--muted); max-width: 700px; margin-bottom: 22px; }
+    .day-layout { display: grid; gap: 26px; }
+    .timeline-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 15px; }
+    .text-button { padding: 8px 2px; min-height: 44px; color: var(--muted); border: 0; background: none; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
+    .timeline { display: grid; gap: 14px; position: relative; padding-left: 24px; }
+    .timeline::before { content: ""; position: absolute; top: 26px; bottom: 28px; left: 5px; width: 1px; background: #cbd1c9; }
+    .stop { position: relative; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; min-width: 0; }
+    .stop::before { content: ""; position: absolute; width: 9px; height: 9px; background: var(--paper); border: 2px solid var(--day-accent); border-radius: 50%; left: -25px; top: 26px; }
+    .stop summary { list-style: none; cursor: pointer; padding: 19px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .stop summary::-webkit-details-marker { display: none; }
+    .stop-period { color: var(--day-accent); font-size: 12px; letter-spacing: .07em; margin-bottom: 4px; display: block; }
+    .stop-name { font-weight: 600; font-size: 18px; line-height: 1.6; display: block; }
+    .stop-teaser { font-size: 14px; color: var(--muted); display: block; margin-top: 4px; }
+    .chevron { width: 25px; height: 25px; flex-shrink: 0; display: grid; place-items: center; border-radius: 50%; background: var(--paper); transition: transform .2s; }
+    .chevron .icon { width: 16px; height: 16px; }
+    .stop[open] .chevron { transform: rotate(180deg); }
+    .stop-body { padding: 0 18px 20px; }
+    .stop-body p { padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 16px; }
+    .map-link { display: inline-flex; gap: 8px; align-items: center; justify-content: center; min-height: 44px; padding: 9px 12px; border: 1px solid #d8ddd6; background: #f5f6f1; border-radius: 8px; font-size: 14px; color: #566361; margin-top: 14px; max-width: 100%; text-align: left; }
+    .map-link:not(:disabled):hover { border-color: var(--accent); }
+    .aside { display: grid; gap: 14px; align-content: start; }
+    .info-card { padding: 21px; background: #ebece4; border: 1px solid #dce0d5; border-radius: 12px; min-width: 0; }
+    .info-card h3 { display: flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 650; margin-bottom: 10px; }
+    .info-card p, .info-card li { font-size: 14px; color: #53615d; }
+    .info-card ul { padding-left: 1.2em; margin: 0; }
+    .info-card li + li { margin-top: 8px; }
+    .info-card + .info-card { background: transparent; }
+    .info-card.notice { background: var(--tint); border-color: #e9dace; }
+    .info-card .subhead { margin-top: 17px; border-top: 1px solid #d5dace; padding-top: 15px; }
+    .mood-line { color: var(--day-accent); font: italic 20px/1.5 Georgia, serif; margin-top: 16px; }
+    .planning { margin-top: 22px; padding: 22px; background: var(--surface); border: 1px dashed #b7c3b7; border-radius: 12px; }
+    .planning-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+    .planning h3 { font-size: 18px; }
+    .planning > p { color: var(--muted); font-size: 14px; margin-top: 7px; }
+    .planning-fields { margin-top: 20px; display: grid; gap: 16px; }
+    .field-label { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 14px; margin-bottom: 7px; }
+    .field-state { font-size: 12px; color: #8b542b; }
+    .planning input { width: 100%; min-height: 48px; border: 1px solid #c8d0c5; background: #fffefa; color: var(--ink); padding: 11px 12px; border-radius: 7px; font-size: 16px; }
+    .planning input::placeholder { color: #758079; }
+    .pool { margin-top: 22px; padding: 22px; background: var(--surface); border: 1px dashed #bbc6c0; border-radius: 12px; }
+    .pool h3 { font-size: 18px; margin-bottom: 7px; }
+    .pool p { color: var(--muted); font-size: 14px; }
+    .pool ul { padding: 0; margin: 16px 0 0; display: flex; gap: 8px; flex-wrap: wrap; list-style: none; }
+    .collections { padding-block: 50px; border-bottom: 1px solid var(--line); }
+    .stop summary > span:first-child, .day-heading > div { min-width: 0; overflow-wrap: anywhere; }
+    /* 05. Gifts and footer */
+    .gifts { padding-block: 50px; }
+    .gift-heading { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
+    .gift-heading h2 { font: 500 30px/1.4 var(--serif); margin-top: 7px; }
+    .gift-heading p { font-size: 14px; color: var(--muted); margin-top: 9px; }
+    .gift-counter { font-size: 14px; color: var(--accent); white-space: nowrap; }
+    .gift-list { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); }
+    .gift-row { display: flex; align-items: center; gap: 15px; padding: 19px 20px; cursor: pointer; min-height: 66px; }
+    .gift-row + .gift-row { border-top: 1px solid var(--line); }
+    .gift-row input { width: 22px; height: 22px; flex-shrink: 0; accent-color: var(--accent); cursor: pointer; }
+    .gift-row:has(input:checked) .gift-name { text-decoration: line-through; color: var(--muted); }
+    .gift-row:has(input:checked) { background: #f0f2eb; }
+    .gift-number { margin-left: auto; padding-left: 8px; color: #6c7770; font: 16px Georgia, serif; }
+    .storage-note { font-size: 14px; color: var(--muted); margin-top: 14px; }
+    .footer { display: flex; justify-content: space-between; gap: 20px; padding: 26px 0 calc(90px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .footer .closing { font-family: var(--serif); font-size: 16px; color: var(--ink); }
+    .back-top { position: fixed; z-index: 25; right: max(18px, env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 48px; height: 48px; display: grid; place-items: center; color: white; background: var(--ink); border: 1px solid #fff5; border-radius: 50%; box-shadow: 0 4px 15px #233c471a; }
+    noscript { display: block; padding: 24px; border: 1px solid var(--accent); }
+    /* 06. Responsive, safe areas, accessibility and print */
+    @supports (padding: max(0px)) { body { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); } }
+    @media (min-width: 640px) {
+      .day-cards { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .day-card { padding: 15px; }
+      .day-card:last-child { grid-column: auto; }
+      .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .planning-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .day-header { display: flex; justify-content: space-between; align-items: center; }
+    }
+    @media (min-width: 900px) {
+      .cover { grid-template-columns: 1.15fr 1fr; align-items: center; padding-block: 47px 38px; gap: 60px; }
+      .route-panel svg { height: 234px; }
+      .day-card { padding: 20px; }
+      .nav-label, .nav-gift { display: flex; }
+      .day-nav { max-width: 550px; margin: auto; }
+      .day-layout { grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 30px; }
+      .day-section { padding-block: 55px; }
+      .day-description { margin-left: 80px; }
+      .gifts { display: grid; grid-template-columns: 1fr 1.35fr; gap: 50px; align-items: start; }
+      .gift-heading { display: block; }
+      .gift-counter { margin-top: 24px; }
+    }
+    @media (max-width: 359px) {
+      .wrap { width: calc(100% - 32px); }
+      h1 { font-size: 53px; }
+      .cover-subtitle { font-size: 15px; }
+      .day-heading { gap: 12px; }
+      .day-index { font-size: 50px; }
+      .day-card { padding: 14px; }
+      .edition { letter-spacing: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+    @media print {
+      .nav-bar, .back-top, .timeline-toolbar, .map-link, .skip { display: none; }
+      body { background: white; }
+      .wrap { width: 100%; }
+      .day-layout { display: block; }
+      .aside { margin-top: 20px; }
+      .stop, .info-card, .gift-row { break-inside: avoid; }
+      .day-section { break-before: page; }
+      .footer { padding-bottom: 20px; }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip" href="#day-1">跳至行程</a>
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" style="position:absolute">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.2"/></symbol>
+      <symbol id="i-car" viewBox="0 0 24 24"><path d="m5 9 2-5h10l2 5M4 16V9h16v7H4Zm2 0v3m12-3v3M7 12h1m8 0h1"/></symbol>
+      <symbol id="i-food" viewBox="0 0 24 24"><path d="M6 3v7m-3-7v4a3 3 0 0 0 6 0V3M6 10v11M18 3c-3 3-3 8 0 8h2M20 3v18"/></symbol>
+      <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l1 13H4L5 8Zm3 0V6a4 4 0 0 1 8 0v2"/></symbol>
+      <symbol id="i-options" viewBox="0 0 24 24"><path d="M7 21V3m0 7h7a4 4 0 0 0 4-4V3m-3 3 3-3 3 3M4 6l3-3 3 3"/></symbol>
+    </defs>
+  </svg>
+  <header class="wrap masthead">
+    <a class="brand" href="#top"><span class="sun" aria-hidden="true"></span> 九州・旅のしおり</a>
+    <span class="edition">TRAVEL JOURNAL / V2</span>
+  </header>
+  <main>
+    <section class="wrap cover" aria-labelledby="cover-title">
+      <div>
+        <p class="eyebrow cover-kicker">A little escape to Kyushu</p>
+        <h1 id="cover-title">FUKUOKA</h1>
+        <p class="cover-subtitle">5 DAYS TRIP <span aria-label="日本">🇯🇵</span></p>
+        <p class="cover-copy">從城市燈火，到山間與海邊。</p>
+        <div class="cover-meta"><span class="pill pending">旅行日期・待確認</span><span class="pill">5 位男性朋友・5 天 4 夜</span><span class="pill">Day 2–3 自駕</span><a class="pill" href="#gifts">伴手禮清單 ↗</a></div>
+      </div>
+      <div class="route-panel">
+        <div class="route-caption"><span class="eyebrow">Our little journey</span><span>KYUSHU / 九州</span></div>
+        <svg viewBox="0 0 440 230" role="img" aria-labelledby="route-title route-desc">
+          <title id="route-title">福岡五日旅行路線示意圖</title>
+          <desc id="route-desc">以福岡為起點，Day 2 前往由布院，Day 3 經糸島返回福岡，Day 4 往返太宰府。此圖不代表地理位置或距離。</desc>
+          <g fill="none" stroke="#c3d2c7" stroke-width="1" opacity=".8"><path d="M-20 180Q70 20 230 30T460-30"/><path d="M-20 195Q70 35 230 45T460-15"/><path d="M-20 210Q70 50 230 60T460 0"/><path d="M260 250Q220 170 370 160T490 70"/><path d="M278 250Q235 185 385 175T510 70"/></g>
+          <circle cx="351" cy="64" r="31" fill="#d48864" opacity=".72"/>
+          <g fill="none" stroke="#7d9690" stroke-width="1.5" stroke-linecap="round"><path d="M27 66q9-8 18 0t18 0m-29 8q9-8 18 0t18 0"/><path d="m302 92 20-29 19 29m-7-2 16-21 18 23"/></g>
+          <path d="M162 119Q206 26 315 120Q280 198 70 124Q105 94 162 119" fill="none" stroke="#56756b" stroke-width="2" stroke-dasharray="5 6"/>
+          <path d="m162 119 35 65" fill="none" stroke="#a97557" stroke-width="2" stroke-dasharray="4 5"/>
+          <g fill="#f6f4ee" stroke="#56756b" stroke-width="2"><circle cx="70" cy="124" r="5"/><circle cx="315" cy="120" r="5"/><circle cx="197" cy="184" r="5"/></g>
+          <circle cx="162" cy="119" r="9" fill="#ac432e" stroke="#f6f4ee" stroke-width="3"/>
+          <g text-anchor="middle"><text x="156" y="149" font-size="18" font-weight="600">福岡</text><text x="68" y="104" font-size="16">糸島</text><text x="338" y="148" font-size="16">由布院</text><text x="244" y="202" font-size="16">太宰府</text><text x="234" y="70" font-size="11" letter-spacing="2">DAY 2 →</text><text x="171" y="185" font-size="11" text-anchor="end">← DAY 3</text></g>
+        </svg>
+        <p class="route-foot">路線示意・非實際地圖，位置與距離未按比例</p>
+      </div>
+    </section>
+    <section class="wrap overview" aria-label="五日行程總覽">
+      <div class="section-label"><h2 class="eyebrow">The five-day edit</h2><p>選一天，開始探索 ↘</p></div>
+      <div class="day-cards" id="day-cards"></div>
+    </section>
+    <div class="nav-bar">
+      <div class="wrap nav-inner"><a class="nav-label" href="#top">福岡旅行手冊</a><nav class="day-nav" id="day-nav" aria-label="每日行程快速切換"></nav><a class="nav-gift" href="#gifts"><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>伴手禮</a></div>
+    </div>
+    <div class="wrap">
+      <p class="intro-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>V2・預計早去晚回，實際日期與航班待確認。時段僅表示行程順序；5 人同行，保留移動、候位與休息餘裕，所有預訂資訊皆待確認。</span></p>
+      <noscript>此手冊需要啟用瀏覽器 JavaScript 才能顯示行程。啟用後不需網路即可閱讀；不需要登入或 API Key。</noscript>
+      <div id="itinerary"></div>
+      <section id="collections" class="collections" aria-labelledby="collections-title"><div class="gift-heading"><div><p class="eyebrow">Saved places / Route notes</p><h2 id="collections-title">收藏，按動線留著。</h2><p>候選與備選未排入固定時段；主行程也仍需確認營業、交通與預訂資訊。</p></div></div><div class="aside collection-grid" id="collection-groups"></div></section>
+      <section id="gifts" class="gifts" aria-labelledby="gift-title">
+        <div class="gift-heading"><div><p class="eyebrow">Shopping / Gift List</p><h2 id="gift-title">把九州的一點日常，帶回家。</h2><p>遇見喜歡的再買，把想帶回去的先記下。</p></div><p class="gift-counter" id="gift-counter" role="status" aria-live="polite">0 / 5 已完成</p></div>
+        <div><div class="gift-list" id="gift-list"></div><p class="storage-note" id="storage-note">勾選與自駕筆記僅儲存於目前瀏覽器，不會同步至其他裝置。清除瀏覽器資料或移動檔案後，紀錄可能消失。</p></div>
+      </section>
+    </div>
+  </main>
+  <footer class="wrap footer"><div><p class="closing">旅途，留一點空白。</p><p>FUKUOKA · 5 DAYS TRIP</p></div><div>V2・行程草案<br>主要內容可離線閱讀</div></footer>
+  <a class="back-top" href="#top" aria-label="回到頂部" title="回到頂部"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></a>
+  <script>
+    'use strict';
+    /*
+     * EDITING GUIDE
+     * 1. Edit TRIP only to change the itinerary. No dependencies or fetch calls.
+     * 2. Each stop: period, title, teaser, note, mapUrl. Use null until confirmed.
+     * 3. mapUrl accepts a normal Google Maps HTTPS URL, no API key required.
+     * 4. Browser-local state is separate from itinerary data and versioned.
+     * 5. This classic inline script works directly under file://.
+     */
+    const TRIP = {
+  "days": [
+    {
+      "id": 1,
+      "title": "福岡市區・夜景",
+      "emoji": "🏮",
+      "theme": "Fukuoka First Day / City & Night View",
+      "short": "城市、夜景與屋台",
+      "mode": "步行・市區交通",
+      "accent": "#a94b35",
+      "tint": "#f4ebe2",
+      "intro": "5 位朋友的福岡旅行，先從市區走起。預計早班抵達，但航班待確認；安頓行李後再安排散步與美食，傍晚往福岡塔，晚上回中洲。第一天留足入境、交通與休息的空間。",
+      "stops": [
+        {
+          "period": "抵達後｜預計早班，待確認",
+          "title": "福岡機場 → 飯店寄放行李",
+          "teaser": "入境・領行李・輕裝出門",
+          "note": "航班時間、福岡住宿與寄放方式待確認。先完成入境、領行李與飯店寄放，再依實際時間出發；不以預計落地時間直接銜接景點。",
+          "mapUrl": null
+        },
+        {
+          "period": "安頓後｜依抵達時間調整",
+          "title": "博多站周邊 → 櫛田神社",
+          "teaser": "博多散步・沿途吃東西",
+          "note": "先在博多站附近走走，再前往櫛田神社。午餐與停留長度待確認；若班機延誤或大家想休息，就縮短散策。",
+          "mapUrl": null
+        },
+        {
+          "period": "接續散策｜彈性停留",
+          "title": "Canal City Hakata 博多運河城",
+          "teaser": "逛逛商場・市區散步・吃東西",
+          "note": "依體力與時間決定逛街長度，也可安排吃東西或休息。店家與營業時間待確認，保留轉往福岡塔的交通餘裕。",
+          "mapUrl": null
+        },
+        {
+          "period": "傍晚｜依日落時間調整",
+          "title": "福岡塔・夕陽／夜景",
+          "teaser": "建議日落前約 45～60 分鐘抵達，實際時間待旅行日期確定後調整。",
+          "note": "由市區前往福岡塔，再於觀景後回中洲。交通路線、票券、營業時間、天候與日落時間待確認；若抵達較晚或體力不足，調整為夜景或縮短停留。",
+          "mapUrl": null
+        },
+        {
+          "period": "夜晚｜自由安排",
+          "title": "回中洲 → 中洲屋台",
+          "teaser": "屋台晚餐・吃得下再加宵夜",
+          "note": "屋台店家與營業狀況待確認。5 人座位與候位方式依現場確認，不預設一定能同時入座；如果還吃得下，一蘭拉麵總本店可作為宵夜候選，是否前往與營業資訊待確認。",
+          "mapUrl": null
+        }
+      ],
+      "transport": "以步行與市區大眾交通為主，串連機場、飯店、博多、福岡塔與中洲。飯店位置尚未確定，具體路線與移動時間待確認。",
+      "food": [
+        "市區午餐／小吃：餐廳待確認。",
+        "中洲屋台：店家與座位安排待確認。",
+        "宵夜候選：一蘭拉麵總本店，還吃得下再去。"
+      ],
+      "notes": [
+        "預計早班抵達，實際航班待確認；預留入境、行李、寄放與航班延誤的緩衝。",
+        "福岡塔：建議日落前約 45～60 分鐘抵達，實際時間待旅行日期確定後調整。",
+        "依第一天體力減少逛街或散步，不以跑完全部行程為目標。"
+      ],
+      "alternatives": [
+        "東長寺：僅列備選，不在核心行程；有時間與體力再評估。",
+        "抵達延誤時，縮短博多與運河城停留；福岡塔是否改看夜景依當天情況決定。",
+        "疲累或天候不佳時，縮短戶外行程，保留休息與晚餐。"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "福岡 → 由布院",
+      "emoji": "♨️",
+      "theme": "Yufuin Road Trip 🚗♨️",
+      "short": "由布院溫泉 Road Trip",
+      "mode": "自駕・步行",
+      "accent": "#567056",
+      "tint": "#eaf0e5",
+      "intro": "兩天一夜自駕開始。早上從福岡取車出發，在由布院吃午餐、逛街，再入住泡湯。收藏店家依動線與排隊情況挑選，下午留給溫泉與休息。",
+      "stops": [
+        {
+          "period": "早上｜取車資訊待確認",
+          "title": "福岡取車 → 自駕前往由布院",
+          "teaser": "5 人同行，車種與行李空間待確認",
+          "note": "租車公司、車種、取車地點、出發時間與停車場待確認。訂車前確認 5 位成人與實際行李能否容納，再決定車型；不先假設租用哪一款車。",
+          "mapUrl": null
+        },
+        {
+          "period": "抵達後｜午餐候選",
+          "title": "由布まぶし「心」金鱗湖本店",
+          "teaser": "先停車・依排隊與抵達時間決定",
+          "note": "列為午餐候選，尚未確定用餐。營業資訊、候位與 5 人座位待確認；若抵達較晚或排隊過久，午餐現場調整，不影響住宿入住安排。",
+          "mapUrl": null
+        },
+        {
+          "period": "午餐後｜彈性散策",
+          "title": "金鱗湖／湯之坪街道",
+          "teaser": "小吃・甜點・逛店，按動線挑選",
+          "note": "保留 B-SPEAK 本店、鞠智，以及湯布院金賞コロッケ、湯布院金賞コロッケ 2號店。金賞可樂餅兩間擇一，依當天排隊與動線決定。SNOOPY茶屋 由布院店定位為順路逛逛／有興趣再停留，不預設坐下吃正餐。店家營業與是否前往皆待確認。",
+          "mapUrl": null
+        },
+        {
+          "period": "下午｜入住資訊待確認",
+          "title": "入住由布院住宿 → 泡溫泉",
+          "teaser": "住宿候選：由布露天 時のまにまに・余情の美（尚未訂房）",
+          "note": "目前僅為住宿候選。房況、5 人入住配置、入住時間、停車、溫泉與餐食方案待確認；依最終住宿安排調整散策結束時間。",
+          "mapUrl": null
+        },
+        {
+          "period": "晚上｜餐食方案待確認",
+          "title": "晚餐・住宿由布院",
+          "teaser": "先確認住宿是否提供晚餐",
+          "note": "如住宿提供晚餐，依方案與用餐時段安排；若住宿沒有提供晚餐，CARNE 湯布院 串焼き列為候選。餐廳營業、座位、交通與是否預約待確認，未訂位。",
+          "mapUrl": null
+        }
+      ],
+      "transport": "福岡取車後自駕至由布院，停車後步行散策。路線、車程、過路費、停車場，以及 5 人與行李所需車型待確認。",
+      "food": [
+        "午餐候選：由布まぶし「心」金鱗湖本店。",
+        "小吃／甜點候選：B-SPEAK 本店、鞠智。",
+        "湯布院金賞コロッケ／湯布院金賞コロッケ 2號店：兩間擇一，依當天排隊與動線決定。",
+        "SNOOPY茶屋 由布院店：順路逛逛／有興趣再停留，不預設正餐。",
+        "住宿若無晚餐：CARNE 湯布院 串焼き為候選，待確認。"
+      ],
+      "notes": [
+        "由布露天 時のまにまに・余情の美：住宿候選，尚未訂房；5 人入住與餐食方案待確認。",
+        "收藏店家不必全部走完，營業、候位與實際動線待確認。",
+        "駕駛所需文件、取還車條件與停車資訊待確認。"
+      ],
+      "alternatives": [
+        "出發延誤或候位過久時，縮短午餐／逛店，優先配合住宿入住與晚餐。",
+        "金鱗湖可依天候調整至 Day 3 早晨；兩天不必重複走完整段。"
+      ],
+      "winter": [
+        "若於冬季出發，確認雪胎／冬季胎。",
+        "留意山區結冰與天氣，行前確認高速公路及路況。",
+        "日期確定後確認日落時間，不建議過晚行駛山區道路。"
+      ],
+      "fields": [
+        {
+          "id": "rental-company",
+          "label": "租車公司"
+        },
+        {
+          "id": "car-model",
+          "label": "車種／5 人與行李空間"
+        },
+        {
+          "id": "pickup-location",
+          "label": "取車地點"
+        },
+        {
+          "id": "yufuin-stay",
+          "label": "由布院住宿"
+        },
+        {
+          "id": "parking",
+          "label": "停車場"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "由布院 → 糸島 → 福岡",
+      "emoji": "🌊",
+      "theme": "Yufuin Morning & Itoshima Road Trip 🌫️🌊🚗",
+      "short": "糸島海岸 Road Trip",
+      "mode": "自駕・市區還車",
+      "accent": "#376d7b",
+      "tint": "#e7eef0",
+      "mood": "Sea • Cafe • Drive • Sunset",
+      "intro": "早晨走一段金鱗湖，再開車前往糸島。海岸行程以櫻井二見浦為核心，沿途自由停靠，留一段海景咖啡時間；是否看夕陽，再看天氣與還車安排。",
+      "stops": [
+        {
+          "period": "早晨｜依天候與體力調整",
+          "title": "金鱗湖 → 回住宿早餐",
+          "teaser": "湖畔散步後，再回住宿吃早餐",
+          "note": "若 Day 2 已逛金鱗湖，可依大家體力縮短晨間散步。早餐方案與用餐時間待確認；晨霧依天候，並非保證可見。",
+          "mapUrl": null
+        },
+        {
+          "period": "退房後｜抵達時間待確認",
+          "title": "Check-out → 開車前往糸島",
+          "teaser": "約中午抵達為目標，依實際路況調整",
+          "note": "退房、出發、實際路線與車程待確認，途中保留休息時間。約中午抵達不視為固定承諾，若出發延後，就縮短下午停留。",
+          "mapUrl": null
+        },
+        {
+          "period": "抵達後｜午餐待確認",
+          "title": "糸島午餐",
+          "teaser": "餐廳尚未決定，依當天動線安排",
+          "note": "目前不指定餐廳。店家、營業時間、停車與 5 人座位待確認；依抵達時間與後續海岸動線選擇。",
+          "mapUrl": null
+        },
+        {
+          "period": "午餐後｜海岸核心景點",
+          "title": "桜井二見ヶ浦 夫婦岩／海上鳥居",
+          "teaser": "Sakurai Futamigaura's Couple Stones",
+          "note": "櫻井二見浦是糸島目前確定程度較高的核心景點。停車位置、現場天候與停留長度待確認；其餘沿海景點不預先塞進行程。",
+          "mapUrl": null
+        },
+        {
+          "period": "下午｜自由停靠",
+          "title": "糸島海岸線 Road Trip → 海景咖啡",
+          "teaser": "Sea • Cafe • Drive • Sunset",
+          "note": "沿海自駕，咖啡店待確認，有合適的停靠點再休息。視天候、日落與還車時間決定是否看夕陽，不增加大量固定打卡景點。",
+          "mapUrl": null
+        },
+        {
+          "period": "下午／傍晚｜還車資訊待確認",
+          "title": "返回福岡 → 市區還車",
+          "teaser": "還車後，晚餐自由安排",
+          "note": "預留回程交通、加油與還車處理時間。還車地點、截止時間、加油規定及晚餐待確認；以還車安排回推離開糸島的時間。",
+          "mapUrl": null
+        }
+      ],
+      "transport": "由布院自駕前往糸島，再返回福岡市區還車。這天有多段移動，約中午抵達糸島只是目標；依實際車程、路況與還車時間調整海岸停留。",
+      "food": [
+        "糸島午餐：尚未決定餐廳，待確認。",
+        "海景咖啡：店家待確認，有時間再停留。",
+        "福岡晚餐自由安排，待確認。"
+      ],
+      "notes": [
+        "櫻井二見浦為海岸核心，其他景點保留彈性。",
+        "冬季留意山區結冰、高速公路與天氣，參考 Day 2 自駕提醒。",
+        "日落與還車截止時間待確認；看夕陽不能壓縮回程與還車餘裕。"
+      ],
+      "alternatives": [
+        "天候不佳或移動延誤時，縮短海岸與咖啡停留，提早返回福岡。",
+        "若還車安排不允許等夕陽，就保留白天海岸自駕，不再加景點。"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "太宰府 → 天神",
+      "emoji": "⛩️",
+      "theme": "Culture & Shopping ⛩️🛍️",
+      "short": "太宰府文化・天神購物美食",
+      "mode": "大眾交通・步行",
+      "accent": "#97702d",
+      "tint": "#f3eddd",
+      "intro": "搭大眾交通到太宰府，逛天滿宮、表參道與博物館，再返回天神購物吃晚餐。購物主線包含 BEAMS 福岡，其他店家順路再逛。",
+      "stops": [
+        {
+          "period": "前半日｜出發時間彈性",
+          "title": "太宰府市 → 太宰府天滿宮・表參道",
+          "teaser": "文化散策・梅ヶ枝餅",
+          "note": "搭乘大眾交通前往太宰府，走訪天滿宮與表參道，安排梅ヶ枝餅。班次、參訪時間與店家營業資訊待確認。",
+          "mapUrl": null
+        },
+        {
+          "period": "接續安排｜開館資訊待確認",
+          "title": "九州國立博物館",
+          "teaser": "依實際日期確認是否開館",
+          "note": "旅行日期確定後，需要確認九州國立博物館休館日與營業時間。展覽、票券與停留長度待確認。",
+          "mapUrl": null
+        },
+        {
+          "period": "返回天神後",
+          "title": "天神地下街 → BEAMS 福岡 → 自由逛街",
+          "teaser": "地下街與天神購物",
+          "note": "BEAMS 福岡列入正式購物行程，停留長度依大家需求調整。各店營業與路線待確認；The Full Full 僅為順路麵包／小吃／輕食候選，分店與動線待確認，不設固定時間。",
+          "mapUrl": null
+        },
+        {
+          "period": "晚餐｜候選擇一",
+          "title": "葫蘆壽司 ひょうたん寿司／もつ鍋",
+          "teaser": "依胃口、候位與訂位狀況決定",
+          "note": "葫蘆壽司 ひょうたん寿司與もつ鍋均為晚餐候選，尚未決定或訂位。もつ鍋店家、營業時間與 5 人座位待確認，不安排兩場晚餐。",
+          "mapUrl": null
+        }
+      ],
+      "transport": "以大眾交通搭配步行，從福岡前往太宰府，再返回天神。飯店位置、具體路線與班次待確認。",
+      "food": [
+        "太宰府表參道：梅ヶ枝餅，店家待確認。",
+        "晚餐候選：葫蘆壽司 ひょうたん寿司或もつ鍋，擇一，待確認。",
+        "The Full Full：順路麵包／小吃／輕食候選，分店待確認，不排固定時段。"
+      ],
+      "notes": [
+        "旅行日期確定後，需要確認九州國立博物館休館日與營業時間。",
+        "BEAMS 福岡在購物主線，其他購物依時間與需求調整。",
+        "晚餐 5 人座位、候位與是否可預約待確認。"
+      ],
+      "alternatives": [
+        "博物館休館時，保留太宰府散策並提早回天神。",
+        "天候不佳時，增加地下街停留，其他商店彈性刪減。"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Chill Fukuoka",
+      "emoji": "☕",
+      "theme": "Slow Last Day ☕🍜",
+      "short": "散步、美食、舒服回家",
+      "mode": "博多附近・機場交通",
+      "accent": "#80596c",
+      "tint": "#f1e9ed",
+      "intro": "睡飽再出門，在博多附近散步、吃東西，舒服收尾。預計晚班回程，但班機尚未確認；這天不跨很多區域，把領行李、機場報到與出境的時間先留好。",
+      "stops": [
+        {
+          "period": "起床後｜配合退房時間",
+          "title": "睡飽 → 飯店退房／寄放行李",
+          "teaser": "慢慢整理，先確認回程安排",
+          "note": "福岡飯店、退房時間與退房後寄放行李方式待確認。即使預計晚班機，也先回推取行李與出發去機場的時間。",
+          "mapUrl": null
+        },
+        {
+          "period": "早餐或早午餐｜候選",
+          "title": "Dacomecca",
+          "teaser": "依起床時間、候位與胃口決定",
+          "note": "早餐／早午餐候選，營業資訊、候位與是否前往待確認；不為了排隊壓縮後續收尾時間。",
+          "mapUrl": null
+        },
+        {
+          "period": "餐後｜博多附近簡單散步",
+          "title": "博多周邊・住吉神社候選",
+          "teaser": "一小段散步，不跨很多區域",
+          "note": "住吉神社列為小景點候選，依住宿位置、天氣與可用時間決定；參訪資訊待確認，不延伸成大型或遠距離景點行程。",
+          "mapUrl": null
+        },
+        {
+          "period": "依胃口與回程餘裕安排",
+          "title": "LAST MEAL｜最後一餐",
+          "teaser": "好好吃一餐，餐廳現場再決定",
+          "note": "先保留選擇：拉麵、壽司、水炊鍋、福岡當地料理，或前幾天最喜歡的店再吃一次。餐廳、時段與座位待確認，完整候選清單見下方。",
+          "mapUrl": null
+        },
+        {
+          "period": "餐後｜少量購物即可",
+          "title": "伴手禮 → 回飯店拿行李",
+          "teaser": "買齊需要的，再收好行李",
+          "note": "只補買少量伴手禮，不密集逛街。預留可能的退稅流程、整理與回飯店取行李時間；寄放與領取方式待確認。",
+          "mapUrl": null
+        },
+        {
+          "period": "依航班回推｜提早出發",
+          "title": "前往福岡機場 → 回程",
+          "teaser": "機場報到・行李托運・出境",
+          "note": "回程航班、航廈、交通與航空公司報到要求待確認。保留交通緩衝、報到、行李托運、安檢、出境及可能的退稅相關作業時間，不把晚班機視為可玩滿一整天。",
+          "mapUrl": null
+        }
+      ],
+      "transport": "活動集中博多附近，以步行與必要的市區交通為主。先回飯店拿行李，再提早前往福岡機場；飯店、航廈、路線與出發時間待確認。",
+      "food": [
+        "早餐／早午餐候選：Dacomecca，待確認。",
+        "最後一餐不鎖定餐廳，依胃口、動線與剩餘時間決定。"
+      ],
+      "notes": [
+        "預計晚班回程，實際航班與報到要求待確認。",
+        "留足取行李、交通、機場報到、出境及可能的退稅流程時間。",
+        "不安排福岡塔、海之中道海濱公園、Marine World、大型遠距離景點或密集購物。"
+      ],
+      "alternatives": [
+        "時間或體力不足時，省略住吉神社與非必要購物，保留吃飯與機場餘裕。",
+        "若實際回程較早，縮短博多散步與餐食安排，提早取行李出發。"
+      ],
+      "lastMeal": {
+        "title": "LAST MEAL｜最後一餐",
+        "note": "餐廳與時間・待確認。依當天胃口、動線與機場餘裕選一餐。",
+        "choices": [
+          "拉麵",
+          "壽司",
+          "水炊鍋",
+          "福岡當地料理",
+          "前幾天最喜歡的店再吃一次",
+          "現場決定"
+        ]
+      }
+    }
+  ],
+  "collections": [
+    {
+      "title": "主行程",
+      "icon": "pin",
+      "items": [
+        "Day 1：博多站周邊、櫛田神社、博多運河城、福岡塔、中洲屋台。",
+        "Day 2：金鱗湖／湯之坪街道與由布院溫泉住宿；店家與住宿仍依候選確認。",
+        "Day 3：桜井二見ヶ浦 夫婦岩（Sakurai Futamigaura's Couple Stones）。",
+        "Day 4：太宰府天滿宮、表參道、九州國立博物館、天神地下街、BEAMS 福岡。",
+        "Day 5：博多附近散步、最後一餐與少量購物；餐廳不預先鎖定。"
+      ]
+    },
+    {
+      "title": "順路候選",
+      "icon": "food",
+      "items": [
+        "一蘭拉麵總本店：Day 1 吃得下再安排宵夜。",
+        "由布院收藏：由布まぶし「心」金鱗湖本店、B-SPEAK 本店、鞠智；金賞可樂餅兩分店擇一；SNOOPY茶屋有興趣再停留，詳見 Day 2。",
+        "The Full Full：Day 4 麵包／小吃／輕食候選，分店待確認。",
+        "Dacomecca、住吉神社：Day 5 博多附近候選，依飯店位置與時間評估。",
+        "黒毛和牛焼肉 西新初喜：餐廳候選，分店、動線與是否前往待確認；不排固定時段，不為此另加繞路行程。"
+      ]
+    },
+    {
+      "title": "備選",
+      "icon": "options",
+      "items": [
+        "東長寺：Day 1 有餘裕再評估，不列核心。",
+        "大濠公園：保留備選，安排日待確認，目前不塞入 Day 5。",
+        "LaLaport 福岡：備選購物／鋼彈景點，安排日待確認，目前不放主線。"
+      ]
+    },
+    {
+      "title": "本次不安排",
+      "icon": "info",
+      "items": [
+        "海之中道海濱公園。",
+        "Marine World 海之中道。"
+      ]
+    }
+  ],
+  "gifts": [
+    {
+      "id": "beams",
+      "text": "BEAMS"
+    },
+    {
+      "id": "mentaiko",
+      "text": "明太子"
+    },
+    {
+      "id": "kyushu-gifts",
+      "text": "九州／福岡伴手禮"
+    },
+    {
+      "id": "japan-exclusive",
+      "text": "日本限定商品"
+    },
+    {
+      "id": "other",
+      "text": "其他待補"
+    }
+  ]
+};
+
+    // Pure rendering helpers. Escape text so future content remains safe.
+    const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+    const icon = name => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+    const list = items => `<ul>${items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>`;
+    const dayStyle = day => `--day-accent:${day.accent};--card:${day.tint}`;
+    function renderMap(stop) {
+      let url;
+      try { url = new URL(stop.mapUrl); } catch { /* An unset link is expected. */ }
+      const allowed = url && url.protocol === 'https:' && /(^|\.)(google\.(com|co\.jp)|goo\.gl|maps\.app\.goo\.gl)$/.test(url.hostname);
+      return allowed
+        ? `<a class="map-link" href="${escapeHTML(url.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(stop.title)}：開啟 Google Maps（需要網路，另開分頁）">${icon('pin')}Google Maps ↗</a>`
+        : `<button class="map-link" type="button" disabled aria-label="${escapeHTML(stop.title)}：Google Maps 連結待確認">${icon('pin')}Google Maps · 待確認</button>`;
+    }
+    function renderStop(stop, index) {
+      return `<details class="stop"${index === 0 ? ' open' : ''}><summary><span><span class="stop-period">${escapeHTML(stop.period)}</span><span class="stop-name">${escapeHTML(stop.title)}</span><span class="stop-teaser">${escapeHTML(stop.teaser)}</span></span><span class="chevron">${icon('down')}</span></summary><div class="stop-body"><p>${escapeHTML(stop.note)}</p>${renderMap(stop)}</div></details>`;
+    }
+    function renderPlanning(day) {
+      if (!day.fields) return '';
+      return `<section class="planning" aria-labelledby="planning-title"><div class="planning-heading"><h3 id="planning-title">自駕與住宿筆記</h3><span class="pill pending">預訂狀態・待確認</span></div><p id="planning-help">先記下候選資訊；填寫不代表已預訂。僅保存在目前瀏覽器。</p><div class="planning-fields">${day.fields.map(field => `<div><label class="field-label" for="${field.id}">${escapeHTML(field.label)}<span class="field-state" id="${field.id}-state">待確認</span></label><input id="${field.id}" data-note="${field.id}" type="text" maxlength="180" placeholder="待確認・可填入候選資訊" aria-describedby="planning-help ${field.id}-state" autocomplete="off"></div>`).join('')}</div></section>`;
+    }
+    function renderDay(day) {
+      return `<section id="day-${day.id}" class="day-section" style="${dayStyle(day)}" aria-labelledby="day-${day.id}-title">
+        <header class="day-header"><div class="day-heading"><span class="day-index" aria-hidden="true">0${day.id}</span><div><p class="eyebrow">Day ${day.id} <span aria-hidden="true">${day.emoji}</span></p><h2 id="day-${day.id}-title">${escapeHTML(day.title)}</h2><p class="day-theme" lang="en">${escapeHTML(day.theme)}</p></div></div><span class="pill">${escapeHTML(day.mode)}</span></header>
+        <p class="day-description">${escapeHTML(day.intro)}</p>
+        <div class="day-layout"><div><div class="timeline-toolbar"><h3 class="eyebrow">The day, at your pace</h3><button class="text-button" type="button" data-expand="${day.id}" aria-controls="timeline-${day.id}">全部展開</button></div><div class="timeline" id="timeline-${day.id}">${day.stops.map(renderStop).join('')}</div>${day.mood ? `<p class="mood-line">${escapeHTML(day.mood)}</p>` : ''}${renderPlanning(day)}${day.lastMeal ? `<section class="pool" aria-labelledby="last-meal-title"><div class="planning-heading"><h3 id="last-meal-title">${escapeHTML(day.lastMeal.title)}</h3><span class="pill pending">餐廳・待確認</span></div><p>${escapeHTML(day.lastMeal.note)}</p><ul>${day.lastMeal.choices.map(choice => `<li class="pill">${escapeHTML(choice)}</li>`).join('')}</ul></section>` : ''}</div>
+        <aside class="aside" aria-label="Day ${day.id} 旅行資訊"><section class="info-card"><h3>${icon('car')}交通方式</h3><p>${escapeHTML(day.transport)}</p><h3 class="subhead">${icon('food')}今日必吃・候選</h3>${list(day.food)}</section><section class="info-card"><h3>${icon('info')}注意事項</h3>${list(day.notes)}</section>${day.winter ? `<section class="info-card notice"><h3>${icon('info')}冬季自駕提醒</h3>${list(day.winter)}</section>` : ''}<section class="info-card"><h3>${icon('options')}備選方案</h3>${list(day.alternatives)}</section></aside></div>
+      </section>`;
+    }
+    function renderApp() {
+      document.getElementById('day-cards').innerHTML = TRIP.days.map(day => `<a class="day-card" style="${dayStyle(day)}" href="#day-${day.id}" aria-label="Day ${day.id}：${escapeHTML(day.title)}"><div class="day-card-top"><span class="day-card-number">0${day.id}</span><span aria-hidden="true">${day.emoji}</span></div><h3>${escapeHTML(day.title)}</h3><p>${escapeHTML(day.short)}</p><div class="day-card-bottom"><span>DAY ${day.id}</span>${icon('arrow')}</div></a>`).join('');
+      document.getElementById('day-nav').innerHTML = TRIP.days.map(day => `<a href="#day-${day.id}"${day.id === 1 ? ' aria-current="location"' : ''}>Day ${day.id}</a>`).join('');
+      document.getElementById('itinerary').innerHTML = TRIP.days.map(renderDay).join('');
+      document.getElementById('collection-groups').innerHTML = TRIP.collections.map(group => `<section class="info-card"><h3>${icon(group.icon)}${escapeHTML(group.title)}</h3>${list(group.items)}</section>`).join('');
+      document.getElementById('gift-list').innerHTML = TRIP.gifts.map((gift, index) => `<label class="gift-row"><input type="checkbox" data-gift="${gift.id}"><span class="gift-name">${escapeHTML(gift.text)}</span><span class="gift-number" aria-hidden="true">0${index + 1}</span></label>`).join('');
+    }
+
+    // Local persistence must never prevent offline itinerary rendering.
+    // Keep the existing storage schema/key so V1 notes and unchanged gift IDs survive.
+    // New gift categories use new IDs rather than inheriting old completion states.
+    const STORAGE_KEY = 'fukuoka-trip.v1.local';
+    let state = { gifts: {}, notes: {} };
+    function storageUnavailable() {
+      document.getElementById('storage-note').textContent = '目前瀏覽器無法保存紀錄；勾選與筆記僅在這次開啟期間保留，行程仍可正常閱讀。';
+      document.getElementById('planning-help').textContent = '先記下候選資訊；填寫不代表已預訂。目前筆記僅在這次開啟期間保留。';
+    }
+    function readState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        if (saved && typeof saved === 'object') {
+          if (saved.gifts && typeof saved.gifts === 'object' && !Array.isArray(saved.gifts)) state.gifts = saved.gifts;
+          if (saved.notes && typeof saved.notes === 'object' && !Array.isArray(saved.notes)) state.notes = saved.notes;
+        }
+        // Detect blocked storage even on the first visit.
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch { storageUnavailable(); }
+    }
+    function saveState() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { storageUnavailable(); }
+    }
+    function updateGiftCounter() {
+      const count = document.querySelectorAll('[data-gift]:checked').length;
+      document.getElementById('gift-counter').textContent = `${count} / ${TRIP.gifts.length} 已完成`;
+    }
+    function updateNoteStatus(input) {
+      document.getElementById(`${input.id}-state`).textContent = input.value.trim() ? '已記錄・仍待確認' : '待確認';
+    }
+    function setupLocalInputs() {
+      document.querySelectorAll('[data-gift]').forEach(input => {
+        input.checked = state.gifts[input.dataset.gift] === true;
+        input.addEventListener('change', () => { state.gifts[input.dataset.gift] = input.checked; saveState(); updateGiftCounter(); });
+      });
+      document.querySelectorAll('[data-note]').forEach(input => {
+        const saved = state.notes[input.dataset.note];
+        input.value = typeof saved === 'string' ? saved.slice(0, 180) : '';
+        updateNoteStatus(input);
+        input.addEventListener('input', () => { state.notes[input.dataset.note] = input.value; updateNoteStatus(input); saveState(); });
+      });
+      updateGiftCounter();
+    }
+    function setupDisclosure() {
+      document.querySelectorAll('[data-expand]').forEach(button => {
+        const cards = Array.from(document.querySelectorAll(`#timeline-${button.dataset.expand} details`));
+        const sync = () => { button.textContent = cards.every(card => card.open) ? '全部收合' : '全部展開'; };
+        button.addEventListener('click', () => { const open = !cards.every(card => card.open); cards.forEach(card => { card.open = open; }); sync(); });
+        cards.forEach(card => card.addEventListener('toggle', sync));
+        sync();
+      });
+    }
+    function setupNavigation() {
+      const sections = Array.from(document.querySelectorAll('.day-section'));
+      const links = Array.from(document.querySelectorAll('.day-nav a'));
+      let scheduled = false;
+      const update = () => {
+        const edge = document.querySelector('.nav-bar').getBoundingClientRect().height + 70;
+        let current = sections[0].id;
+        for (const section of sections) { if (section.getBoundingClientRect().top <= edge) current = section.id; }
+        links.forEach(link => { if (link.hash === `#${current}`) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); });
+        scheduled = false;
+      };
+      window.addEventListener('scroll', () => { if (!scheduled) { scheduled = true; requestAnimationFrame(update); } }, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+      // Dynamic sections must also resolve direct links on a fresh file opening.
+      const targetId = location.hash.slice(1);
+      const target = document.getElementById(targetId);
+      if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant' }));
+    }
+    renderApp();
+    readState();
+    setupLocalInputs();
+    setupDisclosure();
+    setupNavigation();
+  </script>
+</body>
+</html>
