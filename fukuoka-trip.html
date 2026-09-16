@@ -134,6 +134,38 @@
     .pool ul { padding: 0; margin: 16px 0 0; display: flex; gap: 8px; flex-wrap: wrap; list-style: none; }
     .collections { padding-block: 50px; border-bottom: 1px solid var(--line); }
     .stop summary > span:first-child, .day-heading > div { min-width: 0; overflow-wrap: anywhere; }
+    .trip-facts { padding-block: 36px 50px; border-bottom: 1px solid var(--line); }
+    .trip-facts-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 14px; margin-bottom: 20px; }
+    .trip-facts-heading h2 { font: 500 30px/1.4 var(--serif); margin-top: 7px; }
+    .trip-facts-heading p { color: var(--muted); font-size: 14px; margin-top: 7px; }
+    .trip-facts-grid { display: grid; gap: 14px; }
+    .trip-card { min-width: 0; padding: 21px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+    .trip-card h3 { display: flex; align-items: center; gap: 9px; font-size: 18px; margin-bottom: 14px; }
+    .fact-list { display: grid; gap: 12px; margin: 0; }
+    .fact-list > div { display: grid; gap: 2px; }
+    .fact-list dt { color: var(--muted); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+    .fact-list dd { margin: 0; font-size: 16px; font-weight: 600; }
+    .flight-stack { display: grid; gap: 12px; }
+    .flight-card { padding: 16px; background: #f3f4ee; border: 1px solid #dfe2d9; border-radius: 10px; }
+    .flight-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 13px; }
+    .flight-top strong { font-size: 15px; }
+    .flight-route { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 10px; }
+    .flight-stop:last-child { text-align: right; }
+    .airport-code { display: block; font: 400 29px/1 Georgia, serif; color: var(--ink); }
+    .flight-time { display: block; font-weight: 650; margin-top: 5px; }
+    .flight-place { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+    .flight-arrow { color: var(--accent); font-size: 18px; }
+    .flight-meta { display: flex; flex-wrap: wrap; gap: 5px 12px; margin-top: 13px; padding-top: 12px; border-top: 1px solid #daddd4; color: var(--muted); font-size: 13px; }
+    .quote-total { margin-top: 14px; padding: 15px 16px; background: var(--tint); border-radius: 9px; }
+    .quote-total strong { display: block; font: 500 24px/1.3 Georgia, var(--serif); color: var(--accent); }
+    .quote-total span, .fact-note { color: var(--muted); font-size: 13px; }
+    .fact-note { margin-top: 16px; }
+    .feature-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 16px 0 0; list-style: none; }
+    .feature-chips li { padding: 5px 10px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: 13px; }
+    .chip-label { margin-top: 16px; color: var(--ink); font-size: 13px; font-weight: 650; letter-spacing: .06em; }
+    .chip-label + .feature-chips { margin-top: 8px; }
+    .day-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .day-card-date { color: var(--day-accent) !important; font-size: 12px !important; letter-spacing: .04em; }
     /* 05. Gifts and footer */
     .gifts { padding-block: 50px; }
     .gift-heading { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
@@ -159,6 +191,8 @@
       .day-card { padding: 15px; }
       .day-card:last-child { grid-column: auto; }
       .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .trip-facts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stay-card { grid-column: 1 / -1; }
       .planning-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .day-header { display: flex; justify-content: space-between; align-items: center; }
     }
@@ -226,7 +260,7 @@
         <h1 id="cover-title">FUKUOKA</h1>
         <p class="cover-subtitle">5 DAYS TRIP <span aria-label="日本">🇯🇵</span></p>
         <p class="cover-copy">從城市燈火，到山間與海邊。</p>
-        <div class="cover-meta"><span class="pill pending">旅行日期・待確認</span><span class="pill">5 位男性朋友・5 天 4 夜</span><span class="pill">Day 2–3 自駕</span><a class="pill" href="#gifts">伴手禮清單 ↗</a></div>
+        <div class="cover-meta"><span class="pill pending">2027/02/21–02/25・候選／待確認</span><span class="pill">5 位成人・5 天 4 夜</span><span class="pill">Day 2–3 自駕</span><a class="pill" href="#gifts">伴手禮清單 ↗</a></div>
       </div>
       <div class="route-panel">
         <div class="route-caption"><span class="eyebrow">Our little journey</span><span>KYUSHU / 九州</span></div>
@@ -253,7 +287,8 @@
       <div class="wrap nav-inner"><a class="nav-label" href="#top">福岡旅行手冊</a><nav class="day-nav" id="day-nav" aria-label="每日行程快速切換"></nav><a class="nav-gift" href="#gifts"><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>伴手禮</a></div>
     </div>
     <div class="wrap">
-      <p class="intro-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>V2・預計早去晚回，實際日期與航班待確認。時段僅表示行程順序；5 人同行，保留移動、候位與休息餘裕，所有預訂資訊皆待確認。</span></p>
+      <p class="intro-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>旅行日期、航班、票價與住宿皆為候選／待確認；尚未代表已付款、出票或完成訂房。時段僅表示行程順序，5 人同行仍保留移動、候位與休息餘裕。</span></p>
+      <section id="trip-details" class="trip-facts" aria-labelledby="trip-details-title"></section>
       <noscript>此手冊需要啟用瀏覽器 JavaScript 才能顯示行程。啟用後不需網路即可閱讀；不需要登入或 API Key。</noscript>
       <div id="itinerary"></div>
       <section id="collections" class="collections" aria-labelledby="collections-title"><div class="gift-heading"><div><p class="eyebrow">Saved places / Route notes</p><h2 id="collections-title">收藏，按動線留著。</h2><p>候選與備選未排入固定時段；主行程也仍需確認營業、交通與預訂資訊。</p></div></div><div class="aside collection-grid" id="collection-groups"></div></section>
@@ -276,9 +311,81 @@
      * 5. This classic inline script works directly under file://.
      */
     const TRIP = {
+  "basics": {
+    "dates": "2027/02/21 ～ 2027/02/25",
+    "travelers": "5 位成人",
+    "status": "候選／待確認"
+  },
+  "flights": [
+    {
+      "direction": "去程候選",
+      "airline": "台灣虎航 Tigerair Taiwan",
+      "flight": "IT240",
+      "date": "2027/02/21",
+      "from": "TPE",
+      "fromName": "桃園機場",
+      "depart": "06:45",
+      "to": "FUK",
+      "toName": "福岡機場",
+      "arrive": "10:00",
+      "duration": "約 2 小時 15 分",
+      "fare": "TigerSmart",
+      "price": "約 TWD 5,749／人"
+    },
+    {
+      "direction": "回程候選",
+      "airline": "台灣虎航 Tigerair Taiwan",
+      "flight": "IT721",
+      "date": "2027/02/25",
+      "from": "FUK",
+      "fromName": "福岡機場",
+      "depart": "17:55",
+      "to": "TPE",
+      "toName": "桃園機場",
+      "arrive": "19:40",
+      "duration": "約 2 小時 45 分",
+      "fare": "TigerSmart",
+      "price": "約 TWD 4,249／人"
+    }
+  ],
+  "flightQuote": {
+    "total": "約 TWD 63,170",
+    "label": "5 位成人整體訂單・目前查詢價格",
+    "note": "機票價格可能變動；尚未付款或出票，請以實際購票頁面為準。"
+  },
+  "stay": {
+    "name": "【余情の美】Yojono bi / 余情の美",
+    "dates": "2027/02/22 ～ 2027/02/23",
+    "nights": "1 晚",
+    "guests": "5 位成人",
+    "price": "約 TWD 10,449.47",
+    "roundedPrice": "畫面另一處約 TWD 10,450",
+    "status": "住宿候選／待確認",
+    "details": [
+      "整套房源",
+      "最多入住 13 人",
+      "3 間臥室",
+      "7 張床",
+      "2 間衛浴",
+      "評分 4.77",
+      "578 則評價",
+      "超讚房東／Guest Favorite 類型標示"
+    ],
+    "features": [
+      "靠近由布院站",
+      "免費停車",
+      "自助入住",
+      "私人溫泉池／露天溫泉",
+      "洗衣機",
+      "烘衣機",
+      "空調設備"
+    ],
+    "cancellation": "目前訂房頁顯示：24 小時內取消可獲得全額退款。取消政策仍應以實際完成訂房後的最終條款為準。"
+  },
   "days": [
     {
       "id": 1,
+      "date": "2027/02/21・候選",
       "title": "福岡市區・夜景",
       "emoji": "🏮",
       "theme": "Fukuoka First Day / City & Night View",
@@ -286,13 +393,13 @@
       "mode": "步行・市區交通",
       "accent": "#a94b35",
       "tint": "#f4ebe2",
-      "intro": "5 位朋友的福岡旅行，先從市區走起。預計早班抵達，但航班待確認；安頓行李後再安排散步與美食，傍晚往福岡塔，晚上回中洲。第一天留足入境、交通與休息的空間。",
+      "intro": "5 位朋友的福岡旅行，先從市區走起。去程候選 IT240 預計 10:00 抵達福岡；安頓行李後再安排散步與美食，傍晚往福岡塔，晚上回中洲。航班尚未出票，第一天仍留足入境、交通與休息的空間。",
       "stops": [
         {
-          "period": "抵達後｜預計早班，待確認",
+          "period": "2027/02/21｜10:00 抵達候選",
           "title": "福岡機場 → 飯店寄放行李",
           "teaser": "入境・領行李・輕裝出門",
-          "note": "航班時間、福岡住宿與寄放方式待確認。先完成入境、領行李與飯店寄放，再依實際時間出發；不以預計落地時間直接銜接景點。",
+          "note": "台灣虎航 IT240 為候選航班，預計自桃園 06:45 出發、福岡 10:00 抵達，尚未付款或出票。福岡住宿與寄放方式待確認；先完成入境、領行李與飯店寄放，再依實際時間出發。",
           "mapUrl": null
         },
         {
@@ -331,7 +438,7 @@
         "宵夜候選：一蘭拉麵總本店，還吃得下再去。"
       ],
       "notes": [
-        "預計早班抵達，實際航班待確認；預留入境、行李、寄放與航班延誤的緩衝。",
+        "去程候選：台灣虎航 IT240，2027/02/21 桃園 06:45 → 福岡 10:00；尚未付款或出票。",
         "福岡塔：建議日落前約 45～60 分鐘抵達，實際時間待旅行日期確定後調整。",
         "依第一天體力減少逛街或散步，不以跑完全部行程為目標。"
       ],
@@ -343,6 +450,7 @@
     },
     {
       "id": 2,
+      "date": "2027/02/22・候選",
       "title": "福岡 → 由布院",
       "emoji": "♨️",
       "theme": "Yufuin Road Trip 🚗♨️",
@@ -376,8 +484,8 @@
         {
           "period": "下午｜入住資訊待確認",
           "title": "入住由布院住宿 → 泡溫泉",
-          "teaser": "住宿候選：由布露天 時のまにまに・余情の美（尚未訂房）",
-          "note": "目前僅為住宿候選。房況、5 人入住配置、入住時間、停車、溫泉與餐食方案待確認；依最終住宿安排調整散策結束時間。",
+          "teaser": "住宿候選：【余情の美】Yojono bi / 余情の美（尚未訂房）",
+          "note": "2027/02/22 入住、02/23 退房，共 1 晚，5 位成人；目前僅為住宿候選。畫面顯示總價約 TWD 10,449.47，價格、房況、入住時間、停車、溫泉與餐食方案均待確認。",
           "mapUrl": null
         },
         {
@@ -397,7 +505,7 @@
         "住宿若無晚餐：CARNE 湯布院 串焼き為候選，待確認。"
       ],
       "notes": [
-        "由布露天 時のまにまに・余情の美：住宿候選，尚未訂房；5 人入住與餐食方案待確認。",
+        "【余情の美】Yojono bi / 余情の美：2027/02/22～02/23 住宿候選，尚未訂房；5 人入住、價格與餐食方案待確認。",
         "收藏店家不必全部走完，營業、候位與實際動線待確認。",
         "駕駛所需文件、取還車條件與停車資訊待確認。"
       ],
@@ -435,6 +543,7 @@
     },
     {
       "id": 3,
+      "date": "2027/02/23・候選",
       "title": "由布院 → 糸島 → 福岡",
       "emoji": "🌊",
       "theme": "Yufuin Morning & Itoshima Road Trip 🌫️🌊🚗",
@@ -506,6 +615,7 @@
     },
     {
       "id": 4,
+      "date": "2027/02/24・候選",
       "title": "太宰府 → 天神",
       "emoji": "⛩️",
       "theme": "Culture & Shopping ⛩️🛍️",
@@ -577,6 +687,7 @@
     },
     {
       "id": 5,
+      "date": "2027/02/25・候選",
       "title": "Chill Fukuoka",
       "emoji": "☕",
       "theme": "Slow Last Day ☕🍜",
@@ -622,10 +733,10 @@
           "mapUrl": null
         },
         {
-          "period": "依航班回推｜提早出發",
+          "period": "依 17:55 回程候選回推｜提早出發",
           "title": "前往福岡機場 → 回程",
           "teaser": "機場報到・行李托運・出境",
-          "note": "回程航班、航廈、交通與航空公司報到要求待確認。保留交通緩衝、報到、行李托運、安檢、出境及可能的退稅相關作業時間，不把晚班機視為可玩滿一整天。",
+          "note": "回程候選為台灣虎航 IT721，2027/02/25 福岡 17:55 出發、桃園 19:40 抵達，尚未付款或出票。航廈、交通與航空公司報到要求待確認；保留交通、報到、行李托運、安檢、出境及可能的退稅時間。",
           "mapUrl": null
         }
       ],
@@ -635,7 +746,7 @@
         "最後一餐不鎖定餐廳，依胃口、動線與剩餘時間決定。"
       ],
       "notes": [
-        "預計晚班回程，實際航班與報到要求待確認。",
+        "回程候選：台灣虎航 IT721，2027/02/25 福岡 17:55 → 桃園 19:40；尚未付款或出票。",
         "留足取行李、交通、機場報到、出境及可能的退稅流程時間。",
         "不安排福岡塔、海之中道海濱公園、Marine World、大型遠距離景點或密集購物。"
       ],
@@ -742,17 +853,25 @@
       if (!day.fields) return '';
       return `<section class="planning" aria-labelledby="planning-title"><div class="planning-heading"><h3 id="planning-title">自駕與住宿筆記</h3><span class="pill pending">預訂狀態・待確認</span></div><p id="planning-help">先記下候選資訊；填寫不代表已預訂。僅保存在目前瀏覽器。</p><div class="planning-fields">${day.fields.map(field => `<div><label class="field-label" for="${field.id}">${escapeHTML(field.label)}<span class="field-state" id="${field.id}-state">待確認</span></label><input id="${field.id}" data-note="${field.id}" type="text" maxlength="180" placeholder="待確認・可填入候選資訊" aria-describedby="planning-help ${field.id}-state" autocomplete="off"></div>`).join('')}</div></section>`;
     }
+    function renderFlight(flight) {
+      return `<article class="flight-card" aria-label="${escapeHTML(flight.direction)}：${escapeHTML(flight.flight)}"><div class="flight-top"><strong>${escapeHTML(flight.direction)}・${escapeHTML(flight.airline)} ${escapeHTML(flight.flight)}</strong><span class="pill pending">候選／待確認</span></div><div class="flight-route"><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.from)}</span><span class="flight-time">${escapeHTML(flight.depart)}</span><span class="flight-place">${escapeHTML(flight.fromName)}</span></div><span class="flight-arrow" aria-hidden="true">→</span><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.to)}</span><span class="flight-time">${escapeHTML(flight.arrive)}</span><span class="flight-place">${escapeHTML(flight.toName)}</span></div></div><div class="flight-meta"><span>${escapeHTML(flight.date)}</span><span>${escapeHTML(flight.duration)}</span><span>${escapeHTML(flight.fare)}</span><span>${escapeHTML(flight.price)}</span></div></article>`;
+    }
+    function renderTripDetails() {
+      const stay = TRIP.stay;
+      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Booking candidates</p><h2 id="trip-details-title">行前資訊</h2><p>以下為目前查詢畫面內容，尚未代表已付款、出票或完成訂房。</p></div><span class="pill pending">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>預計日期</dt><dd>${escapeHTML(TRIP.basics.dates)}</dd></div><div><dt>旅行人數</dt><dd>${escapeHTML(TRIP.basics.travelers)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><h3>${icon('arrow')}航班候選</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div><div class="quote-total"><span>${escapeHTML(TRIP.flightQuote.label)}</span><strong>${escapeHTML(TRIP.flightQuote.total)}</strong><span>${escapeHTML(TRIP.flightQuote.note)}</span></div></article><article class="trip-card stay-card"><div class="planning-heading"><h3>${icon('pin')}由布院住宿候選</h3><span class="pill pending">${escapeHTML(stay.status)}</span></div><dl class="fact-list"><div><dt>住宿名稱</dt><dd>${escapeHTML(stay.name)}</dd></div><div><dt>住宿日期／人數</dt><dd>${escapeHTML(stay.dates)}・${escapeHTML(stay.nights)}・${escapeHTML(stay.guests)}</dd></div><div><dt>目前畫面顯示總價</dt><dd>${escapeHTML(stay.price)}（${escapeHTML(stay.roundedPrice)}）</dd></div></dl><p class="chip-label">房源資訊</p><ul class="feature-chips" aria-label="房源資訊">${stay.details.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="chip-label">主要設施</p><ul class="feature-chips" aria-label="主要設施">${stay.features.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="fact-note">${escapeHTML(stay.cancellation)}</p></article></div>`;
+    }
     function renderDay(day) {
       return `<section id="day-${day.id}" class="day-section" style="${dayStyle(day)}" aria-labelledby="day-${day.id}-title">
-        <header class="day-header"><div class="day-heading"><span class="day-index" aria-hidden="true">0${day.id}</span><div><p class="eyebrow">Day ${day.id} <span aria-hidden="true">${day.emoji}</span></p><h2 id="day-${day.id}-title">${escapeHTML(day.title)}</h2><p class="day-theme" lang="en">${escapeHTML(day.theme)}</p></div></div><span class="pill">${escapeHTML(day.mode)}</span></header>
+        <header class="day-header"><div class="day-heading"><span class="day-index" aria-hidden="true">0${day.id}</span><div><p class="eyebrow">Day ${day.id} <span aria-hidden="true">${day.emoji}</span></p><h2 id="day-${day.id}-title">${escapeHTML(day.title)}</h2><p class="day-theme" lang="en">${escapeHTML(day.theme)}</p></div></div><div class="day-meta"><span class="pill pending">${escapeHTML(day.date)}</span><span class="pill">${escapeHTML(day.mode)}</span></div></header>
         <p class="day-description">${escapeHTML(day.intro)}</p>
         <div class="day-layout"><div><div class="timeline-toolbar"><h3 class="eyebrow">The day, at your pace</h3><button class="text-button" type="button" data-expand="${day.id}" aria-controls="timeline-${day.id}">全部展開</button></div><div class="timeline" id="timeline-${day.id}">${day.stops.map(renderStop).join('')}</div>${day.mood ? `<p class="mood-line">${escapeHTML(day.mood)}</p>` : ''}${renderPlanning(day)}${day.lastMeal ? `<section class="pool" aria-labelledby="last-meal-title"><div class="planning-heading"><h3 id="last-meal-title">${escapeHTML(day.lastMeal.title)}</h3><span class="pill pending">餐廳・待確認</span></div><p>${escapeHTML(day.lastMeal.note)}</p><ul>${day.lastMeal.choices.map(choice => `<li class="pill">${escapeHTML(choice)}</li>`).join('')}</ul></section>` : ''}</div>
         <aside class="aside" aria-label="Day ${day.id} 旅行資訊"><section class="info-card"><h3>${icon('car')}交通方式</h3><p>${escapeHTML(day.transport)}</p><h3 class="subhead">${icon('food')}今日必吃・候選</h3>${list(day.food)}</section><section class="info-card"><h3>${icon('info')}注意事項</h3>${list(day.notes)}</section>${day.winter ? `<section class="info-card notice"><h3>${icon('info')}冬季自駕提醒</h3>${list(day.winter)}</section>` : ''}<section class="info-card"><h3>${icon('options')}備選方案</h3>${list(day.alternatives)}</section></aside></div>
       </section>`;
     }
     function renderApp() {
-      document.getElementById('day-cards').innerHTML = TRIP.days.map(day => `<a class="day-card" style="${dayStyle(day)}" href="#day-${day.id}" aria-label="Day ${day.id}：${escapeHTML(day.title)}"><div class="day-card-top"><span class="day-card-number">0${day.id}</span><span aria-hidden="true">${day.emoji}</span></div><h3>${escapeHTML(day.title)}</h3><p>${escapeHTML(day.short)}</p><div class="day-card-bottom"><span>DAY ${day.id}</span>${icon('arrow')}</div></a>`).join('');
+      document.getElementById('day-cards').innerHTML = TRIP.days.map(day => `<a class="day-card" style="${dayStyle(day)}" href="#day-${day.id}" aria-label="Day ${day.id}：${escapeHTML(day.title)}"><div class="day-card-top"><span class="day-card-number">0${day.id}</span><span aria-hidden="true">${day.emoji}</span></div><p class="day-card-date">${escapeHTML(day.date)}</p><h3>${escapeHTML(day.title)}</h3><p>${escapeHTML(day.short)}</p><div class="day-card-bottom"><span>DAY ${day.id}</span>${icon('arrow')}</div></a>`).join('');
       document.getElementById('day-nav').innerHTML = TRIP.days.map(day => `<a href="#day-${day.id}"${day.id === 1 ? ' aria-current="location"' : ''}>Day ${day.id}</a>`).join('');
+      renderTripDetails();
       document.getElementById('itinerary').innerHTML = TRIP.days.map(renderDay).join('');
       document.getElementById('collection-groups').innerHTML = TRIP.collections.map(group => `<section class="info-card"><h3>${icon(group.icon)}${escapeHTML(group.title)}</h3>${list(group.items)}</section>`).join('');
       document.getElementById('gift-list').innerHTML = TRIP.gifts.map((gift, index) => `<label class="gift-row"><input type="checkbox" data-gift="${gift.id}"><span class="gift-name">${escapeHTML(gift.text)}</span><span class="gift-number" aria-hidden="true">0${index + 1}</span></label>`).join('');
