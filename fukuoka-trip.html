@@ -160,6 +160,8 @@
     .quote-total strong { display: block; font: 500 24px/1.3 Georgia, var(--serif); color: var(--accent); }
     .quote-total span, .fact-note { color: var(--muted); font-size: 13px; }
     .fact-note { margin-top: 16px; }
+    .transit-list { display: grid; gap: 8px; margin: 0; padding-left: 20px; color: var(--muted); font-size: 13px; }
+    .transit-list li::marker { color: var(--accent); }
     .feature-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 16px 0 0; list-style: none; }
     .feature-chips li { padding: 5px 10px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: 13px; }
     .chip-label { margin-top: 16px; color: var(--ink); font-size: 13px; font-weight: 650; letter-spacing: .06em; }
@@ -192,6 +194,8 @@
       .day-card:last-child { grid-column: auto; }
       .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .trip-facts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flight-overview { grid-column: 1 / -1; }
+      .flight-overview .flight-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .stay-card { grid-column: 1 / -1; }
       .planning-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .day-header { display: flex; justify-content: space-between; align-items: center; }
@@ -318,40 +322,45 @@
   },
   "flights": [
     {
-      "direction": "去程候選",
-      "airline": "台灣虎航 Tigerair Taiwan",
-      "flight": "IT240",
-      "date": "2027/02/21",
+      "direction": "去程",
+      "airline": "中華航空 China Airlines",
+      "flight": "CI110",
+      "date": "2027/02/21（日）",
       "from": "TPE",
       "fromName": "桃園機場",
-      "depart": "06:45",
+      "depart": "06:50",
       "to": "FUK",
       "toName": "福岡機場",
       "arrive": "10:00",
-      "duration": "約 2 小時 15 分",
-      "fare": "TigerSmart",
-      "price": "約 TWD 5,749／人"
+      "duration": "約 2 小時 10 分",
+      "cabin": "經濟艙",
+      "bookingClass": "訂位艙等 N"
     },
     {
-      "direction": "回程候選",
-      "airline": "台灣虎航 Tigerair Taiwan",
-      "flight": "IT721",
-      "date": "2027/02/25",
+      "direction": "回程",
+      "airline": "中華航空 China Airlines",
+      "flight": "CI117",
+      "date": "2027/02/25（四）",
       "from": "FUK",
       "fromName": "福岡機場",
-      "depart": "17:55",
+      "depart": "20:35",
       "to": "TPE",
       "toName": "桃園機場",
-      "arrive": "19:40",
+      "arrive": "22:20",
       "duration": "約 2 小時 45 分",
-      "fare": "TigerSmart",
-      "price": "約 TWD 4,249／人"
+      "cabin": "經濟艙",
+      "bookingClass": "訂位艙等 H"
     }
   ],
-  "flightQuote": {
-    "total": "約 TWD 63,170",
-    "label": "5 位成人整體訂單・目前查詢價格",
-    "note": "機票價格可能變動；尚未付款或出票，請以實際購票頁面為準。"
+  "transitTip": {
+    "title": "福岡市地下鐵・交通小提醒",
+    "status": "2027 出發前再確認",
+    "items": [
+      "可使用感應式信用卡、Apple Pay 或 Apple Watch 進出站。",
+      "成人當日累積車資最高 ¥640；未達上限按實際金額，超過後自動封頂。",
+      "全日必須使用同一張卡與同一裝置，進站、出站也要用同一付款媒介；Apple Watch、iPhone 與實體卡不要混用。",
+      "Suica 不併入信用卡 ¥640 上限；此上限僅適用福岡市地下鐵，不含 JR 與西鐵。"
+    ]
   },
   "stay": {
     "name": "【余情の美】Yojono bi / 余情の美",
@@ -385,7 +394,7 @@
   "days": [
     {
       "id": 1,
-      "date": "2027/02/21・候選",
+      "date": "2027/02/21（日）",
       "title": "福岡市區・夜景",
       "emoji": "🏮",
       "theme": "Fukuoka First Day / City & Night View",
@@ -393,13 +402,13 @@
       "mode": "步行・市區交通",
       "accent": "#a94b35",
       "tint": "#f4ebe2",
-      "intro": "5 位朋友的福岡旅行，先從市區走起。去程候選 IT240 預計 10:00 抵達福岡；安頓行李後再安排散步與美食，傍晚往福岡塔，晚上回中洲。航班尚未出票，第一天仍留足入境、交通與休息的空間。",
+      "intro": "5 位朋友的福岡旅行，先從市區走起。目前選定航班 CI110 預計 10:00 抵達福岡；安頓行李後再安排散步與美食，傍晚往福岡塔，晚上回中洲。第一天仍留足入境、交通、航班延誤與休息的空間。",
       "stops": [
         {
-          "period": "2027/02/21｜10:00 抵達候選",
+          "period": "2027/02/21（日）｜10:00 抵達",
           "title": "福岡機場 → 飯店寄放行李",
           "teaser": "入境・領行李・輕裝出門",
-          "note": "台灣虎航 IT240 為候選航班，預計自桃園 06:45 出發、福岡 10:00 抵達，尚未付款或出票。福岡住宿與寄放方式待確認；先完成入境、領行李與飯店寄放，再依實際時間出發。",
+          "note": "目前選定中華航空 CI110，自桃園 06:50 出發、福岡 10:00 抵達。福岡住宿與寄放方式待確認；先完成入境、領行李與飯店寄放，再依實際時間出發。",
           "mapUrl": null
         },
         {
@@ -438,7 +447,7 @@
         "宵夜候選：一蘭拉麵總本店，還吃得下再去。"
       ],
       "notes": [
-        "去程候選：台灣虎航 IT240，2027/02/21 桃園 06:45 → 福岡 10:00；尚未付款或出票。",
+        "目前選定航班：中華航空 CI110，2027/02/21（日）桃園 06:50 → 福岡 10:00；經濟艙、訂位艙等 N。",
         "福岡塔：建議日落前約 45～60 分鐘抵達，實際時間待旅行日期確定後調整。",
         "依第一天體力減少逛街或散步，不以跑完全部行程為目標。"
       ],
@@ -687,7 +696,7 @@
     },
     {
       "id": 5,
-      "date": "2027/02/25・候選",
+      "date": "2027/02/25（四）",
       "title": "Chill Fukuoka",
       "emoji": "☕",
       "theme": "Slow Last Day ☕🍜",
@@ -695,7 +704,7 @@
       "mode": "博多附近・機場交通",
       "accent": "#80596c",
       "tint": "#f1e9ed",
-      "intro": "睡飽再出門，在博多附近散步、吃東西，舒服收尾。預計晚班回程，但班機尚未確認；這天不跨很多區域，把領行李、機場報到與出境的時間先留好。",
+      "intro": "睡飽再出門，在博多附近散步、吃東西，舒服收尾。目前選定航班 CI117 於 20:35 起飛，白天可維持悠閒節奏；這天不跨很多區域，仍把領行李、前往機場與國際線手續的時間先留好。",
       "stops": [
         {
           "period": "起床後｜配合退房時間",
@@ -733,10 +742,10 @@
           "mapUrl": null
         },
         {
-          "period": "依 17:55 回程候選回推｜提早出發",
+          "period": "17:20～17:30 抵達機場｜依 20:35 航班回推",
           "title": "前往福岡機場 → 回程",
-          "teaser": "機場報到・行李托運・出境",
-          "note": "回程候選為台灣虎航 IT721，2027/02/25 福岡 17:55 出發、桃園 19:40 抵達，尚未付款或出票。航廈、交通與航空公司報到要求待確認；保留交通、報到、行李托運、安檢、出境及可能的退稅時間。",
+          "teaser": "預留約 3 小時・報到・托運・安檢・出境",
+          "note": "目前選定中華航空 CI117，2027/02/25（四）福岡 20:35 出發、桃園 22:20 抵達。建議約 17:20～17:30 抵達福岡機場，預留約 3 小時辦理報到、行李托運、安檢、出境，以及免稅／退稅相關事項；航廈、交通與航空公司報到要求仍待行前確認。",
           "mapUrl": null
         }
       ],
@@ -746,13 +755,13 @@
         "最後一餐不鎖定餐廳，依胃口、動線與剩餘時間決定。"
       ],
       "notes": [
-        "回程候選：台灣虎航 IT721，2027/02/25 福岡 17:55 → 桃園 19:40；尚未付款或出票。",
-        "留足取行李、交通、機場報到、出境及可能的退稅流程時間。",
+        "目前選定航班：中華航空 CI117，2027/02/25（四）福岡 20:35 → 桃園 22:20；經濟艙、訂位艙等 H。",
+        "建議 17:20～17:30 抵達福岡機場，預留約 3 小時處理報到、托運、安檢、出境與免稅／退稅流程。",
         "不安排福岡塔、海之中道海濱公園、Marine World、大型遠距離景點或密集購物。"
       ],
       "alternatives": [
         "時間或體力不足時，省略住吉神社與非必要購物，保留吃飯與機場餘裕。",
-        "若實際回程較早，縮短博多散步與餐食安排，提早取行李出發。"
+        "若當天交通或機場作業狀況有變，縮短博多散步與餐食安排，提早取行李出發。"
       ],
       "lastMeal": {
         "title": "LAST MEAL｜最後一餐",
@@ -854,11 +863,12 @@
       return `<section class="planning" aria-labelledby="planning-title"><div class="planning-heading"><h3 id="planning-title">自駕與住宿筆記</h3><span class="pill pending">預訂狀態・待確認</span></div><p id="planning-help">先記下候選資訊；填寫不代表已預訂。僅保存在目前瀏覽器。</p><div class="planning-fields">${day.fields.map(field => `<div><label class="field-label" for="${field.id}">${escapeHTML(field.label)}<span class="field-state" id="${field.id}-state">待確認</span></label><input id="${field.id}" data-note="${field.id}" type="text" maxlength="180" placeholder="待確認・可填入候選資訊" aria-describedby="planning-help ${field.id}-state" autocomplete="off"></div>`).join('')}</div></section>`;
     }
     function renderFlight(flight) {
-      return `<article class="flight-card" aria-label="${escapeHTML(flight.direction)}：${escapeHTML(flight.flight)}"><div class="flight-top"><strong>${escapeHTML(flight.direction)}・${escapeHTML(flight.airline)} ${escapeHTML(flight.flight)}</strong><span class="pill pending">候選／待確認</span></div><div class="flight-route"><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.from)}</span><span class="flight-time">${escapeHTML(flight.depart)}</span><span class="flight-place">${escapeHTML(flight.fromName)}</span></div><span class="flight-arrow" aria-hidden="true">→</span><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.to)}</span><span class="flight-time">${escapeHTML(flight.arrive)}</span><span class="flight-place">${escapeHTML(flight.toName)}</span></div></div><div class="flight-meta"><span>${escapeHTML(flight.date)}</span><span>${escapeHTML(flight.duration)}</span><span>${escapeHTML(flight.fare)}</span><span>${escapeHTML(flight.price)}</span></div></article>`;
+      return `<article class="flight-card" aria-label="${escapeHTML(flight.direction)}：${escapeHTML(flight.flight)}"><div class="flight-top"><strong>${escapeHTML(flight.direction)}・${escapeHTML(flight.airline)} ${escapeHTML(flight.flight)}</strong><span class="pill pending">目前選定航班</span></div><div class="flight-route"><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.from)}</span><span class="flight-time">${escapeHTML(flight.depart)}</span><span class="flight-place">${escapeHTML(flight.fromName)}</span></div><span class="flight-arrow" aria-hidden="true">→</span><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.to)}</span><span class="flight-time">${escapeHTML(flight.arrive)}</span><span class="flight-place">${escapeHTML(flight.toName)}</span></div></div><div class="flight-meta"><span>${escapeHTML(flight.date)}</span><span>${escapeHTML(flight.duration)}</span><span>${escapeHTML(flight.cabin)}</span><span>${escapeHTML(flight.bookingClass)}</span></div></article>`;
     }
     function renderTripDetails() {
       const stay = TRIP.stay;
-      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Booking candidates</p><h2 id="trip-details-title">行前資訊</h2><p>以下為目前查詢畫面內容，尚未代表已付款、出票或完成訂房。</p></div><span class="pill pending">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>預計日期</dt><dd>${escapeHTML(TRIP.basics.dates)}</dd></div><div><dt>旅行人數</dt><dd>${escapeHTML(TRIP.basics.travelers)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><h3>${icon('arrow')}航班候選</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div><div class="quote-total"><span>${escapeHTML(TRIP.flightQuote.label)}</span><strong>${escapeHTML(TRIP.flightQuote.total)}</strong><span>${escapeHTML(TRIP.flightQuote.note)}</span></div></article><article class="trip-card stay-card"><div class="planning-heading"><h3>${icon('pin')}由布院住宿候選</h3><span class="pill pending">${escapeHTML(stay.status)}</span></div><dl class="fact-list"><div><dt>住宿名稱</dt><dd>${escapeHTML(stay.name)}</dd></div><div><dt>住宿日期／人數</dt><dd>${escapeHTML(stay.dates)}・${escapeHTML(stay.nights)}・${escapeHTML(stay.guests)}</dd></div><div><dt>目前畫面顯示總價</dt><dd>${escapeHTML(stay.price)}（${escapeHTML(stay.roundedPrice)}）</dd></div></dl><p class="chip-label">房源資訊</p><ul class="feature-chips" aria-label="房源資訊">${stay.details.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="chip-label">主要設施</p><ul class="feature-chips" aria-label="主要設施">${stay.features.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="fact-note">${escapeHTML(stay.cancellation)}</p></article></div>`;
+      const transit = TRIP.transitTip;
+      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Booking candidates</p><h2 id="trip-details-title">行前資訊</h2><p>旅行日期與住宿仍為候選／待確認；航班為目前選定規劃。網站不保存付款、出票或個人訂位資訊。</p></div><span class="pill pending">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>預計日期</dt><dd>${escapeHTML(TRIP.basics.dates)}</dd></div><div><dt>旅行人數</dt><dd>${escapeHTML(TRIP.basics.travelers)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><div class="planning-heading"><h3>${icon('arrow')}${escapeHTML(transit.title)}</h3><span class="pill pending">${escapeHTML(transit.status)}</span></div><ul class="transit-list">${transit.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card flight-overview"><h3>${icon('arrow')}目前選定航班</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div></article><article class="trip-card stay-card"><div class="planning-heading"><h3>${icon('pin')}由布院住宿候選</h3><span class="pill pending">${escapeHTML(stay.status)}</span></div><dl class="fact-list"><div><dt>住宿名稱</dt><dd>${escapeHTML(stay.name)}</dd></div><div><dt>住宿日期／人數</dt><dd>${escapeHTML(stay.dates)}・${escapeHTML(stay.nights)}・${escapeHTML(stay.guests)}</dd></div><div><dt>目前畫面顯示總價</dt><dd>${escapeHTML(stay.price)}（${escapeHTML(stay.roundedPrice)}）</dd></div></dl><p class="chip-label">房源資訊</p><ul class="feature-chips" aria-label="房源資訊">${stay.details.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="chip-label">主要設施</p><ul class="feature-chips" aria-label="主要設施">${stay.features.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="fact-note">${escapeHTML(stay.cancellation)}</p></article></div>`;
     }
     function renderDay(day) {
       return `<section id="day-${day.id}" class="day-section" style="${dayStyle(day)}" aria-labelledby="day-${day.id}-title">
