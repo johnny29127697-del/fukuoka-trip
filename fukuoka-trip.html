@@ -41,6 +41,7 @@
     .skip:focus { top: 12px; }
     .pill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); padding: 4px 11px; border-radius: 99px; font-size: 14px; }
     .pending { color: #864a24; background: #f9ecdc; border: 0; }
+    .confirmed { color: #355f4b; background: #e3efe5; border: 0; }
     .icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
     /* 02. Cover and route diagram */
     .masthead { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 24px; border-bottom: 1px solid var(--line); }
@@ -162,6 +163,11 @@
     .fact-note { margin-top: 16px; }
     .transit-list { display: grid; gap: 8px; margin: 0; padding-left: 20px; color: var(--muted); font-size: 13px; }
     .transit-list li::marker { color: var(--accent); }
+    .lodging-grid { display: grid; gap: 10px; }
+    .lodging-item { min-width: 0; padding: 15px 16px; background: #f3f4ee; border: 1px solid #dfe2d9; border-radius: 10px; }
+    .lodging-item .planning-heading { margin-bottom: 9px; }
+    .lodging-item strong { overflow-wrap: anywhere; }
+    .lodging-item p { color: var(--muted); font-size: 13px; }
     .feature-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 16px 0 0; list-style: none; }
     .feature-chips li { padding: 5px 10px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: 13px; }
     .chip-label { margin-top: 16px; color: var(--ink); font-size: 13px; font-weight: 650; letter-spacing: .06em; }
@@ -196,6 +202,8 @@
       .trip-facts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .flight-overview { grid-column: 1 / -1; }
       .flight-overview .flight-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .lodging-overview { grid-column: 1 / -1; }
+      .lodging-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .stay-card { grid-column: 1 / -1; }
       .planning-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .day-header { display: flex; justify-content: space-between; align-items: center; }
@@ -264,7 +272,7 @@
         <h1 id="cover-title">FUKUOKA</h1>
         <p class="cover-subtitle">5 DAYS TRIP <span aria-label="日本">🇯🇵</span></p>
         <p class="cover-copy">從城市燈火，到山間與海邊。</p>
-        <div class="cover-meta"><span class="pill pending">2027/02/21–02/25・候選／待確認</span><span class="pill">5 位成人・5 天 4 夜</span><span class="pill">Day 2–3 自駕</span><a class="pill" href="#gifts">伴手禮清單 ↗</a></div>
+        <div class="cover-meta"><span class="pill confirmed">2027/02/21–02/25・日期已確認</span><span class="pill">5 位成人・5 天 4 夜</span><span class="pill">Day 2–3 自駕</span><a class="pill" href="#gifts">伴手禮清單 ↗</a></div>
       </div>
       <div class="route-panel">
         <div class="route-caption"><span class="eyebrow">Our little journey</span><span>KYUSHU / 九州</span></div>
@@ -291,7 +299,7 @@
       <div class="wrap nav-inner"><a class="nav-label" href="#top">福岡旅行手冊</a><nav class="day-nav" id="day-nav" aria-label="每日行程快速切換"></nav><a class="nav-gift" href="#gifts"><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>伴手禮</a></div>
     </div>
     <div class="wrap">
-      <p class="intro-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>旅行日期、航班、票價與住宿皆為候選／待確認；尚未代表已付款、出票或完成訂房。時段僅表示行程順序，5 人同行仍保留移動、候位與休息餘裕。</span></p>
+      <p class="intro-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>旅行日期、中華航空去回程及 2/23～2/25 福岡住宿已確認；第一晚福岡住宿、由布院住宿、租車與部分餐廳仍待確認。時段僅表示行程順序，5 人同行仍保留移動、候位與休息餘裕。</span></p>
       <section id="trip-details" class="trip-facts" aria-labelledby="trip-details-title"></section>
       <noscript>此手冊需要啟用瀏覽器 JavaScript 才能顯示行程。啟用後不需網路即可閱讀；不需要登入或 API Key。</noscript>
       <div id="itinerary"></div>
@@ -318,7 +326,8 @@
   "basics": {
     "dates": "2027/02/21 ～ 2027/02/25",
     "travelers": "5 位成人",
-    "status": "候選／待確認"
+    "duration": "5 天 4 夜",
+    "status": "已確認與待確認項目並存"
   },
   "flights": [
     {
@@ -362,6 +371,29 @@
       "Suica 不併入信用卡 ¥640 上限；此上限僅適用福岡市地下鐵，不含 JR 與西鐵。"
     ]
   },
+  "lodgingOverview": [
+    {
+      "period": "入住 2027/02/21（日）・退房 2027/02/22（一）・第 1 晚",
+      "name": "福岡住宿",
+      "detail": "住宿與寄放行李方式尚未確認；不預設為 Minn。",
+      "status": "待確認",
+      "confirmed": false
+    },
+    {
+      "period": "入住 2027/02/22（一）・退房 2027/02/23（二）・第 2 晚",
+      "name": "【余情の美】Yojono bi / 余情の美",
+      "detail": "由布院住宿候選，維持既有狀態，尚未訂房。",
+      "status": "住宿候選／待確認",
+      "confirmed": false
+    },
+    {
+      "period": "入住 2027/02/23（二）・退房 2027/02/25（四）・第 3、4 晚",
+      "name": "Minn Hakata Station East",
+      "detail": "明恩飯店－博多站東・2 晚・5 位成人・確認總價 TWD 9,675",
+      "status": "已預訂／已確認",
+      "confirmed": true
+    }
+  ],
   "stay": {
     "name": "【余情の美】Yojono bi / 余情の美",
     "dates": "2027/02/22 ～ 2027/02/23",
@@ -402,20 +434,27 @@
       "mode": "步行・市區交通",
       "accent": "#a94b35",
       "tint": "#f4ebe2",
-      "intro": "5 位朋友的福岡旅行，先從市區走起。目前選定航班 CI110 預計 10:00 抵達福岡；安頓行李後再安排散步與美食，傍晚往福岡塔，晚上回中洲。第一天仍留足入境、交通、航班延誤與休息的空間。",
+      "intro": "5 位朋友搭乘已確認的 CI110，預計 10:00 抵達福岡。第一晚住宿仍待確認；寄放行李後先在博多站附近吃午餐、順路逛 Pokémon Center FUKUOKA，再走市區景點，傍晚前往福岡塔，晚上到中洲。全日保留入境、交通、航班延誤與休息空間。",
       "stops": [
         {
           "period": "2027/02/21（日）｜10:00 抵達",
           "title": "福岡機場 → 飯店寄放行李",
           "teaser": "入境・領行李・輕裝出門",
-          "note": "目前選定中華航空 CI110，自桃園 06:50 出發、福岡 10:00 抵達。福岡住宿與寄放方式待確認；先完成入境、領行李與飯店寄放，再依實際時間出發。",
+          "note": "已確認搭乘中華航空 CI110，自桃園 06:50 出發、福岡 10:00 抵達。第一晚福岡住宿與寄放方式尚未確認，且不是已確認的 Minn 住宿；先完成入境、領行李與寄放，再依實際時間出發。",
           "mapUrl": null
         },
         {
           "period": "安頓後｜依抵達時間調整",
-          "title": "博多站周邊 → 櫛田神社",
-          "teaser": "博多散步・沿途吃東西",
-          "note": "先在博多站附近走走，再前往櫛田神社。午餐與停留長度待確認；若班機延誤或大家想休息，就縮短散策。",
+          "title": "博多站附近午餐 → Pokémon Center FUKUOKA",
+          "teaser": "先吃午餐・順路逛逛",
+          "note": "午餐店家待確認；用餐後在博多站附近順路逛 Pokémon Center FUKUOKA，不延伸成大型主題行程。若入境或寄放行李延誤，就縮短停留。",
+          "mapUrl": null
+        },
+        {
+          "period": "午餐後｜彈性散策",
+          "title": "櫛田神社",
+          "teaser": "從博多站周邊接續市區散步",
+          "note": "依實際抵達時間與體力前往櫛田神社，參拜與停留長度保持彈性，再接續博多運河城。",
           "mapUrl": null
         },
         {
@@ -428,7 +467,7 @@
         {
           "period": "傍晚｜依日落時間調整",
           "title": "福岡塔・夕陽／夜景",
-          "teaser": "建議日落前約 45～60 分鐘抵達，實際時間待旅行日期確定後調整。",
+          "teaser": "建議日落前約 45～60 分鐘抵達，實際時間依當日日落時間調整。",
           "note": "由市區前往福岡塔，再於觀景後回中洲。交通路線、票券、營業時間、天候與日落時間待確認；若抵達較晚或體力不足，調整為夜景或縮短停留。",
           "mapUrl": null
         },
@@ -436,19 +475,20 @@
           "period": "夜晚｜自由安排",
           "title": "回中洲 → 中洲屋台",
           "teaser": "屋台晚餐・吃得下再加宵夜",
-          "note": "屋台店家與營業狀況待確認。5 人座位與候位方式依現場確認，不預設一定能同時入座；如果還吃得下，一蘭拉麵總本店可作為宵夜候選，是否前往與營業資訊待確認。",
+          "note": "屋台店家與營業狀況待確認。5 人同行不預設一定能同坐一攤，依現場座位狀況安排，必要時分組或改附近餐廳＋屋台續攤。若還吃得下，一蘭拉麵總本店僅作為宵夜候選。",
           "mapUrl": null
         }
       ],
-      "transport": "以步行與市區大眾交通為主，串連機場、飯店、博多、福岡塔與中洲。飯店位置尚未確定，具體路線與移動時間待確認。",
+      "transport": "以步行與市區大眾交通為主，串連機場、第一晚飯店、博多、櫛田神社、博多運河城、福岡塔與中洲。第一晚飯店位置尚未確定，具體路線與移動時間待確認。",
       "food": [
         "市區午餐／小吃：餐廳待確認。",
         "中洲屋台：店家與座位安排待確認。",
         "宵夜候選：一蘭拉麵總本店，還吃得下再去。"
       ],
       "notes": [
-        "目前選定航班：中華航空 CI110，2027/02/21（日）桃園 06:50 → 福岡 10:00；經濟艙、訂位艙等 N。",
-        "福岡塔：建議日落前約 45～60 分鐘抵達，實際時間待旅行日期確定後調整。",
+        "已確認航班：中華航空 CI110，2027/02/21（日）桃園 06:50 → 福岡 10:00；經濟艙、訂位艙等 N。",
+        "第一晚福岡住宿尚未確認；Minn 僅為 2/23～2/25 的住宿。",
+        "福岡塔：建議日落前約 45～60 分鐘抵達，實際時間依當日日落時間調整。",
         "依第一天體力減少逛街或散步，不以跑完全部行程為目標。"
       ],
       "alternatives": [
@@ -459,7 +499,7 @@
     },
     {
       "id": 2,
-      "date": "2027/02/22・候選",
+      "date": "2027/02/22（一）",
       "title": "福岡 → 由布院",
       "emoji": "♨️",
       "theme": "Yufuin Road Trip 🚗♨️",
@@ -473,7 +513,7 @@
           "period": "早上｜取車資訊待確認",
           "title": "福岡取車 → 自駕前往由布院",
           "teaser": "5 人同行，車種與行李空間待確認",
-          "note": "租車公司、車種、取車地點、出發時間與停車場待確認。訂車前確認 5 位成人與實際行李能否容納，再決定車型；不先假設租用哪一款車。",
+          "note": "租車公司、車種、取還車地點、出發時間、ETC、保險／NOC 補償與停車場均待確認。訂車前確認 5 位成人與實際行李能否容納，並確認冬季胎／雪胎；不先假設任何租車公司或車型。",
           "mapUrl": null
         },
         {
@@ -505,7 +545,7 @@
           "mapUrl": null
         }
       ],
-      "transport": "福岡取車後自駕至由布院，停車後步行散策。路線、車程、過路費、停車場，以及 5 人與行李所需車型待確認。",
+      "transport": "福岡取車後自駕至由布院，停車後步行散策。租車公司、路線、車程、過路費、ETC、保險／NOC 補償、停車場，以及 5 人與行李所需車型均待確認。",
       "food": [
         "午餐候選：由布まぶし「心」金鱗湖本店。",
         "小吃／甜點候選：B-SPEAK 本店、鞠智。",
@@ -516,7 +556,7 @@
       "notes": [
         "【余情の美】Yojono bi / 余情の美：2027/02/22～02/23 住宿候選，尚未訂房；5 人入住、價格與餐食方案待確認。",
         "收藏店家不必全部走完，營業、候位與實際動線待確認。",
-        "駕駛所需文件、取還車條件與停車資訊待確認。"
+        "駕駛所需文件、取還車條件、ETC、保險／NOC 補償與停車資訊待確認。"
       ],
       "alternatives": [
         "出發延誤或候位過久時，縮短午餐／逛店，優先配合住宿入住與晚餐。",
@@ -525,7 +565,7 @@
       "winter": [
         "若於冬季出發，確認雪胎／冬季胎。",
         "留意山區結冰與天氣，行前確認高速公路及路況。",
-        "日期確定後確認日落時間，不建議過晚行駛山區道路。"
+        "行前確認日落時間，不建議過晚行駛山區道路。"
       ],
       "fields": [
         {
@@ -538,7 +578,7 @@
         },
         {
           "id": "pickup-location",
-          "label": "取車地點"
+          "label": "取還車地點"
         },
         {
           "id": "yufuin-stay",
@@ -547,12 +587,20 @@
         {
           "id": "parking",
           "label": "停車場"
+        },
+        {
+          "id": "etc",
+          "label": "ETC"
+        },
+        {
+          "id": "rental-insurance-noc",
+          "label": "保險／NOC 補償"
         }
       ]
     },
     {
       "id": 3,
-      "date": "2027/02/23・候選",
+      "date": "2027/02/23（二）",
       "title": "由布院 → 糸島 → 福岡",
       "emoji": "🌊",
       "theme": "Yufuin Morning & Itoshima Road Trip 🌫️🌊🚗",
@@ -561,7 +609,7 @@
       "accent": "#376d7b",
       "tint": "#e7eef0",
       "mood": "Sea • Cafe • Drive • Sunset",
-      "intro": "早晨走一段金鱗湖，再開車前往糸島。海岸行程以櫻井二見浦為核心，沿途自由停靠，留一段海景咖啡時間；是否看夕陽，再看天氣與還車安排。",
+      "intro": "早晨走一段金鱗湖，再開車前往糸島。海岸行程以櫻井二見浦為核心，沿途自由停靠，留一段海景咖啡時間；是否看夕陽，再看天氣與還車安排。返回福岡還車後，入住已確認的 Minn Hakata Station East。",
       "stops": [
         {
           "period": "早晨｜依天候與體力調整",
@@ -600,13 +648,13 @@
         },
         {
           "period": "下午／傍晚｜還車資訊待確認",
-          "title": "返回福岡 → 市區還車",
-          "teaser": "還車後，晚餐自由安排",
-          "note": "預留回程交通、加油與還車處理時間。還車地點、截止時間、加油規定及晚餐待確認；以還車安排回推離開糸島的時間。",
+          "title": "返回福岡 → 還車 → Minn Check-in",
+          "teaser": "入住 Minn Hakata Station East・晚餐自由安排",
+          "note": "預留回程交通、加油與還車處理時間。還車地點、截止時間與加油規定待確認；完成還車後前往已確認的 Minn Hakata Station East（明恩飯店－博多站東）入住，再依時間自由安排晚餐。",
           "mapUrl": null
         }
       ],
-      "transport": "由布院自駕前往糸島，再返回福岡市區還車。這天有多段移動，約中午抵達糸島只是目標；依實際車程、路況與還車時間調整海岸停留。",
+      "transport": "由布院自駕前往糸島，再返回福岡市區還車並前往 Minn Hakata Station East。這天有多段移動，約中午抵達糸島只是目標；依實際車程、路況與還車時間調整海岸停留。",
       "food": [
         "糸島午餐：尚未決定餐廳，待確認。",
         "海景咖啡：店家待確認，有時間再停留。",
@@ -615,7 +663,7 @@
       "notes": [
         "櫻井二見浦為海岸核心，其他景點保留彈性。",
         "冬季留意山區結冰、高速公路與天氣，參考 Day 2 自駕提醒。",
-        "日落與還車截止時間待確認；看夕陽不能壓縮回程與還車餘裕。"
+        "日落與還車截止時間待確認；看夕陽不能壓縮回程、還車與 Minn Check-in 的餘裕。"
       ],
       "alternatives": [
         "天候不佳或移動延誤時，縮短海岸與咖啡停留，提早返回福岡。",
@@ -624,7 +672,7 @@
     },
     {
       "id": 4,
-      "date": "2027/02/24・候選",
+      "date": "2027/02/24（三）",
       "title": "太宰府 → 天神",
       "emoji": "⛩️",
       "theme": "Culture & Shopping ⛩️🛍️",
@@ -632,20 +680,13 @@
       "mode": "大眾交通・步行",
       "accent": "#97702d",
       "tint": "#f3eddd",
-      "intro": "搭大眾交通到太宰府，走訪天滿宮、表參道與博物館，再返回天神購物、體驗女僕咖啡廳並吃晚餐。主軸仍是太宰府文化、天神購物與美食，女僕咖啡廳是朋友想體驗的日本特色行程。",
+      "intro": "從 Minn／博多出發，搭大眾交通到太宰府，慢慢走天滿宮與表參道，再返回天神購物、體驗女僕咖啡廳並吃晚餐。主軸是太宰府文化、天神購物與美食，女僕咖啡廳是朋友想體驗的日本特色行程。",
       "stops": [
         {
           "period": "前半日｜出發時間彈性",
-          "title": "太宰府天滿宮 → 太宰府表參道 → 梅ヶ枝餅",
+          "title": "Minn／博多出發 → 太宰府天滿宮 → 表參道",
           "teaser": "文化散策・梅ヶ枝餅",
-          "note": "搭乘大眾交通前往太宰府，走訪天滿宮與表參道，安排梅ヶ枝餅。班次、參訪時間與店家營業資訊待確認。",
-          "mapUrl": null
-        },
-        {
-          "period": "接續安排｜開館資訊待確認",
-          "title": "九州國立博物館",
-          "teaser": "依實際日期確認是否開館",
-          "note": "旅行日期確定後，需要確認九州國立博物館休館日與營業時間。展覽、票券與停留長度待確認。",
+          "note": "從已確認的 Minn Hakata Station East／博多一帶出發，搭乘大眾交通前往太宰府。走訪天滿宮與表參道並安排梅ヶ枝餅，慢慢散步；班次與店家營業資訊待確認。",
           "mapUrl": null
         },
         {
@@ -671,25 +712,25 @@
         },
         {
           "period": "晚餐後｜依體力與營業時間",
-          "title": "天神自由逛街",
-          "teaser": "慢慢收尾，不追加固定店家",
-          "note": "晚餐後留在天神自由逛街，依大家體力、店家營業時間與隔天安排決定停留長度。不新增必去店家，也不把行程排得過滿。",
+          "title": "天神自由逛街 → 回 Minn",
+          "teaser": "慢慢收尾，返回住宿",
+          "note": "晚餐後留在天神自由逛街，依大家體力與店家營業時間決定停留長度，之後返回 Minn。不新增必去店家，也不把行程排得過滿。",
           "mapUrl": null
         }
       ],
-      "transport": "以大眾交通搭配步行，從福岡前往太宰府，再返回天神。飯店位置、具體路線與班次待確認。",
+      "transport": "住宿基地為已確認的 Minn Hakata Station East。以大眾交通搭配步行，從博多前往太宰府，再返回天神，晚間回 Minn；具體路線與班次待確認。",
       "food": [
         "太宰府表參道：梅ヶ枝餅，店家待確認。",
         "晚餐候選：葫蘆壽司 ひょうたん寿司或もつ鍋，擇一，待確認。",
         "The Full Full：順路麵包／小吃／輕食候選，分店待確認，不排固定時段。"
       ],
       "notes": [
-        "旅行日期確定後，需要確認九州國立博物館休館日與營業時間。",
+        "Day 4 住宿基地：Minn Hakata Station East（明恩飯店－博多站東），已確認。",
         "BEAMS 福岡在購物主線；Maidcafe Maidreamin 天神西通店建議預留約 1～1.5 小時，實際時間依太宰府回程與當天狀況調整。",
         "晚餐 5 人座位、候位與是否可預約待確認。"
       ],
       "alternatives": [
-        "博物館休館時，保留太宰府散策並提早回天神。",
+        "Bonus／備選：九州國立博物館。若當天對展覽有興趣、有時間再去，不列為必要行程；行前確認休館日與營業時間。",
         "天候不佳時，增加地下街停留，其他商店彈性刪減。",
         "太宰府回程較晚時，縮短天神自由逛街，不壓縮晚餐與返程餘裕。"
       ]
@@ -704,13 +745,13 @@
       "mode": "博多附近・機場交通",
       "accent": "#80596c",
       "tint": "#f1e9ed",
-      "intro": "睡飽再出門，在博多附近散步、吃東西，舒服收尾。目前選定航班 CI117 於 20:35 起飛，白天可維持悠閒節奏；這天不跨很多區域，仍把領行李、前往機場與國際線手續的時間先留好。",
+      "intro": "從已確認的 Minn Hakata Station East 退房後，在博多附近散步、吃東西，舒服收尾。已確認的 CI117 於 20:35 起飛，白天可維持悠閒節奏；這天不跨很多區域，仍把取行李、前往機場與國際線手續的時間先留好。",
       "stops": [
         {
           "period": "起床後｜配合退房時間",
-          "title": "睡飽 → 飯店退房／寄放行李",
+          "title": "睡飽 → Minn 退房／確認寄放行李",
           "teaser": "慢慢整理，先確認回程安排",
-          "note": "福岡飯店、退房時間與退房後寄放行李方式待確認。即使預計晚班機，也先回推取行李與出發去機場的時間。",
+          "note": "從 Minn Hakata Station East 退房。退房時間與退房後寄放方式行前再次確認，不預設一定能寄放；即使是晚班機，也先回推取行李與出發去機場的時間。",
           "mapUrl": null
         },
         {
@@ -736,26 +777,27 @@
         },
         {
           "period": "餐後｜少量購物即可",
-          "title": "伴手禮 → 回飯店拿行李",
+          "title": "伴手禮 → 回 Minn 拿行李",
           "teaser": "買齊需要的，再收好行李",
-          "note": "只補買少量伴手禮，不密集逛街。預留可能的退稅流程、整理與回飯店取行李時間；寄放與領取方式待確認。",
+          "note": "只補買少量伴手禮，不密集逛街。預留可能的退稅流程、整理與回 Minn 取行李時間；退房後寄放與領取方式行前再次確認。",
           "mapUrl": null
         },
         {
           "period": "17:20～17:30 抵達機場｜依 20:35 航班回推",
           "title": "前往福岡機場 → 回程",
           "teaser": "預留約 3 小時・報到・托運・安檢・出境",
-          "note": "目前選定中華航空 CI117，2027/02/25（四）福岡 20:35 出發、桃園 22:20 抵達。建議約 17:20～17:30 抵達福岡機場，預留約 3 小時辦理報到、行李托運、安檢、出境，以及免稅／退稅相關事項；航廈、交通與航空公司報到要求仍待行前確認。",
+          "note": "已確認搭乘中華航空 CI117，2027/02/25（四）福岡 20:35 出發、桃園 22:20 抵達。建議約 17:20～17:30 抵達福岡機場，預留約 3 小時辦理報到、行李托運、安檢、出境，以及免稅／退稅相關事項；航廈、交通與航空公司報到要求仍待行前確認。",
           "mapUrl": null
         }
       ],
-      "transport": "活動集中博多附近，以步行與必要的市區交通為主。先回飯店拿行李，再提早前往福岡機場；飯店、航廈、路線與出發時間待確認。",
+      "transport": "活動集中 Minn／博多附近，以步行與必要的市區交通為主。先回 Minn 拿行李，再提早前往福岡機場；退房後寄放方式、航廈、路線與出發時間仍需行前確認。",
       "food": [
         "早餐／早午餐候選：Dacomecca，待確認。",
         "最後一餐不鎖定餐廳，依胃口、動線與剩餘時間決定。"
       ],
       "notes": [
-        "目前選定航班：中華航空 CI117，2027/02/25（四）福岡 20:35 → 桃園 22:20；經濟艙、訂位艙等 H。",
+        "已確認航班：中華航空 CI117，2027/02/25（四）福岡 20:35 → 桃園 22:20；經濟艙、訂位艙等 H。",
+        "Minn 退房後寄放行李方式行前再次確認，不視為保證提供。",
         "建議 17:20～17:30 抵達福岡機場，預留約 3 小時處理報到、托運、安檢、出境與免稅／退稅流程。",
         "不安排福岡塔、海之中道海濱公園、Marine World、大型遠距離景點或密集購物。"
       ],
@@ -782,11 +824,11 @@
       "title": "主行程",
       "icon": "pin",
       "items": [
-        "Day 1：博多站周邊、櫛田神社、博多運河城、福岡塔、中洲屋台。",
+        "Day 1：博多站附近午餐、Pokémon Center FUKUOKA、櫛田神社、博多運河城、福岡塔、中洲屋台。",
         "Day 2：金鱗湖／湯之坪街道與由布院溫泉住宿；店家與住宿仍依候選確認。",
-        "Day 3：桜井二見ヶ浦 夫婦岩（Sakurai Futamigaura's Couple Stones）。",
-        "Day 4：太宰府天滿宮、表參道、九州國立博物館、天神地下街、BEAMS 福岡、Maidcafe Maidreamin 天神西通店。",
-        "Day 5：博多附近散步、最後一餐與少量購物；餐廳不預先鎖定。"
+        "Day 3：桜井二見ヶ浦 夫婦岩（Sakurai Futamigaura's Couple Stones），返回福岡還車後入住 Minn。",
+        "Day 4：從 Minn／博多出發，走太宰府天滿宮、表參道，再到天神地下街、BEAMS 福岡與 Maidcafe Maidreamin 天神西通店。",
+        "Day 5：從 Minn 退房，在博多附近散步、吃最後一餐與少量購物；餐廳不預先鎖定。"
       ]
     },
     {
@@ -805,6 +847,7 @@
       "icon": "options",
       "items": [
         "東長寺：Day 1 有餘裕再評估，不列核心。",
+        "九州國立博物館：Day 4 Bonus／備選；當天對展覽有興趣、有時間再去，不列必要行程。",
         "大濠公園：保留備選，安排日待確認，目前不塞入 Day 5。",
         "LaLaport 福岡：備選購物／鋼彈景點，安排日待確認，目前不放主線。"
       ]
@@ -863,16 +906,20 @@
       return `<section class="planning" aria-labelledby="planning-title"><div class="planning-heading"><h3 id="planning-title">自駕與住宿筆記</h3><span class="pill pending">預訂狀態・待確認</span></div><p id="planning-help">先記下候選資訊；填寫不代表已預訂。僅保存在目前瀏覽器。</p><div class="planning-fields">${day.fields.map(field => `<div><label class="field-label" for="${field.id}">${escapeHTML(field.label)}<span class="field-state" id="${field.id}-state">待確認</span></label><input id="${field.id}" data-note="${field.id}" type="text" maxlength="180" placeholder="待確認・可填入候選資訊" aria-describedby="planning-help ${field.id}-state" autocomplete="off"></div>`).join('')}</div></section>`;
     }
     function renderFlight(flight) {
-      return `<article class="flight-card" aria-label="${escapeHTML(flight.direction)}：${escapeHTML(flight.flight)}"><div class="flight-top"><strong>${escapeHTML(flight.direction)}・${escapeHTML(flight.airline)} ${escapeHTML(flight.flight)}</strong><span class="pill pending">目前選定航班</span></div><div class="flight-route"><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.from)}</span><span class="flight-time">${escapeHTML(flight.depart)}</span><span class="flight-place">${escapeHTML(flight.fromName)}</span></div><span class="flight-arrow" aria-hidden="true">→</span><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.to)}</span><span class="flight-time">${escapeHTML(flight.arrive)}</span><span class="flight-place">${escapeHTML(flight.toName)}</span></div></div><div class="flight-meta"><span>${escapeHTML(flight.date)}</span><span>${escapeHTML(flight.duration)}</span><span>${escapeHTML(flight.cabin)}</span><span>${escapeHTML(flight.bookingClass)}</span></div></article>`;
+      return `<article class="flight-card" aria-label="${escapeHTML(flight.direction)}：${escapeHTML(flight.flight)}"><div class="flight-top"><strong>${escapeHTML(flight.direction)}・${escapeHTML(flight.airline)} ${escapeHTML(flight.flight)}</strong><span class="pill confirmed">已確認</span></div><div class="flight-route"><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.from)}</span><span class="flight-time">${escapeHTML(flight.depart)}</span><span class="flight-place">${escapeHTML(flight.fromName)}</span></div><span class="flight-arrow" aria-hidden="true">→</span><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.to)}</span><span class="flight-time">${escapeHTML(flight.arrive)}</span><span class="flight-place">${escapeHTML(flight.toName)}</span></div></div><div class="flight-meta"><span>${escapeHTML(flight.date)}</span><span>${escapeHTML(flight.duration)}</span><span>${escapeHTML(flight.cabin)}</span><span>${escapeHTML(flight.bookingClass)}</span></div></article>`;
+    }
+    function renderLodging(item) {
+      const statusClass = item.confirmed ? 'confirmed' : 'pending';
+      return `<article class="lodging-item"><div class="planning-heading"><strong>${escapeHTML(item.name)}</strong><span class="pill ${statusClass}">${escapeHTML(item.status)}</span></div><p>${escapeHTML(item.period)}</p><p>${escapeHTML(item.detail)}</p></article>`;
     }
     function renderTripDetails() {
       const stay = TRIP.stay;
       const transit = TRIP.transitTip;
-      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Booking candidates</p><h2 id="trip-details-title">行前資訊</h2><p>旅行日期與住宿仍為候選／待確認；航班為目前選定規劃。網站不保存付款、出票或個人訂位資訊。</p></div><span class="pill pending">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>預計日期</dt><dd>${escapeHTML(TRIP.basics.dates)}</dd></div><div><dt>旅行人數</dt><dd>${escapeHTML(TRIP.basics.travelers)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><div class="planning-heading"><h3>${icon('arrow')}${escapeHTML(transit.title)}</h3><span class="pill pending">${escapeHTML(transit.status)}</span></div><ul class="transit-list">${transit.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card flight-overview"><h3>${icon('arrow')}目前選定航班</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div></article><article class="trip-card stay-card"><div class="planning-heading"><h3>${icon('pin')}由布院住宿候選</h3><span class="pill pending">${escapeHTML(stay.status)}</span></div><dl class="fact-list"><div><dt>住宿名稱</dt><dd>${escapeHTML(stay.name)}</dd></div><div><dt>住宿日期／人數</dt><dd>${escapeHTML(stay.dates)}・${escapeHTML(stay.nights)}・${escapeHTML(stay.guests)}</dd></div><div><dt>目前畫面顯示總價</dt><dd>${escapeHTML(stay.price)}（${escapeHTML(stay.roundedPrice)}）</dd></div></dl><p class="chip-label">房源資訊</p><ul class="feature-chips" aria-label="房源資訊">${stay.details.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="chip-label">主要設施</p><ul class="feature-chips" aria-label="主要設施">${stay.features.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="fact-note">${escapeHTML(stay.cancellation)}</p></article></div>`;
+      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Confirmed & pending</p><h2 id="trip-details-title">行前資訊</h2><p>旅行日期、中華航空去回程與第 3、4 晚福岡住宿已確認；第一晚福岡住宿、由布院住宿、租車及部分餐廳仍待確認。網站不保存訂位代號或個人資料。</p></div><span class="pill">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>旅行日期</dt><dd>${escapeHTML(TRIP.basics.dates)}・已確認</dd></div><div><dt>旅行人數／日程</dt><dd>${escapeHTML(TRIP.basics.travelers)}・${escapeHTML(TRIP.basics.duration)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><div class="planning-heading"><h3>${icon('arrow')}${escapeHTML(transit.title)}</h3><span class="pill pending">${escapeHTML(transit.status)}</span></div><ul class="transit-list">${transit.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card flight-overview"><h3>${icon('arrow')}已確認航班</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div></article><article class="trip-card lodging-overview"><h3>${icon('pin')}住宿總覽</h3><div class="lodging-grid">${TRIP.lodgingOverview.map(renderLodging).join('')}</div></article><article class="trip-card stay-card"><div class="planning-heading"><h3>${icon('pin')}由布院住宿候選</h3><span class="pill pending">${escapeHTML(stay.status)}</span></div><dl class="fact-list"><div><dt>住宿名稱</dt><dd>${escapeHTML(stay.name)}</dd></div><div><dt>住宿日期／人數</dt><dd>${escapeHTML(stay.dates)}・${escapeHTML(stay.nights)}・${escapeHTML(stay.guests)}</dd></div><div><dt>目前畫面顯示總價</dt><dd>${escapeHTML(stay.price)}（${escapeHTML(stay.roundedPrice)}）</dd></div></dl><p class="chip-label">房源資訊</p><ul class="feature-chips" aria-label="房源資訊">${stay.details.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="chip-label">主要設施</p><ul class="feature-chips" aria-label="主要設施">${stay.features.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="fact-note">${escapeHTML(stay.cancellation)}</p></article></div>`;
     }
     function renderDay(day) {
       return `<section id="day-${day.id}" class="day-section" style="${dayStyle(day)}" aria-labelledby="day-${day.id}-title">
-        <header class="day-header"><div class="day-heading"><span class="day-index" aria-hidden="true">0${day.id}</span><div><p class="eyebrow">Day ${day.id} <span aria-hidden="true">${day.emoji}</span></p><h2 id="day-${day.id}-title">${escapeHTML(day.title)}</h2><p class="day-theme" lang="en">${escapeHTML(day.theme)}</p></div></div><div class="day-meta"><span class="pill pending">${escapeHTML(day.date)}</span><span class="pill">${escapeHTML(day.mode)}</span></div></header>
+        <header class="day-header"><div class="day-heading"><span class="day-index" aria-hidden="true">0${day.id}</span><div><p class="eyebrow">Day ${day.id} <span aria-hidden="true">${day.emoji}</span></p><h2 id="day-${day.id}-title">${escapeHTML(day.title)}</h2><p class="day-theme" lang="en">${escapeHTML(day.theme)}</p></div></div><div class="day-meta"><span class="pill confirmed">${escapeHTML(day.date)}</span><span class="pill">${escapeHTML(day.mode)}</span></div></header>
         <p class="day-description">${escapeHTML(day.intro)}</p>
         <div class="day-layout"><div><div class="timeline-toolbar"><h3 class="eyebrow">The day, at your pace</h3><button class="text-button" type="button" data-expand="${day.id}" aria-controls="timeline-${day.id}">全部展開</button></div><div class="timeline" id="timeline-${day.id}">${day.stops.map(renderStop).join('')}</div>${day.mood ? `<p class="mood-line">${escapeHTML(day.mood)}</p>` : ''}${renderPlanning(day)}${day.lastMeal ? `<section class="pool" aria-labelledby="last-meal-title"><div class="planning-heading"><h3 id="last-meal-title">${escapeHTML(day.lastMeal.title)}</h3><span class="pill pending">餐廳・待確認</span></div><p>${escapeHTML(day.lastMeal.note)}</p><ul>${day.lastMeal.choices.map(choice => `<li class="pill">${escapeHTML(choice)}</li>`).join('')}</ul></section>` : ''}</div>
         <aside class="aside" aria-label="Day ${day.id} 旅行資訊"><section class="info-card"><h3>${icon('car')}交通方式</h3><p>${escapeHTML(day.transport)}</p><h3 class="subhead">${icon('food')}今日必吃・候選</h3>${list(day.food)}</section><section class="info-card"><h3>${icon('info')}注意事項</h3>${list(day.notes)}</section>${day.winter ? `<section class="info-card notice"><h3>${icon('info')}冬季自駕提醒</h3>${list(day.winter)}</section>` : ''}<section class="info-card"><h3>${icon('options')}備選方案</h3>${list(day.alternatives)}</section></aside></div>
