@@ -264,14 +264,26 @@
         <svg viewBox="0 0 440 230" role="img" aria-labelledby="route-title route-desc">
           <title id="route-title">福岡五日旅行路線示意圖</title>
           <desc id="route-desc">以福岡為住宿基地，Day 3 前往糸島，Day 4 先前往柳川再到太宰府。Day 2 方案仍在評估；此圖不代表地理位置或距離。</desc>
+          <defs>
+            <marker id="arrow-day3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#a97557"/></marker>
+            <marker id="arrow-day4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#56756b"/></marker>
+          </defs>
           <g fill="none" stroke="#c3d2c7" stroke-width="1" opacity=".8"><path d="M-20 180Q70 20 230 30T460-30"/><path d="M-20 195Q70 35 230 45T460-15"/><path d="M-20 210Q70 50 230 60T460 0"/><path d="M260 250Q220 170 370 160T490 70"/><path d="M278 250Q235 185 385 175T510 70"/></g>
           <circle cx="351" cy="64" r="31" fill="#d48864" opacity=".72"/>
           <g fill="none" stroke="#7d9690" stroke-width="1.5" stroke-linecap="round"><path d="M27 66q9-8 18 0t18 0m-29 8q9-8 18 0t18 0"/><path d="m302 92 20-29 19 29m-7-2 16-21 18 23"/></g>
-          <path d="M162 119Q206 26 315 120Q280 198 70 124Q105 94 162 119" fill="none" stroke="#56756b" stroke-width="2" stroke-dasharray="5 6"/>
-          <path d="m162 119 35 65" fill="none" stroke="#a97557" stroke-width="2" stroke-dasharray="4 5"/>
-          <g fill="#f6f4ee" stroke="#56756b" stroke-width="2"><circle cx="70" cy="124" r="5"/><circle cx="315" cy="120" r="5"/><circle cx="197" cy="184" r="5"/></g>
-          <circle cx="162" cy="119" r="9" fill="#ac432e" stroke="#f6f4ee" stroke-width="3"/>
-          <g text-anchor="middle"><text x="156" y="149" font-size="18" font-weight="600">福岡</text><text x="68" y="104" font-size="16">糸島</text><text x="338" y="148" font-size="16">柳川</text><text x="244" y="202" font-size="16">太宰府</text><text x="234" y="70" font-size="11" letter-spacing="2">DAY 4 →</text><text x="171" y="185" font-size="11" text-anchor="end">← DAY 3</text></g>
+          <g fill="none" stroke="#a97557" stroke-width="2" stroke-dasharray="4 5">
+            <path d="M205 78Q140 55 76 101" marker-end="url(#arrow-day3)"/>
+            <path d="M76 109Q140 132 205 86" marker-end="url(#arrow-day3)"/>
+          </g>
+          <g fill="none" stroke="#56756b" stroke-width="2" stroke-dasharray="5 6">
+            <path d="M209 89Q174 127 124 173" marker-end="url(#arrow-day4)"/>
+            <path d="M130 180Q210 205 277 169" marker-end="url(#arrow-day4)"/>
+            <path d="M284 157Q270 101 224 85" marker-end="url(#arrow-day4)"/>
+          </g>
+          <circle cx="70" cy="105" r="5" fill="#f6f4ee" stroke="#a97557" stroke-width="2"/>
+          <g fill="#f6f4ee" stroke="#56756b" stroke-width="2"><circle cx="120" cy="178" r="5"/><circle cx="285" cy="165" r="5"/></g>
+          <circle cx="215" cy="82" r="9" fill="#ac432e" stroke="#f6f4ee" stroke-width="3"/>
+          <g text-anchor="middle"><text x="215" y="58" font-size="18" font-weight="600">福岡</text><text x="62" y="88" font-size="16">糸島</text><text x="91" y="202" font-size="16">柳川</text><text x="327" y="171" font-size="16">太宰府</text><text x="132" y="62" font-size="11" letter-spacing="2">DAY 3 ↔</text><text x="226" y="220" font-size="10" letter-spacing="1">DAY 4　福岡 → 柳川 → 太宰府 → 福岡</text></g>
         </svg>
         <p class="route-foot">路線示意・非實際地圖，位置與距離未按比例</p>
       </div>
