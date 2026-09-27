@@ -168,10 +168,6 @@
     .lodging-item .planning-heading { margin-bottom: 9px; }
     .lodging-item strong { overflow-wrap: anywhere; }
     .lodging-item p { color: var(--muted); font-size: 13px; }
-    .feature-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 16px 0 0; list-style: none; }
-    .feature-chips li { padding: 5px 10px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: 13px; }
-    .chip-label { margin-top: 16px; color: var(--ink); font-size: 13px; font-weight: 650; letter-spacing: .06em; }
-    .chip-label + .feature-chips { margin-top: 8px; }
     .day-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
     .day-card-date { color: var(--day-accent) !important; font-size: 12px !important; letter-spacing: .04em; }
     /* 05. Gifts and footer */
@@ -204,7 +200,6 @@
       .flight-overview .flight-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .lodging-overview { grid-column: 1 / -1; }
       .lodging-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .stay-card { grid-column: 1 / -1; }
       .planning-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .day-header { display: flex; justify-content: space-between; align-items: center; }
     }
@@ -391,35 +386,6 @@
     "2027/02/21～2027/02/25 四晚皆入住 Minn Hakata Station East，但分成兩張連續訂單。",
     "已準備向住宿方詢問是否可四晚使用同一間客房，避免 2/23 退房、搬行李與重新入住；住宿方回覆待確認。"
   ],
-  "stay": {
-    "name": "【余情の美】Yojono bi / 余情の美",
-    "dates": "2027/02/22 ～ 2027/02/23",
-    "nights": "1 晚",
-    "guests": "5 位成人",
-    "price": "約 TWD 10,449.47",
-    "roundedPrice": "畫面另一處約 TWD 10,450",
-    "status": "舊方案／住宿候選／目前未採用",
-    "details": [
-      "整套房源",
-      "最多入住 13 人",
-      "3 間臥室",
-      "7 張床",
-      "2 間衛浴",
-      "評分 4.77",
-      "578 則評價",
-      "超讚房東／Guest Favorite 類型標示"
-    ],
-    "features": [
-      "靠近由布院站",
-      "免費停車",
-      "自助入住",
-      "私人溫泉池／露天溫泉",
-      "洗衣機",
-      "烘衣機",
-      "空調設備"
-    ],
-    "cancellation": "目前訂房頁顯示：24 小時內取消可獲得全額退款。取消政策仍應以實際完成訂房後的最終條款為準。"
-  },
   "days": [
     {
       "id": 1,
@@ -506,7 +472,7 @@
       "status": "方案評估中／待確認",
       "accent": "#567056",
       "tint": "#eaf0e5",
-      "intro": "這一天仍在評估由布院、阿蘇／黑川溫泉、其他一日遊或福岡自由活動，尚未定案；當晚住宿已確認回到 Minn Hakata Station East。下方保留原本的由布院自駕資料作為舊方案參考，不代表已決定租車、前往由布院或入住由布院。",
+      "intro": "這一天仍在評估由布院、阿蘇／黑川溫泉、其他一日遊或福岡自由活動，尚未定案；當晚住宿已確認回到 Minn Hakata Station East。下方保留由布院一日往返的景點與自駕資料作為方案參考，不代表已決定租車或前往由布院。",
       "stops": [
         {
           "period": "舊方案候選｜尚未採用",
@@ -528,20 +494,6 @@
           "teaser": "小吃・甜點・逛店，按動線挑選",
           "note": "保留 B-SPEAK 本店、鞠智，以及湯布院金賞コロッケ、湯布院金賞コロッケ 2號店。金賞可樂餅兩間擇一，依當天排隊與動線決定。SNOOPY茶屋 由布院店定位為順路逛逛／有興趣再停留，不預設坐下吃正餐。店家營業與是否前往皆待確認。",
           "mapUrl": null
-        },
-        {
-          "period": "舊方案住宿候選｜目前未採用",
-          "title": "由布院住宿舊候選：余情の美",
-          "teaser": "Yojono bi / 余情の美・未訂房",
-          "note": "曾參考 2027/02/22 入住、02/23 退房，共 1 晚，5 位成人；目前未採用且未訂房。2027/02/22 晚上已確認入住 Minn Hakata Station East。",
-          "mapUrl": null
-        },
-        {
-          "period": "由布院舊方案｜目前未採用",
-          "title": "舊方案晚餐資訊",
-          "teaser": "CARNE 湯布院 串焼き曾列為候選",
-          "note": "原住宿方案若沒有提供晚餐，曾將 CARNE 湯布院 串焼き列為候選；目前由布院住宿方案未採用，餐廳也未訂位。",
-          "mapUrl": null
         }
       ],
       "transport": "Day 2 交通方式尚未確定。若採自駕方案，租車公司、路線、車程、過路費、ETC、保險／NOC 補償、停車場，以及 5 人與行李所需車型均待確認。",
@@ -549,17 +501,16 @@
         "午餐候選：由布まぶし「心」金鱗湖本店。",
         "小吃／甜點候選：B-SPEAK 本店、鞠智。",
         "湯布院金賞コロッケ／湯布院金賞コロッケ 2號店：兩間擇一，依當天排隊與動線決定。",
-        "SNOOPY茶屋 由布院店：順路逛逛／有興趣再停留，不預設正餐。",
-        "舊方案晚餐候選：CARNE 湯布院 串焼き，目前未採用且未訂位。"
+        "SNOOPY茶屋 由布院店：順路逛逛／有興趣再停留，不預設正餐。"
       ],
       "notes": [
-        "2027/02/22 第二晚已確認入住 Minn Hakata Station East；【余情の美】Yojono bi / 余情の美 僅為舊方案住宿候選，目前未採用且未訂房。",
+        "2027/02/22 第二晚已確認入住 Minn Hakata Station East。",
         "目前同時評估由布院、阿蘇／黑川溫泉、其他一日遊與福岡自由活動。",
         "收藏店家不必全部走完，營業、候位與實際動線待確認。",
         "駕駛所需文件、取還車條件、ETC、保險／NOC 補償與停車資訊待確認。"
       ],
       "alternatives": [
-        "由布院：一日往返方案是否採用待確認；原住宿方案目前未採用。",
+        "由布院：一日往返方案是否採用待確認。",
         "阿蘇／黑川溫泉：行程與交通方式待評估。",
         "其他一日遊：內容與預訂狀態待確認。",
         "福岡自由活動：保留彈性，不先安排固定大型景點。"
@@ -581,10 +532,6 @@
         {
           "id": "pickup-location",
           "label": "取還車地點"
-        },
-        {
-          "id": "yufuin-stay",
-          "label": "由布院舊住宿候選"
         },
         {
           "id": "parking",
@@ -903,7 +850,7 @@
     }
     function renderPlanning(day) {
       if (!day.fields) return '';
-      return `<section class="planning" aria-labelledby="planning-title"><div class="planning-heading"><h3 id="planning-title">自駕與住宿筆記</h3><span class="pill pending">預訂狀態・待確認</span></div><p id="planning-help">先記下候選資訊；填寫不代表已預訂。僅保存在目前瀏覽器。</p><div class="planning-fields">${day.fields.map(field => `<div><label class="field-label" for="${field.id}">${escapeHTML(field.label)}<span class="field-state" id="${field.id}-state">待確認</span></label><input id="${field.id}" data-note="${field.id}" type="text" maxlength="180" placeholder="待確認・可填入候選資訊" aria-describedby="planning-help ${field.id}-state" autocomplete="off"></div>`).join('')}</div></section>`;
+      return `<section class="planning" aria-labelledby="planning-title"><div class="planning-heading"><h3 id="planning-title">自駕方案筆記</h3><span class="pill pending">預訂狀態・待確認</span></div><p id="planning-help">先記下候選資訊；填寫不代表已預訂。僅保存在目前瀏覽器。</p><div class="planning-fields">${day.fields.map(field => `<div><label class="field-label" for="${field.id}">${escapeHTML(field.label)}<span class="field-state" id="${field.id}-state">待確認</span></label><input id="${field.id}" data-note="${field.id}" type="text" maxlength="180" placeholder="待確認・可填入候選資訊" aria-describedby="planning-help ${field.id}-state" autocomplete="off"></div>`).join('')}</div></section>`;
     }
     function renderFlight(flight) {
       return `<article class="flight-card" aria-label="${escapeHTML(flight.direction)}：${escapeHTML(flight.flight)}"><div class="flight-top"><strong>${escapeHTML(flight.direction)}・${escapeHTML(flight.airline)} ${escapeHTML(flight.flight)}</strong><span class="pill confirmed">已確認</span></div><div class="flight-route"><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.from)}</span><span class="flight-time">${escapeHTML(flight.depart)}</span><span class="flight-place">${escapeHTML(flight.fromName)}</span></div><span class="flight-arrow" aria-hidden="true">→</span><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.to)}</span><span class="flight-time">${escapeHTML(flight.arrive)}</span><span class="flight-place">${escapeHTML(flight.toName)}</span></div></div><div class="flight-meta"><span>${escapeHTML(flight.date)}</span><span>${escapeHTML(flight.duration)}</span><span>${escapeHTML(flight.cabin)}</span><span>${escapeHTML(flight.bookingClass)}</span></div></article>`;
@@ -913,9 +860,8 @@
       return `<article class="lodging-item"><div class="planning-heading"><strong>${escapeHTML(item.name)}</strong><span class="pill ${statusClass}">${escapeHTML(item.status)}</span></div><p>${escapeHTML(item.period)}</p><p>${escapeHTML(item.detail)}</p></article>`;
     }
     function renderTripDetails() {
-      const stay = TRIP.stay;
       const transit = TRIP.transitTip;
-      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Confirmed & pending</p><h2 id="trip-details-title">行前資訊</h2><p>旅行日期、中華航空去回程與 2/21～2/25 四晚 Minn 住宿已確認；Day 2 方案、租車、部分餐廳，以及兩張住宿訂單是否能安排同一客房仍待確認。網站不保存訂位代號或個人資料。</p></div><span class="pill">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>旅行日期</dt><dd>${escapeHTML(TRIP.basics.dates)}・已確認</dd></div><div><dt>旅行人數／日程</dt><dd>${escapeHTML(TRIP.basics.travelers)}・${escapeHTML(TRIP.basics.duration)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><div class="planning-heading"><h3>${icon('arrow')}${escapeHTML(transit.title)}</h3><span class="pill pending">${escapeHTML(transit.status)}</span></div><ul class="transit-list">${transit.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card flight-overview"><h3>${icon('arrow')}已確認航班</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div></article><article class="trip-card lodging-overview"><h3>${icon('pin')}住宿總覽</h3><div class="lodging-grid">${TRIP.lodgingOverview.map(renderLodging).join('')}</div><ul class="transit-list">${TRIP.lodgingNotes.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card stay-card"><div class="planning-heading"><h3>${icon('pin')}由布院舊方案住宿候選</h3><span class="pill pending">${escapeHTML(stay.status)}</span></div><dl class="fact-list"><div><dt>住宿名稱</dt><dd>${escapeHTML(stay.name)}</dd></div><div><dt>曾參考的日期／人數</dt><dd>${escapeHTML(stay.dates)}・${escapeHTML(stay.nights)}・${escapeHTML(stay.guests)}</dd></div><div><dt>曾查詢的畫面價格</dt><dd>${escapeHTML(stay.price)}（${escapeHTML(stay.roundedPrice)}）</dd></div></dl><p class="chip-label">房源資訊</p><ul class="feature-chips" aria-label="房源資訊">${stay.details.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="chip-label">主要設施</p><ul class="feature-chips" aria-label="主要設施">${stay.features.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul><p class="fact-note">目前未採用由布院住宿方案。${escapeHTML(stay.cancellation)}</p></article></div>`;
+      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Confirmed & pending</p><h2 id="trip-details-title">行前資訊</h2><p>旅行日期、中華航空去回程與 2/21～2/25 四晚 Minn 住宿已確認；Day 2 方案、租車、部分餐廳，以及兩張住宿訂單是否能安排同一客房仍待確認。網站不保存訂位代號或個人資料。</p></div><span class="pill">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>旅行日期</dt><dd>${escapeHTML(TRIP.basics.dates)}・已確認</dd></div><div><dt>旅行人數／日程</dt><dd>${escapeHTML(TRIP.basics.travelers)}・${escapeHTML(TRIP.basics.duration)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><div class="planning-heading"><h3>${icon('arrow')}${escapeHTML(transit.title)}</h3><span class="pill pending">${escapeHTML(transit.status)}</span></div><ul class="transit-list">${transit.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card flight-overview"><h3>${icon('arrow')}已確認航班</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div></article><article class="trip-card lodging-overview"><h3>${icon('pin')}住宿總覽</h3><div class="lodging-grid">${TRIP.lodgingOverview.map(renderLodging).join('')}</div><ul class="transit-list">${TRIP.lodgingNotes.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article></div>`;
     }
     function renderDay(day) {
       return `<section id="day-${day.id}" class="day-section" style="${dayStyle(day)}" aria-labelledby="day-${day.id}-title">
