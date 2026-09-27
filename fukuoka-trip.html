@@ -120,15 +120,7 @@
     .info-card.notice { background: var(--tint); border-color: #e9dace; }
     .info-card .subhead { margin-top: 17px; border-top: 1px solid #d5dace; padding-top: 15px; }
     .mood-line { color: var(--day-accent); font: italic 20px/1.5 Georgia, serif; margin-top: 16px; }
-    .planning { margin-top: 22px; padding: 22px; background: var(--surface); border: 1px dashed #b7c3b7; border-radius: 12px; }
     .planning-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
-    .planning h3 { font-size: 18px; }
-    .planning > p { color: var(--muted); font-size: 14px; margin-top: 7px; }
-    .planning-fields { margin-top: 20px; display: grid; gap: 16px; }
-    .field-label { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 14px; margin-bottom: 7px; }
-    .field-state { font-size: 12px; color: #8b542b; }
-    .planning input { width: 100%; min-height: 48px; border: 1px solid #c8d0c5; background: #fffefa; color: var(--ink); padding: 11px 12px; border-radius: 7px; font-size: 16px; }
-    .planning input::placeholder { color: #758079; }
     .pool { margin-top: 22px; padding: 22px; background: var(--surface); border: 1px dashed #bbc6c0; border-radius: 12px; }
     .pool h3 { font-size: 18px; margin-bottom: 7px; }
     .pool p { color: var(--muted); font-size: 14px; }
@@ -200,7 +192,6 @@
       .flight-overview .flight-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .lodging-overview { grid-column: 1 / -1; }
       .lodging-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .planning-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .day-header { display: flex; justify-content: space-between; align-items: center; }
     }
     @media (min-width: 900px) {
@@ -250,7 +241,6 @@
       <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></symbol>
       <symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
       <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.2"/></symbol>
-      <symbol id="i-car" viewBox="0 0 24 24"><path d="m5 9 2-5h10l2 5M4 16V9h16v7H4Zm2 0v3m12-3v3M7 12h1m8 0h1"/></symbol>
       <symbol id="i-food" viewBox="0 0 24 24"><path d="M6 3v7m-3-7v4a3 3 0 0 0 6 0V3M6 10v11M18 3c-3 3-3 8 0 8h2M20 3v18"/></symbol>
       <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l1 13H4L5 8Zm3 0V6a4 4 0 0 1 8 0v2"/></symbol>
       <symbol id="i-options" viewBox="0 0 24 24"><path d="M7 21V3m0 7h7a4 4 0 0 0 4-4V3m-3 3 3-3 3 3M4 6l3-3 3 3"/></symbol>
@@ -294,14 +284,14 @@
       <div class="wrap nav-inner"><a class="nav-label" href="#top">福岡旅行手冊</a><nav class="day-nav" id="day-nav" aria-label="每日行程快速切換"></nav><a class="nav-gift" href="#gifts"><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>伴手禮</a></div>
     </div>
     <div class="wrap">
-      <p class="intro-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>旅行日期、中華航空去回程及 2/21～2/25 四晚 Minn 住宿已確認；Day 2 方案、租車、部分餐廳，以及兩張住宿訂單是否能安排同一客房仍待確認。時段僅表示行程順序，5 人同行仍保留移動、候位與休息餘裕。</span></p>
+      <p class="intro-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>旅行日期、中華航空去回程及 2/21～2/25 四晚 Minn 住宿已確認；Day 2 方案、部分餐廳，以及兩張住宿訂單是否能安排同一客房仍待確認。時段僅表示行程順序，5 人同行仍保留移動、候位與休息餘裕。</span></p>
       <section id="trip-details" class="trip-facts" aria-labelledby="trip-details-title"></section>
       <noscript>此手冊需要啟用瀏覽器 JavaScript 才能顯示行程。啟用後不需網路即可閱讀；不需要登入或 API Key。</noscript>
       <div id="itinerary"></div>
       <section id="collections" class="collections" aria-labelledby="collections-title"><div class="gift-heading"><div><p class="eyebrow">Saved places / Route notes</p><h2 id="collections-title">收藏，按動線留著。</h2><p>候選與備選未排入固定時段；主行程也仍需確認營業、交通與預訂資訊。</p></div></div><div class="aside collection-grid" id="collection-groups"></div></section>
       <section id="gifts" class="gifts" aria-labelledby="gift-title">
         <div class="gift-heading"><div><p class="eyebrow">Shopping / Gift List</p><h2 id="gift-title">把九州的一點日常，帶回家。</h2><p>遇見喜歡的再買，把想帶回去的先記下。</p></div><p class="gift-counter" id="gift-counter" role="status" aria-live="polite">0 / 4 已完成</p></div>
-        <div><div class="gift-list" id="gift-list"></div><p class="storage-note" id="storage-note">勾選與自駕筆記僅儲存於目前瀏覽器，不會同步至其他裝置。清除瀏覽器資料或移動檔案後，紀錄可能消失。</p></div>
+        <div><div class="gift-list" id="gift-list"></div><p class="storage-note" id="storage-note">勾選紀錄僅儲存於目前瀏覽器，不會同步至其他裝置。清除瀏覽器資料或移動檔案後，紀錄可能消失。</p></div>
       </section>
     </div>
   </main>
@@ -472,19 +462,12 @@
       "status": "方案評估中／待確認",
       "accent": "#567056",
       "tint": "#eaf0e5",
-      "intro": "這一天仍在評估由布院、阿蘇／黑川溫泉、其他一日遊或福岡自由活動，尚未定案；當晚住宿已確認回到 Minn Hakata Station East。下方保留由布院一日往返的景點與自駕資料作為方案參考，不代表已決定租車或前往由布院。",
+      "intro": "這一天仍在評估由布院、阿蘇／黑川溫泉、其他一日遊或福岡自由活動，尚未定案；當晚住宿已確認回到 Minn Hakata Station East。下方保留由布院一日往返的景點作為方案參考，實際大眾交通或一日遊安排待確認。",
       "stops": [
-        {
-          "period": "舊方案候選｜尚未採用",
-          "title": "由布院自駕方案：福岡取車 → 由布院 → 回福岡",
-          "teaser": "5 人同行，車種與行李空間待確認",
-          "note": "租車公司、車種、取還車地點、出發時間、ETC、保險／NOC 補償與停車場均待確認。訂車前確認 5 位成人與實際行李能否容納，並確認冬季胎／雪胎；不先假設任何租車公司或車型。",
-          "mapUrl": null
-        },
         {
           "period": "若採由布院方案｜午餐候選",
           "title": "由布まぶし「心」金鱗湖本店",
-          "teaser": "先停車・依排隊與抵達時間決定",
+          "teaser": "依排隊與抵達時間決定",
           "note": "列為午餐候選，尚未確定用餐。營業資訊、候位與 5 人座位待確認；若抵達較晚或排隊過久，午餐現場調整，並保留返回福岡住宿的時間。",
           "mapUrl": null
         },
@@ -496,7 +479,7 @@
           "mapUrl": null
         }
       ],
-      "transport": "Day 2 交通方式尚未確定。若採自駕方案，租車公司、路線、車程、過路費、ETC、保險／NOC 補償、停車場，以及 5 人與行李所需車型均待確認。",
+      "transport": "Day 2 交通方式尚未確定，將以大眾交通或一日遊方案為主。各方案的集合地點、班次、轉乘、車程與費用待確認。",
       "food": [
         "午餐候選：由布まぶし「心」金鱗湖本店。",
         "小吃／甜點候選：B-SPEAK 本店、鞠智。",
@@ -506,45 +489,13 @@
       "notes": [
         "2027/02/22 第二晚已確認入住 Minn Hakata Station East。",
         "目前同時評估由布院、阿蘇／黑川溫泉、其他一日遊與福岡自由活動。",
-        "收藏店家不必全部走完，營業、候位與實際動線待確認。",
-        "駕駛所需文件、取還車條件、ETC、保險／NOC 補償與停車資訊待確認。"
+        "收藏店家不必全部走完，營業、候位與實際動線待確認。"
       ],
       "alternatives": [
         "由布院：一日往返方案是否採用待確認。",
         "阿蘇／黑川溫泉：行程與交通方式待評估。",
         "其他一日遊：內容與預訂狀態待確認。",
         "福岡自由活動：保留彈性，不先安排固定大型景點。"
-      ],
-      "winter": [
-        "若於冬季出發，確認雪胎／冬季胎。",
-        "留意山區結冰與天氣，行前確認高速公路及路況。",
-        "行前確認日落時間，不建議過晚行駛山區道路。"
-      ],
-      "fields": [
-        {
-          "id": "rental-company",
-          "label": "租車公司"
-        },
-        {
-          "id": "car-model",
-          "label": "車種／5 人與行李空間"
-        },
-        {
-          "id": "pickup-location",
-          "label": "取還車地點"
-        },
-        {
-          "id": "parking",
-          "label": "停車場"
-        },
-        {
-          "id": "etc",
-          "label": "ETC"
-        },
-        {
-          "id": "rental-insurance-noc",
-          "label": "保險／NOC 補償"
-        }
       ]
     },
     {
@@ -609,7 +560,7 @@
         "Maidreamin：5 位成人、尚未預約；行前確認 2027 營業時間、訂位方式與是否需要預約。"
       ],
       "alternatives": [
-        "若一日遊未成行，糸島替代安排需重新討論，不直接套用舊自駕行程。",
+        "若一日遊未成行，糸島替代安排需重新討論，不臨時塞入大量景點。",
         "若假日交通延誤，縮短天神自由活動或彈性調整晚餐，不勉強趕行程。"
       ]
     },
@@ -848,10 +799,6 @@
     function renderStop(stop, index) {
       return `<details class="stop"${index === 0 ? ' open' : ''}><summary><span><span class="stop-period">${escapeHTML(stop.period)}</span><span class="stop-name">${escapeHTML(stop.title)}</span><span class="stop-teaser">${escapeHTML(stop.teaser)}</span></span><span class="chevron">${icon('down')}</span></summary><div class="stop-body"><p>${escapeHTML(stop.note)}</p>${renderMap(stop)}</div></details>`;
     }
-    function renderPlanning(day) {
-      if (!day.fields) return '';
-      return `<section class="planning" aria-labelledby="planning-title"><div class="planning-heading"><h3 id="planning-title">自駕方案筆記</h3><span class="pill pending">預訂狀態・待確認</span></div><p id="planning-help">先記下候選資訊；填寫不代表已預訂。僅保存在目前瀏覽器。</p><div class="planning-fields">${day.fields.map(field => `<div><label class="field-label" for="${field.id}">${escapeHTML(field.label)}<span class="field-state" id="${field.id}-state">待確認</span></label><input id="${field.id}" data-note="${field.id}" type="text" maxlength="180" placeholder="待確認・可填入候選資訊" aria-describedby="planning-help ${field.id}-state" autocomplete="off"></div>`).join('')}</div></section>`;
-    }
     function renderFlight(flight) {
       return `<article class="flight-card" aria-label="${escapeHTML(flight.direction)}：${escapeHTML(flight.flight)}"><div class="flight-top"><strong>${escapeHTML(flight.direction)}・${escapeHTML(flight.airline)} ${escapeHTML(flight.flight)}</strong><span class="pill confirmed">已確認</span></div><div class="flight-route"><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.from)}</span><span class="flight-time">${escapeHTML(flight.depart)}</span><span class="flight-place">${escapeHTML(flight.fromName)}</span></div><span class="flight-arrow" aria-hidden="true">→</span><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.to)}</span><span class="flight-time">${escapeHTML(flight.arrive)}</span><span class="flight-place">${escapeHTML(flight.toName)}</span></div></div><div class="flight-meta"><span>${escapeHTML(flight.date)}</span><span>${escapeHTML(flight.duration)}</span><span>${escapeHTML(flight.cabin)}</span><span>${escapeHTML(flight.bookingClass)}</span></div></article>`;
     }
@@ -861,14 +808,14 @@
     }
     function renderTripDetails() {
       const transit = TRIP.transitTip;
-      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Confirmed & pending</p><h2 id="trip-details-title">行前資訊</h2><p>旅行日期、中華航空去回程與 2/21～2/25 四晚 Minn 住宿已確認；Day 2 方案、租車、部分餐廳，以及兩張住宿訂單是否能安排同一客房仍待確認。網站不保存訂位代號或個人資料。</p></div><span class="pill">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>旅行日期</dt><dd>${escapeHTML(TRIP.basics.dates)}・已確認</dd></div><div><dt>旅行人數／日程</dt><dd>${escapeHTML(TRIP.basics.travelers)}・${escapeHTML(TRIP.basics.duration)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><div class="planning-heading"><h3>${icon('arrow')}${escapeHTML(transit.title)}</h3><span class="pill pending">${escapeHTML(transit.status)}</span></div><ul class="transit-list">${transit.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card flight-overview"><h3>${icon('arrow')}已確認航班</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div></article><article class="trip-card lodging-overview"><h3>${icon('pin')}住宿總覽</h3><div class="lodging-grid">${TRIP.lodgingOverview.map(renderLodging).join('')}</div><ul class="transit-list">${TRIP.lodgingNotes.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article></div>`;
+      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Confirmed & pending</p><h2 id="trip-details-title">行前資訊</h2><p>旅行日期、中華航空去回程與 2/21～2/25 四晚 Minn 住宿已確認；Day 2 方案、部分餐廳，以及兩張住宿訂單是否能安排同一客房仍待確認。網站不保存訂位代號或個人資料。</p></div><span class="pill">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>旅行日期</dt><dd>${escapeHTML(TRIP.basics.dates)}・已確認</dd></div><div><dt>旅行人數／日程</dt><dd>${escapeHTML(TRIP.basics.travelers)}・${escapeHTML(TRIP.basics.duration)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><div class="planning-heading"><h3>${icon('arrow')}${escapeHTML(transit.title)}</h3><span class="pill pending">${escapeHTML(transit.status)}</span></div><ul class="transit-list">${transit.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card flight-overview"><h3>${icon('arrow')}已確認航班</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div></article><article class="trip-card lodging-overview"><h3>${icon('pin')}住宿總覽</h3><div class="lodging-grid">${TRIP.lodgingOverview.map(renderLodging).join('')}</div><ul class="transit-list">${TRIP.lodgingNotes.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article></div>`;
     }
     function renderDay(day) {
       return `<section id="day-${day.id}" class="day-section" style="${dayStyle(day)}" aria-labelledby="day-${day.id}-title">
         <header class="day-header"><div class="day-heading"><span class="day-index" aria-hidden="true">0${day.id}</span><div><p class="eyebrow">Day ${day.id} <span aria-hidden="true">${day.emoji}</span></p><h2 id="day-${day.id}-title">${escapeHTML(day.title)}</h2><p class="day-theme" lang="en">${escapeHTML(day.theme)}</p></div></div><div class="day-meta"><span class="pill confirmed">${escapeHTML(day.date)}</span><span class="pill">${escapeHTML(day.mode)}</span>${day.status ? `<span class="pill pending">${escapeHTML(day.status)}</span>` : ''}</div></header>
         <p class="day-description">${escapeHTML(day.intro)}</p>
-        <div class="day-layout"><div><div class="timeline-toolbar"><h3 class="eyebrow">The day, at your pace</h3><button class="text-button" type="button" data-expand="${day.id}" aria-controls="timeline-${day.id}">全部展開</button></div><div class="timeline" id="timeline-${day.id}">${day.stops.map(renderStop).join('')}</div>${day.mood ? `<p class="mood-line">${escapeHTML(day.mood)}</p>` : ''}${renderPlanning(day)}${day.lastMeal ? `<section class="pool" aria-labelledby="last-meal-title"><div class="planning-heading"><h3 id="last-meal-title">${escapeHTML(day.lastMeal.title)}</h3><span class="pill pending">餐廳・待確認</span></div><p>${escapeHTML(day.lastMeal.note)}</p><ul>${day.lastMeal.choices.map(choice => `<li class="pill">${escapeHTML(choice)}</li>`).join('')}</ul></section>` : ''}</div>
-        <aside class="aside" aria-label="Day ${day.id} 旅行資訊"><section class="info-card"><h3>${icon('car')}交通方式</h3><p>${escapeHTML(day.transport)}</p><h3 class="subhead">${icon('food')}今日必吃・候選</h3>${list(day.food)}</section><section class="info-card"><h3>${icon('info')}注意事項</h3>${list(day.notes)}</section>${day.winter ? `<section class="info-card notice"><h3>${icon('info')}冬季自駕提醒</h3>${list(day.winter)}</section>` : ''}<section class="info-card"><h3>${icon('options')}備選方案</h3>${list(day.alternatives)}</section></aside></div>
+        <div class="day-layout"><div><div class="timeline-toolbar"><h3 class="eyebrow">The day, at your pace</h3><button class="text-button" type="button" data-expand="${day.id}" aria-controls="timeline-${day.id}">全部展開</button></div><div class="timeline" id="timeline-${day.id}">${day.stops.map(renderStop).join('')}</div>${day.mood ? `<p class="mood-line">${escapeHTML(day.mood)}</p>` : ''}${day.lastMeal ? `<section class="pool" aria-labelledby="last-meal-title"><div class="planning-heading"><h3 id="last-meal-title">${escapeHTML(day.lastMeal.title)}</h3><span class="pill pending">餐廳・待確認</span></div><p>${escapeHTML(day.lastMeal.note)}</p><ul>${day.lastMeal.choices.map(choice => `<li class="pill">${escapeHTML(choice)}</li>`).join('')}</ul></section>` : ''}</div>
+        <aside class="aside" aria-label="Day ${day.id} 旅行資訊"><section class="info-card"><h3>${icon('arrow')}交通方式</h3><p>${escapeHTML(day.transport)}</p><h3 class="subhead">${icon('food')}今日必吃・候選</h3>${list(day.food)}</section><section class="info-card"><h3>${icon('info')}注意事項</h3>${list(day.notes)}</section><section class="info-card"><h3>${icon('options')}備選方案</h3>${list(day.alternatives)}</section></aside></div>
       </section>`;
     }
     function renderApp() {
@@ -881,13 +828,12 @@
     }
 
     // Local persistence must never prevent offline itinerary rendering.
-    // Keep the existing storage schema/key so V1 notes and unchanged gift IDs survive.
+    // Keep the existing storage schema/key so saved gift IDs remain compatible.
     // New gift categories use new IDs rather than inheriting old completion states.
     const STORAGE_KEY = 'fukuoka-trip.v1.local';
     let state = { gifts: {}, notes: {} };
     function storageUnavailable() {
-      document.getElementById('storage-note').textContent = '目前瀏覽器無法保存紀錄；勾選與筆記僅在這次開啟期間保留，行程仍可正常閱讀。';
-      document.getElementById('planning-help').textContent = '先記下候選資訊；填寫不代表已預訂。目前筆記僅在這次開啟期間保留。';
+      document.getElementById('storage-note').textContent = '目前瀏覽器無法保存紀錄；勾選僅在這次開啟期間保留，行程仍可正常閱讀。';
     }
     function readState() {
       try {
@@ -907,19 +853,10 @@
       const count = document.querySelectorAll('[data-gift]:checked').length;
       document.getElementById('gift-counter').textContent = `${count} / ${TRIP.gifts.length} 已完成`;
     }
-    function updateNoteStatus(input) {
-      document.getElementById(`${input.id}-state`).textContent = input.value.trim() ? '已記錄・仍待確認' : '待確認';
-    }
     function setupLocalInputs() {
       document.querySelectorAll('[data-gift]').forEach(input => {
         input.checked = state.gifts[input.dataset.gift] === true;
         input.addEventListener('change', () => { state.gifts[input.dataset.gift] = input.checked; saveState(); updateGiftCounter(); });
-      });
-      document.querySelectorAll('[data-note]').forEach(input => {
-        const saved = state.notes[input.dataset.note];
-        input.value = typeof saved === 'string' ? saved.slice(0, 180) : '';
-        updateNoteStatus(input);
-        input.addEventListener('input', () => { state.notes[input.dataset.note] = input.value; updateNoteStatus(input); saveState(); });
       });
       updateGiftCounter();
     }
