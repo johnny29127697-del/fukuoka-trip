@@ -191,7 +191,7 @@
       .flight-overview { grid-column: 1 / -1; }
       .flight-overview .flight-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .lodging-overview { grid-column: 1 / -1; }
-      .lodging-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .lodging-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
       .day-header { display: flex; justify-content: space-between; align-items: center; }
     }
     @media (min-width: 900px) {
@@ -315,7 +315,7 @@
      * EDITING GUIDE
      * 1. Edit TRIP only to change the itinerary. No dependencies or fetch calls.
      * 2. Each stop: period, title, teaser, note, mapUrl. Use null until confirmed.
-     * 3. mapUrl accepts a normal Google Maps HTTPS URL, no API key required.
+     * 3. mapUrl accepts a Google Maps HTTPS URL; bookingUrl currently accepts Klook only.
      * 4. Browser-local state is separate from itinerary data and versioned.
      * 5. This classic inline script works directly under file://.
      */
@@ -370,23 +370,16 @@
   },
   "lodgingOverview": [
     {
-      "period": "入住 2027/02/21（日）・退房 2027/02/23（二）・第 1、2 晚",
-      "name": "Minn Hakata Station East｜第一張連續訂單",
-      "detail": "明恩飯店－博多站東・2 晚・5 位成人・總金額 TWD 10,478.26・已完成付款・不可退款",
-      "status": "已付款／已確認",
-      "confirmed": true
-    },
-    {
-      "period": "入住 2027/02/23（二）・退房 2027/02/25（四）・第 3、4 晚",
-      "name": "Minn Hakata Station East｜第二張連續訂單",
-      "detail": "明恩飯店－博多站東・2 晚・5 位成人・確認總價 TWD 9,675",
-      "status": "已預訂／已確認",
+      "period": "入住 2027/02/21（日）・退房 2027/02/25（四）・共 4 晚",
+      "name": "Minn Hakata Station East｜4 晚",
+      "detail": "明恩飯店－博多站東・5 位成人・兩筆連續訂單",
+      "status": "已確認可連續入住同一房間",
       "confirmed": true
     }
   ],
   "lodgingNotes": [
     "2027/02/21～2027/02/25 四晚皆入住 Minn Hakata Station East，但分成兩張連續訂單。",
-    "住宿方已確認四晚可使用同一間客房，兩張連續訂單不需要中途更換房間；第二筆訂單的入住程序仍依住宿方規定辦理。"
+    "住宿方已確認四晚可使用同一間客房，不需要中途換房；兩筆訂單的其他入住程序仍依住宿方規定辦理。"
   ],
   "days": [
     {
@@ -399,13 +392,20 @@
       "mode": "步行・市區交通",
       "accent": "#a94b35",
       "tint": "#f4ebe2",
-      "intro": "5 位朋友搭乘已確認的 CI110，預計 10:00 抵達福岡。抵達後先前往已確認的 Minn Hakata Station East，依實際入住規則寄放或處理行李，再到博多站附近吃午餐、順路逛 Pokémon Center FUKUOKA，接續市區景點、福岡塔與中洲。全日保留入境、交通、航班延誤與休息空間。",
+      "intro": "5 位朋友搭乘已確認的 CI110，預計 10:00 抵達福岡。完成入境與領行李後，先在國際線領取預計使用的 Day 3 柳川＋太宰府觀光套票，再前往 Minn 處理行李。接著在博多站附近吃午餐、順路逛 Pokémon Center FUKUOKA，前往市區景點、福岡塔與中洲；全日保留航班延誤與休息空間。",
       "stops": [
         {
           "period": "2027/02/21（日）｜10:00 抵達",
+          "title": "福岡機場入境・領行李・領取 Day 3 套票",
+          "teaser": "套票待購買・預計抵達國際線後領取",
+          "note": "已確認搭乘中華航空 CI110，自桃園 06:50 出發、福岡 10:00 抵達。預計出發前約 1 個月購買 KKday「福岡西鐵｜太宰府 天滿宮 + 柳川遊船 觀光暢遊套票｜福岡機場國際線領取」，Day 1 完成入境與領行李後領取；目前尚未購買或取票。",
+          "mapUrl": null
+        },
+        {
+          "period": "完成機場手續後｜依當日規定",
           "title": "福岡機場 → Minn Hakata Station East",
-          "teaser": "寄放行李／依實際入住規則處理",
-          "note": "已確認搭乘中華航空 CI110，自桃園 06:50 出發、福岡 10:00 抵達。四晚住宿皆為 Minn Hakata Station East；先完成入境與領行李，再前往住宿依實際入住與寄放規則處理行李後出發。",
+          "teaser": "寄放行李／入住依住宿規定處理",
+          "note": "四晚住宿皆為 Minn Hakata Station East，且已確認可連續入住同一房間。抵達後依當日入住與寄放規則處理行李；兩筆連續訂單的其他入住程序仍以住宿方規定為準。",
           "mapUrl": null
         },
         {
@@ -438,13 +438,13 @@
         },
         {
           "period": "夜晚｜自由安排",
-          "title": "回中洲 → 中洲屋台",
+          "title": "回中洲 → 中洲屋台 → 回 Minn",
           "teaser": "屋台晚餐・吃得下再加宵夜",
-          "note": "屋台店家與營業狀況待確認。5 人同行不預設一定能同坐一攤，依現場座位狀況安排，必要時分組或改附近餐廳＋屋台續攤。若還吃得下，一蘭拉麵總本店僅作為宵夜候選。",
+          "note": "屋台店家與營業狀況待確認。5 人同行不預設一定能同坐一攤，依現場座位狀況安排，必要時分組或改附近餐廳＋屋台續攤。若還吃得下，一蘭拉麵總本店僅作為 Bonus，之後返回 Minn。",
           "mapUrl": null
         }
       ],
-      "transport": "以步行與市區大眾交通為主，串連福岡機場、Minn Hakata Station East、博多、櫛田神社、博多運河城、福岡塔與中洲。機場至住宿及後續具體路線、行李寄放方式與移動時間行前確認。",
+      "transport": "以步行與市區大眾交通為主，串連福岡機場國際線、Minn Hakata Station East、博多、櫛田神社、博多運河城、福岡塔與中洲。套票領取位置、機場至住宿及後續具體路線與移動時間行前確認。",
       "food": [
         "市區午餐／小吃：餐廳待確認。",
         "中洲屋台：店家與座位安排待確認。",
@@ -452,13 +452,15 @@
       ],
       "notes": [
         "已確認航班：中華航空 CI110，2027/02/21（日）桃園 06:50 → 福岡 10:00；經濟艙、訂位艙等 N。",
-        "四晚住宿皆已確認為 Minn Hakata Station East；2/21～2/23 與 2/23～2/25 為兩張連續訂單。",
-        "住宿方已確認四晚可使用同一間客房，兩張連續訂單不需要中途更換房間。",
+        "Day 3 觀光套票尚未購買：預計出發前約 1 個月購買，Day 1 抵達福岡機場國際線後領取。",
+        "四晚住宿皆已確認為 Minn Hakata Station East；住宿方已確認可連續入住同一房間，其他入住程序仍依住宿方規定。",
         "福岡塔：建議日落前約 45～60 分鐘抵達，實際時間依當日日落時間調整。",
         "依第一天體力減少逛街或散步，不以跑完全部行程為目標。"
       ],
       "alternatives": [
         "東長寺：僅列備選，不在核心行程；有時間與體力再評估。",
+        "Bonus：LOPIA 博多友都八喜店（ロピア 博多ヨドバシ店）。有空、有餓再去，可買啤酒、飲料、零食或宵夜帶回 Minn；Day 1 沒去也可留到 Day 4。",
+        "Bonus：努努鶏 博多マイング。朋友推薦的冷吃炸雞候選，可買回 Minn 搭配啤酒；有空、有餓再去，Day 1 沒去也可留到 Day 4。",
         "抵達延誤時，縮短博多與運河城停留；福岡塔是否改看夜景依當天情況決定。",
         "疲累或天候不佳時，縮短戶外行程，保留休息與晚餐。"
       ]
@@ -466,98 +468,102 @@
     {
       "id": 2,
       "date": "2027/02/22（一）",
-      "title": "糸島一日遊＋天神",
+      "title": "糸島一日遊・海鮮・牛腸鍋",
       "emoji": "🌊",
-      "theme": "Itoshima Day Tour & Tenjin Night 🌊",
-      "short": "糸島 Klook 一日遊・天神夜晚",
-      "mode": "一日遊候選・大眾交通",
-      "status": "暫定／尚未預訂",
+      "theme": "Itoshima Day Tour & Hakata Dinner 🌊",
+      "short": "糸島 Klook 一日遊・海鮮・前田屋",
+      "mode": "Klook 一日遊・步行",
+      "status": "主方案／待購買",
       "accent": "#376d7b",
       "tint": "#e7eef0",
-      "mood": "Itoshima • Day Tour • Tenjin Night",
-      "intro": "白天暫定參加糸島 Klook 一日遊，參考時間為約 08:45 集合、09:00 出發、18:15 回到博多；目前尚未購買或預訂，實際 2027 集合時間與行程內容需行前確認。晚上前往天神自由活動，再體驗 Maidcafe Maidreamin 天神西通店。",
+      "mood": "Waterfall • Coast • Seafood • Hakata Night",
+      "intro": "Day 2 主方案為約 10 小時的 Klook 糸島一日遊，目前尚未購買。從 Minn 前往博多站附近集合，走訪白絲瀑布、海岸與櫻井二見浦等商品現有行程，午餐自費安排糸島海鮮；約傍晚至晚間返回博多，實際依當日交通與行程。回 Minn 放東西、休息後，再前往博多もつ鍋 前田屋 総本店吃晚餐。",
       "stops": [
         {
-          "period": "約 08:45｜參考時間",
-          "title": "糸島 Klook 一日遊集合",
-          "teaser": "5 位成人・尚未購買／預訂",
-          "note": "集合地點、實際集合時間、成團與憑證規則均待確認；出發前應依 2027 商品資訊重新確認。",
+          "period": "上午｜依商品憑證時間集合",
+          "title": "Minn → 博多站附近集合",
+          "teaser": "5 位成人・Klook 主方案尚未購買",
+          "note": "從 Minn 前往博多站附近集合。商品、集合點、集合時間、成團與憑證規則均需在購買前及出發前確認；目前不可視為已預訂。",
+          "mapUrl": null,
+          "bookingUrl": "https://www.klook.com/zh-TW/activity/152315-shiraito-falls-sakurai-futamigaura-angel-wings-palm-tree-tour/",
+          "bookingLabel": "查看 Klook 行程 ↗",
+          "hideMap": true
+        },
+        {
+          "period": "白天｜約 10 小時一日遊",
+          "title": "Klook 糸島一日遊",
+          "teaser": "白絲瀑布・海岸・櫻井二見浦等",
+          "note": "依 Klook 商品現有行程走訪白絲瀑布、糸島海岸、櫻井二見浦等地；景點順序、停留時間與實際內容以購買時及出發前的商品說明為準，不自行追加固定景點。",
           "mapUrl": null
         },
         {
-          "period": "約 09:00～18:15｜參考時間",
-          "title": "糸島 Klook 一日遊",
-          "teaser": "詳細景點、用餐與停留時間待確認",
-          "note": "目前僅確定評估糸島一日遊方向，不先把商品頁景點寫成固定行程。實際出發、返回、用餐、停靠順序與交通狀況以購買前確認的 2027 行程為準。",
+          "period": "中午｜隨團安排・自費",
+          "title": "糸島海鮮午餐",
+          "teaser": "自費・餐廳與品項不預先保證",
+          "note": "依當日一日遊安排自費用餐。保留糸島海鮮午餐的方向，不鎖定餐廳，也不保證壽司或特定海鮮品項。",
           "mapUrl": null
         },
         {
-          "period": "約 18:15｜依實際回程調整",
-          "title": "返回博多 → 前往天神",
-          "teaser": "同房連住已確認・晚間行程保持彈性",
-          "note": "一日遊返回博多後前往天神。Minn 兩張連續訂單已確認可使用同一間客房；若一日遊延誤，就順延或縮短晚間安排。",
+          "period": "傍晚至晚間｜實際依交通與行程",
+          "title": "返回博多 → Minn 放東西、休息",
+          "teaser": "回程不鎖死・先休息再吃晚餐",
+          "note": "約傍晚至晚間返回博多，實際依當日交通與行程。先回距離晚餐候選不遠的 Minn 放東西、稍作休息；若團體回程較晚，再依實際時間調整晚餐。",
           "mapUrl": null
         },
         {
-          "period": "晚上｜抵達後自由安排",
-          "title": "天神自由活動",
-          "teaser": "散步・輕鬆吃飯・不硬塞大餐",
-          "note": "依一日遊實際返回時間、體力與候位狀況安排。晚餐保持彈性，不鎖固定時間或大型正式餐。",
-          "mapUrl": null
-        },
-        {
-          "period": "暫抓 19:30～21:00｜尚未預約",
-          "title": "Maidcafe Maidreamin 天神西通店",
-          "teaser": "朋友想體驗的日本特色行程",
-          "note": "5 位成人，尚未預約。19:30～21:00 僅為暫抓時段，需行前確認 2027 營業時間、是否需要預約及能否提前訂位；若一日遊延誤，依實際狀況調整。",
+          "period": "晚餐｜第一順位 21:00",
+          "title": "博多もつ鍋 前田屋 総本店",
+          "teaser": "第一候選・待預約",
+          "note": "尚未預約。第一順位 21:00、第二順位 21:30，若回程或休息時間較長則以 22:00 為備案；最終依一日遊回程、2027 營業時間、5 人座位與訂位結果調整。晚餐後返回 Minn。",
           "mapUrl": null
         }
       ],
-      "transport": "白天以 Klook 糸島一日遊候選方案移動，集合地點與交通內容待確認；返回博多後，以市區大眾交通前往天神，再返回 Minn Hakata Station East。",
+      "transport": "從 Minn 前往博多站附近集合，白天依 Klook 糸島一日遊的團體交通移動。約傍晚至晚間返回博多後先回 Minn，再步行或依實際路線前往前田屋総本店；集合位置與 2027 商品內容行前確認。",
       "food": [
-        "一日遊午餐：是否包含、地點與內容待確認。",
-        "天神晚餐保持彈性，不鎖固定時段或大型正式餐。"
+        "糸島海鮮午餐｜自費；不鎖定餐廳或指定海鮮品項。",
+        "博多もつ鍋 前田屋 総本店：晚餐第一候選，待預約。"
       ],
       "notes": [
-        "糸島 Klook 一日遊尚未購買／預訂，參考時間不視為已確認。",
-        "Maidreamin：5 位成人、尚未預約；行前確認 2027 營業時間、訂位方式與是否需要預約。",
-        "2027/02/22 第二晚已確認入住 Minn Hakata Station East，且可與前後訂單使用同一間客房。"
+        "指定 Klook 糸島一日遊為 Day 2 主方案，但目前尚未購買；約 10 小時及景點內容以購買時的商品頁為準。",
+        "回程寫作傍晚至晚間，不鎖死時間；實際依當日交通、天候與行程調整。",
+        "前田屋：5 位成人、尚未預約；依 21:00、21:30、22:00 的順位詢問，並確認 2027 營業時間。"
       ],
       "alternatives": [
-        "若一日遊未成行，替代安排需重新討論，不臨時塞入大量景點。",
-        "若回程延誤，縮短天神自由活動或彈性調整 Maidreamin，不勉強趕行程。"
+        "若一日遊商品內容、成團或可購買狀況改變，替代安排需重新討論，不臨時塞入大量景點。",
+        "若回程延誤或前田屋無法訂位，晚餐時間與店家保持彈性，不勉強趕行程。"
       ]
     },
     {
       "id": 3,
       "date": "2027/02/23（二）",
-      "title": "柳川・太宰府",
+      "title": "柳川・太宰府・天神",
       "emoji": "🛶⛩️",
-      "theme": "Yanagawa & Dazaifu Day Trip 🛶⛩️",
-      "short": "柳川川下り・太宰府散策",
-      "mode": "西鐵・步行・川下り候選",
+      "theme": "Yanagawa, Dazaifu & Tenjin 🛶⛩️",
+      "short": "柳川川下り・太宰府・Maidreamin",
+      "mode": "西鐵・步行・川下り",
+      "status": "套票待購買・餐廳待預約",
       "accent": "#97702d",
       "tint": "#f3eddd",
-      "intro": "從 Minn／博多一帶出發，經西鐵福岡（天神）站先前往柳川，體驗川下り並吃鰻魚蒸籠飯；之後搭西鐵往北轉乘太宰府線，慢慢走天滿宮與表參道。2027/02/23 為日本國定假日，行程保留人潮與交通彈性，返回福岡後晚上自由活動。",
+      "intro": "從 Minn 出發，經西鐵福岡（天神）站先前往柳川，體驗川下り並以元祖 本吉屋作為鰻魚蒸籠飯第一候選；之後搭西鐵往北轉乘太宰府線，慢慢走天滿宮與表參道。回到天神後再安排 Maidcafe Maidreamin 天神西通り店。2027/02/23 為日本國定假日，全日保留人潮與交通彈性。",
       "stops": [
         {
           "period": "早上｜出發時間保持彈性",
           "title": "Minn／博多 → 西鐵福岡（天神）站 → 西鐵柳川",
-          "teaser": "搭西鐵前往・班次行前確認",
-          "note": "從 Minn Hakata Station East／博多一帶出發，先前往西鐵福岡（天神）站，再搭西鐵前往西鐵柳川。實際班次、票價與所需時間行前確認。",
+          "teaser": "Day 3 套票待購買・Day 1 預計領取",
+          "note": "從 Minn Hakata Station East／博多一帶出發，先前往西鐵福岡（天神）站，再搭西鐵前往西鐵柳川。傾向使用 KKday 柳川＋太宰府觀光套票，預計出發前約 1 個月購買、Day 1 抵達福岡機場國際線後領取；目前尚未購買。",
           "mapUrl": null
         },
         {
           "period": "抵達柳川後｜依天候與營運狀況",
           "title": "柳川川下り",
-          "teaser": "航程與乘船地點行前確認",
-          "note": "川下り營運、航程、票價與乘船地點需行前確認。每年 2 月可能遇河道「水落ち」維護，川下り可能改為縮短路線；2027 年實際日期尚未公布，出發前需重新確認官方公告。",
+          "teaser": "行前確認水落ち與遊船營運",
+          "note": "川下り營運、時間、路線與乘船地點需行前確認。2027 水落ち日期待行前確認，若遇維護期間，遊船時間／路線可能調整。",
           "mapUrl": null
         },
         {
           "period": "川下り後｜午餐候選",
           "title": "柳川鰻魚蒸籠飯",
-          "teaser": "第一候選：元祖 本吉屋・尚未預約",
+          "teaser": "元祖 本吉屋・餐廳候選／待預約",
           "note": "元祖 本吉屋列為第一候選，目前尚未預約。營業時間、5 人座位、候位、價格與交通動線需行前確認；若候位過久，改選其他柳川鰻魚店。",
           "mapUrl": null
         },
@@ -576,27 +582,29 @@
           "mapUrl": null
         },
         {
-          "period": "傍晚｜保留回程餘裕",
-          "title": "太宰府 → 返回福岡 → 晚上自由活動",
-          "teaser": "回 Minn 或自由吃飯，不追加大型行程",
-          "note": "依西鐵班次、天候與大家體力返回福岡。回程後不安排必須完成的大型購物或景點，晚餐與晚上活動自由決定。",
+          "period": "傍晚至晚上｜回到天神後",
+          "title": "太宰府 → 天神 → Maidcafe Maidreamin 天神西通り店",
+          "teaser": "朋友想體驗的日本特色行程・待確認",
+          "note": "回到天神後前往 Maidcafe Maidreamin 天神西通り店。5 位成人，目前尚未訂位；待確認 2027 營業時間、5 人訂位方式與是否需要預約。結束後返回 Minn。",
           "mapUrl": null
         }
       ],
-      "transport": "住宿基地為 Minn Hakata Station East。從博多一帶前往西鐵福岡（天神）站，搭西鐵至西鐵柳川；柳川行程結束後往北至西鐵二日市，轉乘太宰府線前往太宰府，傍晚返回福岡。",
+      "transport": "住宿基地為 Minn Hakata Station East。從博多一帶前往西鐵福岡（天神）站，搭西鐵至西鐵柳川；柳川行程結束後往北至西鐵二日市，轉乘太宰府線前往太宰府，再返回天神與 Maidreamin，最後回 Minn。觀光套票尚未購買。",
       "food": [
         "柳川鰻魚蒸籠飯：元祖 本吉屋為第一候選，尚未預約。",
         "太宰府表參道：梅ヶ枝餅，店家待確認。",
-        "返回福岡後晚餐自由安排，不鎖定餐廳。"
+        "回到天神後的晚餐保持彈性，不鎖定餐廳。"
       ],
       "notes": [
         "2027/02/23 為日本國定假日，可能遇到較多人潮；尤其太宰府需預留彈性，但實際狀況以當天為準。",
-        "柳川每年 2 月可能有河道「水落ち」維護期間，川下り可能改為縮短路線。2027 年實際日期尚未確認，出發前必須重新查詢官方公告。",
-        "元祖 本吉屋尚未預約；行前確認營業、價格、5 人座位與訂位方式。"
+        "2027 水落ち日期待行前確認，若遇維護期間，遊船時間／路線可能調整。",
+        "元祖 本吉屋尚未預約；行前確認營業、價格、5 人座位與訂位方式。",
+        "Maidreamin 尚未訂位；待確認 2027 營業時間與 5 人訂位方式。"
       ],
       "alternatives": [
         "Bonus／備選：九州國立博物館。若當天對展覽有興趣、有時間再去，不列為必要行程；行前確認休館日與營業時間。",
-        "若川下り停航或縮短，保留悠閒用餐並提早前往太宰府，不臨時塞入大型景點。",
+        "Bonus／有空、有體力再去：寶滿宮竈門神社。只有柳川與太宰府進度順利、下午仍有足夠時間與體力才考慮前往，不列主線。",
+        "若川下り停航或調整，保留悠閒用餐並提早前往太宰府，不臨時塞入大型景點。",
         "若柳川行程、假日人潮或轉乘耗時較久，縮短太宰府表參道停留，優先保留安全回程餘裕。"
       ]
     },
@@ -606,62 +614,58 @@
       "title": "福岡市區自由日／購物",
       "emoji": "🛍️",
       "theme": "Fukuoka Free Day & Shopping 🛍️",
-      "short": "市區自由活動・購物・牛腸鍋",
+      "short": "睡晚一點・天神購物・自由晚餐",
       "mode": "步行・市區交通",
       "accent": "#97702d",
       "tint": "#f3eddd",
-      "intro": "留一天給福岡城市本身，不趕行程，專心逛街、吃飯與自由活動。睡晚一點再慢慢出門，在天神或博多站周邊依大家興趣購物、喝咖啡休息，晚上以牛腸鍋作為主要正式餐。",
+      "intro": "留一天給福岡城市本身，約 10:30～11:00 從 Minn 慢慢出門，先吃早午餐，再把至少 4～5 小時留給天神購物。SOLARIA PLAZA、ONE FUKUOKA BLDG. 與天神地下街都是自由選擇的購物區，不需要全部走完；逛累就喝咖啡，晚餐再依體力決定。",
       "stops": [
         {
-          "period": "上午｜睡飽再出門",
-          "title": "慢慢吃早餐／早午餐",
+          "period": "約 10:30～11:00｜睡飽再出門",
+          "title": "Minn → 博多／天神早午餐",
           "teaser": "時間與店家依當天狀況決定",
           "note": "不設定過早出發時間，依大家起床時間與胃口安排早餐或早午餐。店家待確認，不為排隊壓縮自由日節奏。",
           "mapUrl": null
         },
         {
-          "period": "白天｜自由選區域",
-          "title": "天神／博多市區自由活動",
-          "teaser": "散步・逛街・依大家興趣調整",
-          "note": "以天神、天神地下街或博多站周邊為主，當天選擇適合的區域，不跨很多地方，也不安排必須完成的景點。",
+          "period": "白天至傍晚｜保留約 4～5 小時",
+          "title": "天神購物・自由選擇購物區",
+          "teaser": "SOLARIA PLAZA・ONE FUKUOKA BLDG.・天神地下街",
+          "note": "以天神為主區域，依大家興趣從 SOLARIA PLAZA、ONE FUKUOKA BLDG.、天神地下街等地自由選擇，不要求全部完成。保留分組、會合與休息彈性。",
           "mapUrl": null
         },
         {
-          "period": "下午｜保留充足時間",
-          "title": "百貨／商場／服飾購物",
-          "teaser": "買衣服・自由逛店・不指定大量店家",
-          "note": "依大家想買的品項，在天神或博多的百貨、商場與服飾店自由活動。保留分組與會合彈性，不列大量指定店家。",
+          "period": "逛街途中｜隨時休息再繼續",
+          "title": "咖啡休息 → 繼續逛街",
+          "teaser": "不卡死店家與時間",
+          "note": "累了就找順路的咖啡休息，再依體力繼續購物。Blue Bottle Coffee Fukuoka Tenjin Cafe 僅列 Bonus，不需要特地繞路或固定時間前往。",
           "mapUrl": null
         },
         {
-          "period": "逛街途中｜隨時休息",
-          "title": "咖啡／甜點休息",
-          "teaser": "店家與時間現場決定",
-          "note": "累了就找順路的咖啡或甜點休息，不為特定店家繞路；也可依當天體力直接回 Minn 稍作休息。",
-          "mapUrl": null
-        },
-        {
-          "period": "晚上｜主要正式餐",
-          "title": "もつ鍋／牛腸鍋晚餐",
-          "teaser": "餐廳待確認／待預約",
-          "note": "目前只確定料理類型，尚未決定餐廳。行前再依預算、位置、5 人座位與訂位方式選擇，不自行假設店家。餐後返回 Minn。",
+          "period": "晚上｜視體力決定",
+          "title": "晚餐 → 回博多／回 Minn",
+          "teaser": "候選：燒肉・餐廳待定",
+          "note": "晚餐方向暫時考慮燒肉，但尚未決定店家或預約。依當天體力、預算、位置與 5 人座位狀況決定，也可選其他料理；餐後返回博多／Minn。",
           "mapUrl": null
         }
       ],
-      "transport": "以 Minn Hakata Station East 為住宿基地，活動集中天神、天神地下街或博多站周邊，以步行與市區大眾交通移動。當天選擇區域與順序，不安排遠距離往返。",
+      "transport": "以 Minn Hakata Station East 為住宿基地，約 10:30～11:00 出門，活動集中天神與博多，以步行和市區大眾交通移動。天神保留約 4～5 小時購物，不安排遠距離往返。",
       "food": [
-        "早餐／早午餐：店家與時間待確認。",
+        "博多／天神早午餐：店家待確認。",
         "咖啡或甜點：逛街途中順路休息。",
-        "晚餐：もつ鍋／牛腸鍋；餐廳待確認／待預約。"
+        "晚餐候選：燒肉／依當天狀況決定，餐廳待確認。"
       ],
       "notes": [
         "這天是完整市區自由日，不排成景點打卡日。",
-        "購物區域可依大家需求在天神與博多之間調整，保留分組與休息時間。",
-        "牛腸鍋只確定料理類型；餐廳、價格、5 人座位與預約方式仍待確認。"
+        "天神購物預留約 4～5 小時；SOLARIA PLAZA、ONE FUKUOKA BLDG. 與天神地下街皆為自由選擇，不是必須全部完成。",
+        "晚餐只保留燒肉方向，餐廳、價格、5 人座位與預約方式仍待確認。"
       ],
       "alternatives": [
+        "Bonus：Blue Bottle Coffee Fukuoka Tenjin Cafe（ブルーボトルコーヒー 福岡天神カフェ）。逛街累了再順路休息，不固定時間。",
+        "Bonus：BIC CAMERA Tenjin 2nd Store（ビックカメラ 天神2号館）。想看 3C、家電、相機或遊戲時再去。",
+        "Bonus：回博多後若還有胃與時間，可去 LOPIA 博多友都八喜店與努努鶏 博多マイング，買啤酒、零食與冷吃炸雞回 Minn 當宵夜。",
         "若天候不佳，以天神地下街、百貨或博多站周邊等室內區域為主。",
-        "若前幾天較累，縮短購物時間、回 Minn 休息，再出門吃牛腸鍋。"
+        "若前幾天較累，縮短購物時間、回 Minn 休息，晚餐也保持彈性。"
       ]
     },
     {
@@ -753,10 +757,10 @@
       "title": "主行程",
       "icon": "pin",
       "items": [
-        "Day 1：博多站附近午餐、Pokémon Center FUKUOKA、櫛田神社、博多運河城、福岡塔、中洲屋台。",
-        "Day 2：暫定糸島 Klook 一日遊，返回博多後前往天神自由活動與 Maidcafe Maidreamin 天神西通店。",
-        "Day 3：從 Minn／博多出發，先到柳川體驗川下り並吃鰻魚蒸籠飯，再前往太宰府天滿宮與表參道。",
-        "Day 4：留在福岡市區，於天神或博多自由逛街、買衣服與休息，晚上吃牛腸鍋。",
+        "Day 1：抵達福岡機場後預計領取 Day 3 觀光套票，再到 Minn、博多、Pokémon Center、櫛田神社、博多運河城、福岡塔與中洲屋台。",
+        "Day 2：Klook 糸島一日遊主方案、糸島海鮮午餐，返回博多後到 Minn 休息，再以博多もつ鍋 前田屋 総本店為晚餐第一候選。",
+        "Day 3：從 Minn 出發，先到柳川體驗川下り並吃鰻魚蒸籠飯，再前往太宰府天滿宮與表參道；回到天神後安排 Maidreamin。",
+        "Day 4：睡晚一點後在博多／天神吃早午餐，保留約 4～5 小時自由購物，晚餐依體力決定。",
         "Day 5：從 Minn 退房，在博多附近散步、吃最後一餐與少量購物；餐廳不預先鎖定。"
       ]
     },
@@ -765,8 +769,9 @@
       "icon": "food",
       "items": [
         "一蘭拉麵總本店：Day 1 吃得下再安排宵夜。",
-        "Maidcafe Maidreamin 天神西通店：Day 2 晚間體驗，5 位成人、尚未預約。",
-        "牛腸鍋：Day 4 晚餐料理類型已選定，餐廳待確認／待預約。",
+        "博多もつ鍋 前田屋 総本店：Day 2 晚餐第一候選，5 位成人、待預約。",
+        "Maidcafe Maidreamin 天神西通り店：Day 3 回到天神後體驗，5 位成人、尚未訂位。",
+        "燒肉：Day 4 晚餐候選，餐廳與是否前往待確認。",
         "Dacomecca、住吉神社：Day 5 博多附近候選，依飯店位置與時間評估。",
         "黒毛和牛焼肉 西新初喜：餐廳候選，分店、動線與是否前往待確認；不排固定時段，不為此另加繞路行程。"
       ]
@@ -777,6 +782,8 @@
       "items": [
         "東長寺：Day 1 有餘裕再評估，不列核心。",
         "九州國立博物館：Day 3 Bonus／備選；當天對展覽有興趣、有時間再去，不列必要行程。",
+        "寶滿宮竈門神社：Day 3 Bonus；只有柳川與太宰府進度順利、仍有時間與體力才考慮。",
+        "Blue Bottle Coffee 福岡天神、BIC CAMERA 天神2号館：Day 4 彈性 Bonus，依購物動線與興趣決定。",
         "大濠公園：保留備選，安排日待確認，目前不塞入 Day 5。",
         "LaLaport 福岡：備選購物／鋼彈景點，安排日待確認，目前不放主線。"
       ]
@@ -823,8 +830,16 @@
         ? `<a class="map-link" href="${escapeHTML(url.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(stop.title)}：開啟 Google Maps（需要網路，另開分頁）">${icon('pin')}Google Maps ↗</a>`
         : `<button class="map-link" type="button" disabled aria-label="${escapeHTML(stop.title)}：Google Maps 連結待確認">${icon('pin')}Google Maps · 待確認</button>`;
     }
+    function renderBooking(stop) {
+      let url;
+      try { url = new URL(stop.bookingUrl); } catch { return ''; }
+      const allowed = url.protocol === 'https:' && /(^|\.)klook\.com$/.test(url.hostname);
+      return allowed
+        ? `<a class="map-link" href="${escapeHTML(url.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(stop.title)}：${escapeHTML(stop.bookingLabel || '查看行程')}（需要網路，另開分頁）">${icon('arrow')}${escapeHTML(stop.bookingLabel || '查看行程 ↗')}</a>`
+        : '';
+    }
     function renderStop(stop, index) {
-      return `<details class="stop"${index === 0 ? ' open' : ''}><summary><span><span class="stop-period">${escapeHTML(stop.period)}</span><span class="stop-name">${escapeHTML(stop.title)}</span><span class="stop-teaser">${escapeHTML(stop.teaser)}</span></span><span class="chevron">${icon('down')}</span></summary><div class="stop-body"><p>${escapeHTML(stop.note)}</p>${renderMap(stop)}</div></details>`;
+      return `<details class="stop"${index === 0 ? ' open' : ''}><summary><span><span class="stop-period">${escapeHTML(stop.period)}</span><span class="stop-name">${escapeHTML(stop.title)}</span><span class="stop-teaser">${escapeHTML(stop.teaser)}</span></span><span class="chevron">${icon('down')}</span></summary><div class="stop-body"><p>${escapeHTML(stop.note)}</p>${stop.hideMap ? '' : renderMap(stop)}${renderBooking(stop)}</div></details>`;
     }
     function renderFlight(flight) {
       return `<article class="flight-card" aria-label="${escapeHTML(flight.direction)}：${escapeHTML(flight.flight)}"><div class="flight-top"><strong>${escapeHTML(flight.direction)}・${escapeHTML(flight.airline)} ${escapeHTML(flight.flight)}</strong><span class="pill confirmed">已確認</span></div><div class="flight-route"><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.from)}</span><span class="flight-time">${escapeHTML(flight.depart)}</span><span class="flight-place">${escapeHTML(flight.fromName)}</span></div><span class="flight-arrow" aria-hidden="true">→</span><div class="flight-stop"><span class="airport-code">${escapeHTML(flight.to)}</span><span class="flight-time">${escapeHTML(flight.arrive)}</span><span class="flight-place">${escapeHTML(flight.toName)}</span></div></div><div class="flight-meta"><span>${escapeHTML(flight.date)}</span><span>${escapeHTML(flight.duration)}</span><span>${escapeHTML(flight.cabin)}</span><span>${escapeHTML(flight.bookingClass)}</span></div></article>`;
