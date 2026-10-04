@@ -155,6 +155,15 @@
     .fact-note { margin-top: 16px; }
     .transit-list { display: grid; gap: 8px; margin: 0; padding-left: 20px; color: var(--muted); font-size: 13px; }
     .transit-list li::marker { color: var(--accent); }
+    .pretrip-counter { color: var(--accent); font-size: 13px; white-space: nowrap; }
+    .pretrip-list { overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: #f3f4ee; }
+    .pretrip-row { display: flex; align-items: flex-start; gap: 12px; min-height: 54px; padding: 14px 15px; color: var(--muted); font-size: 14px; cursor: pointer; }
+    .pretrip-row + .pretrip-row { border-top: 1px solid var(--line); }
+    .pretrip-row input { width: 22px; height: 22px; flex: 0 0 auto; margin: 1px 0 0; accent-color: var(--accent); cursor: pointer; }
+    .pretrip-row span { min-width: 0; overflow-wrap: anywhere; }
+    .pretrip-row:has(input:checked) { background: #ecefe7; }
+    .pretrip-row:has(input:checked) span { color: #7a8580; text-decoration: line-through; }
+    .pretrip-overview .storage-note { margin-top: 12px; }
     .lodging-grid { display: grid; gap: 10px; }
     .lodging-item { min-width: 0; padding: 15px 16px; background: #f3f4ee; border: 1px solid #dfe2d9; border-radius: 10px; }
     .lodging-item .planning-heading { margin-bottom: 9px; }
@@ -406,11 +415,46 @@
     }
   },
   "pretripTasks": [
-    "Day 2 Klook 糸島一日遊：待購買；確認 2027 商品內容、集合位置／時間及返回博多安排。",
-    "Day 3 KKday 柳川＋太宰府套票：待購買；確認 Day 1 國際航廈領取櫃檯、營業時間與使用規則，以及 2027 川下り水落ち公告。",
-    "5 人餐廳／體驗：前田屋待預約（21:00 優先、21:30 次選、22:00 備案）；本吉屋待確認分店與預約；Maidreamin 與 Day 4 牛太 本陣待確認 2027 營業時間及訂位方式。",
-    "Minn 行李與入住：確認 Day 1 提早抵達、Day 5 退房後的寄放方式，以及兩筆連續訂單的入住程序；四晚同房已確認。",
-    "努努鶏保存：先確認 Minn 客房是否有符合商品保存需求的冷凍空間及可使用時間，再決定購買時機與數量。"
+    {
+      "id": "buy-klook-itoshima",
+      "text": "Day 2 Klook 糸島一日遊：待購買；確認 2027 商品內容、集合位置／時間及返回博多安排。"
+    },
+    {
+      "id": "buy-kkday-yanagawa-dazaifu",
+      "text": "Day 3 KKday 柳川＋太宰府套票：待購買；確認 Day 1 國際航廈領取櫃檯、營業時間與使用規則。"
+    },
+    {
+      "id": "reserve-maedaya",
+      "text": "前田屋：5 位成人待預約；依 21:00、21:30、22:00 的順位詢問，並確認 2027 營業時間。"
+    },
+    {
+      "id": "confirm-motoyoshiya",
+      "text": "元祖 本吉屋：確認分店、2027 營業時間、5 人座位與預約方式。"
+    },
+    {
+      "id": "confirm-maidreamin",
+      "text": "Maidreamin 天神西通り店：確認 2027 營業時間、5 人訂位方式與是否需要預約。"
+    },
+    {
+      "id": "confirm-gyuta",
+      "text": "Day 4 焼肉の牛太 本陣：確認 2027 營業時間、方案與 5 人訂位方式。"
+    },
+    {
+      "id": "confirm-minn-arrival-luggage",
+      "text": "Minn Day 1 行李處理：確認提早抵達時的寄放與入住程序。"
+    },
+    {
+      "id": "confirm-minn-departure-luggage",
+      "text": "Minn Day 5 行李寄放：確認退房後的寄放方式與取件時間。"
+    },
+    {
+      "id": "confirm-minn-freezer",
+      "text": "Minn 冷凍空間：確認是否符合努努鶏的商品保存需求及可使用時間。"
+    },
+    {
+      "id": "confirm-yanagawa-maintenance",
+      "text": "柳川川下り：確認 2027 水落ち日期與實際運行方式。"
+    }
   ],
   "lodgingOverview": [
     {
@@ -902,9 +946,12 @@
       const statusClass = item.confirmed ? 'confirmed' : 'pending';
       return `<article class="lodging-item"><div class="planning-heading"><strong>${escapeHTML(item.name)}</strong><span class="pill ${statusClass}">${escapeHTML(item.status)}</span></div><p>${escapeHTML(item.period)}</p><p>${escapeHTML(item.detail)}</p>${item.mapKey ? renderMap(item) : ''}</article>`;
     }
+    function renderPretripChecklist() {
+      return `<article class="trip-card pretrip-overview" aria-labelledby="pretrip-title"><div class="planning-heading"><h3 id="pretrip-title">${icon('info')}行前待辦</h3><p class="pretrip-counter" id="pretrip-counter" role="status" aria-live="polite">0 / ${TRIP.pretripTasks.length} 已完成</p></div><div class="pretrip-list">${TRIP.pretripTasks.map(task => `<label class="pretrip-row"><input type="checkbox" data-pretrip="${escapeHTML(task.id)}"><span>${escapeHTML(task.text)}</span></label>`).join('')}</div><p class="storage-note" id="pretrip-storage-note">勾選紀錄僅儲存於目前瀏覽器，不會同步至其他裝置。</p></article>`;
+    }
     function renderTripDetails() {
       const transit = TRIP.transitTip;
-      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Confirmed & pending</p><h2 id="trip-details-title">行前資訊</h2><p>旅行日期、中華航空去回程與 2/21～2/25 四晚 Minn 住宿已確認；住宿方也已確認兩張連續訂單可使用同一間客房。Day 2 一日遊、部分餐廳與預約仍待確認。網站不保存訂位代號或個人資料。</p></div><span class="pill">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>旅行日期</dt><dd>${escapeHTML(TRIP.basics.dates)}・已確認</dd></div><div><dt>旅行人數／日程</dt><dd>${escapeHTML(TRIP.basics.travelers)}・${escapeHTML(TRIP.basics.duration)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><div class="planning-heading"><h3>${icon('arrow')}${escapeHTML(transit.title)}</h3><span class="pill pending">${escapeHTML(transit.status)}</span></div><ul class="transit-list">${transit.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card flight-overview"><h3>${icon('arrow')}已確認航班</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div></article><article class="trip-card lodging-overview"><h3>${icon('pin')}住宿總覽</h3><div class="lodging-grid">${TRIP.lodgingOverview.map(renderLodging).join('')}</div><ul class="transit-list">${TRIP.lodgingNotes.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card pretrip-overview" aria-labelledby="pretrip-title"><div class="planning-heading"><h3 id="pretrip-title">${icon('info')}行前待辦</h3><span class="pill pending">待確認／待安排</span></div><ul class="transit-list">${TRIP.pretripTasks.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article></div>`;
+      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Confirmed & pending</p><h2 id="trip-details-title">行前資訊</h2><p>旅行日期、中華航空去回程與 2/21～2/25 四晚 Minn 住宿已確認；住宿方也已確認兩張連續訂單可使用同一間客房。Day 2 一日遊、部分餐廳與預約仍待確認。網站不保存訂位代號或個人資料。</p></div><span class="pill">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>旅行日期</dt><dd>${escapeHTML(TRIP.basics.dates)}・已確認</dd></div><div><dt>旅行人數／日程</dt><dd>${escapeHTML(TRIP.basics.travelers)}・${escapeHTML(TRIP.basics.duration)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><div class="planning-heading"><h3>${icon('arrow')}${escapeHTML(transit.title)}</h3><span class="pill pending">${escapeHTML(transit.status)}</span></div><ul class="transit-list">${transit.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card flight-overview"><h3>${icon('arrow')}已確認航班</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div></article><article class="trip-card lodging-overview"><h3>${icon('pin')}住宿總覽</h3><div class="lodging-grid">${TRIP.lodgingOverview.map(renderLodging).join('')}</div><ul class="transit-list">${TRIP.lodgingNotes.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article>${renderPretripChecklist()}</div>`;
     }
     function renderDay(day) {
       return `<section id="day-${day.id}" class="day-section" style="${dayStyle(day)}" aria-labelledby="day-${day.id}-title">
@@ -924,12 +971,14 @@
     }
 
     // Local persistence must never prevent offline itinerary rendering.
-    // Keep the existing storage schema/key so saved gift IDs remain compatible.
-    // New gift categories use new IDs rather than inheriting old completion states.
+    // Keep the existing storage key so saved gift IDs and notes remain compatible.
+    // Pre-trip checklist state is added as a new property on the same stored object.
     const STORAGE_KEY = 'fukuoka-trip.v1.local';
-    let state = { gifts: {}, notes: {} };
+    let state = { gifts: {}, notes: {}, pretrip: {} };
     function storageUnavailable() {
       document.getElementById('storage-note').textContent = '目前瀏覽器無法保存紀錄；勾選僅在這次開啟期間保留，行程仍可正常閱讀。';
+      const pretripNote = document.getElementById('pretrip-storage-note');
+      if (pretripNote) pretripNote.textContent = '目前瀏覽器無法保存紀錄；勾選僅在這次開啟期間保留。';
     }
     function readState() {
       try {
@@ -937,6 +986,7 @@
         if (saved && typeof saved === 'object') {
           if (saved.gifts && typeof saved.gifts === 'object' && !Array.isArray(saved.gifts)) state.gifts = saved.gifts;
           if (saved.notes && typeof saved.notes === 'object' && !Array.isArray(saved.notes)) state.notes = saved.notes;
+          if (saved.pretrip && typeof saved.pretrip === 'object' && !Array.isArray(saved.pretrip)) state.pretrip = saved.pretrip;
         }
         // Detect blocked storage even on the first visit.
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -949,12 +999,21 @@
       const count = document.querySelectorAll('[data-gift]:checked').length;
       document.getElementById('gift-counter').textContent = `${count} / ${TRIP.gifts.length} 已完成`;
     }
+    function updatePretripCounter() {
+      const count = document.querySelectorAll('[data-pretrip]:checked').length;
+      document.getElementById('pretrip-counter').textContent = `${count} / ${TRIP.pretripTasks.length} 已完成`;
+    }
     function setupLocalInputs() {
       document.querySelectorAll('[data-gift]').forEach(input => {
         input.checked = state.gifts[input.dataset.gift] === true;
         input.addEventListener('change', () => { state.gifts[input.dataset.gift] = input.checked; saveState(); updateGiftCounter(); });
       });
+      document.querySelectorAll('[data-pretrip]').forEach(input => {
+        input.checked = state.pretrip[input.dataset.pretrip] === true;
+        input.addEventListener('change', () => { state.pretrip[input.dataset.pretrip] = input.checked; saveState(); updatePretripCounter(); });
+      });
       updateGiftCounter();
+      updatePretripCounter();
     }
     function setupDisclosure() {
       document.querySelectorAll('[data-expand]').forEach(button => {
