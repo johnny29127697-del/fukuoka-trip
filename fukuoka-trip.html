@@ -190,7 +190,7 @@
       .trip-facts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .flight-overview { grid-column: 1 / -1; }
       .flight-overview .flight-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .lodging-overview { grid-column: 1 / -1; }
+      .lodging-overview, .pretrip-overview { grid-column: 1 / -1; }
       .lodging-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
       .day-header { display: flex; justify-content: space-between; align-items: center; }
     }
@@ -314,7 +314,7 @@
     /*
      * EDITING GUIDE
      * 1. Edit TRIP only to change the itinerary. No dependencies or fetch calls.
-     * 2. Each stop: period, title, teaser, note, mapUrl. Use null until confirmed.
+     * 2. Each stop: period, title, teaser, note, mapUrl; mapKey uses mapLocations below.
      * 3. mapUrl accepts a Google Maps HTTPS URL; bookingUrl currently accepts Klook only.
      * 4. Browser-local state is separate from itinerary data and versioned.
      * 5. This classic inline script works directly under file://.
@@ -368,13 +368,58 @@
       "Suica 不併入信用卡 ¥640 上限；此上限僅適用福岡市地下鐵，不含 JR 與西鐵。"
     ]
   },
+  "mapLocations": {
+    "minn": {
+      "title": "Minn Hakata Station East",
+      "query": "Minn 博多 Station East 福岡市博多区博多駅東3丁目9-30",
+      "label": "地圖：Minn ↗"
+    },
+    "tower": {
+      "title": "福岡塔",
+      "query": "福岡タワー 福岡市早良区百道浜2-3-26",
+      "label": "地圖：福岡塔 ↗"
+    },
+    "maedaya": {
+      "title": "博多もつ鍋 前田屋 総本店",
+      "query": "博多もつ鍋 前田屋 総本店 福岡市博多区博多駅東2-9-20",
+      "label": "地圖：前田屋 総本店 ↗"
+    },
+    "motoyoshiya": {
+      "title": "元祖 本吉屋（分店待確認）",
+      "query": "元祖 本吉屋 柳川",
+      "label": "搜尋本吉屋（分店待確認）↗"
+    },
+    "maidreamin": {
+      "title": "Maidreamin 天神西通り店",
+      "query": "めいどりーみん 天神西通り店 福岡市中央区大名2-1-5",
+      "label": "地圖：Maidreamin 天神西通店 ↗"
+    },
+    "gyuta": {
+      "title": "焼肉の牛太 本陣 ヨドバシ博多店",
+      "query": "焼肉の牛太 本陣 ヨドバシ博多店 福岡市博多区博多駅中央街6-12",
+      "label": "地圖：牛太 本陣 ヨドバシ博多店 ↗"
+    },
+    "airport": {
+      "title": "福岡機場國際航廈",
+      "query": "福岡空港 国際線ターミナル 福岡市博多区青木739",
+      "label": "地圖：福岡機場國際航廈 ↗"
+    }
+  },
+  "pretripTasks": [
+    "Day 2 Klook 糸島一日遊：待購買；確認 2027 商品內容、集合位置／時間及返回博多安排。",
+    "Day 3 KKday 柳川＋太宰府套票：待購買；確認 Day 1 國際航廈領取櫃檯、營業時間與使用規則，以及 2027 川下り水落ち公告。",
+    "5 人餐廳／體驗：前田屋待預約（21:00 優先、21:30 次選、22:00 備案）；本吉屋待確認分店與預約；Maidreamin 與 Day 4 牛太 本陣待確認 2027 營業時間及訂位方式。",
+    "Minn 行李與入住：確認 Day 1 提早抵達、Day 5 退房後的寄放方式，以及兩筆連續訂單的入住程序；四晚同房已確認。",
+    "努努鶏保存：先確認 Minn 客房是否有符合商品保存需求的冷凍空間及可使用時間，再決定購買時機與數量。"
+  ],
   "lodgingOverview": [
     {
       "period": "入住 2027/02/21（日）・退房 2027/02/25（四）・共 4 晚",
       "name": "Minn Hakata Station East｜4 晚",
       "detail": "明恩飯店－博多站東・5 位成人・兩筆連續訂單",
       "status": "已確認可連續入住同一房間",
-      "confirmed": true
+      "confirmed": true,
+      "mapKey": "minn"
     }
   ],
   "lodgingNotes": [
@@ -406,6 +451,7 @@
           "title": "福岡機場 → Minn Hakata Station East",
           "teaser": "寄放行李／入住依住宿規定處理",
           "note": "四晚住宿皆為 Minn Hakata Station East，且已確認可連續入住同一房間。抵達後依當日入住與寄放規則處理行李；兩筆連續訂單的其他入住程序仍以住宿方規定為準。",
+          "mapKey": "minn",
           "mapUrl": null
         },
         {
@@ -434,6 +480,7 @@
           "title": "福岡塔・夕陽／夜景",
           "teaser": "建議日落前約 45～60 分鐘抵達，實際時間依當日日落時間調整。",
           "note": "由市區前往福岡塔，再於觀景後回中洲。交通路線、票券、營業時間、天候與日落時間待確認；若抵達較晚或體力不足，調整為夜景或縮短停留。",
+          "mapKey": "tower",
           "mapUrl": null
         },
         {
@@ -460,7 +507,7 @@
       "alternatives": [
         "東長寺：僅列備選，不在核心行程；有時間與體力再評估。",
         "Bonus／順路採買：LOPIA 博多友都八喜店（ロピア 博多ヨドバシ店）。有空可買啤酒、飲料、零食與房間需要的食品，作為第一天補給；不列固定行程。",
-        "Day 1 優先 Bonus／順路就先買：努努鶏 博多マイング店。朋友推薦的福岡宵夜候選；若經過博多站且方便，可先買回 Minn，依商品標示妥善冷藏／保存，之後幾晚想吃時搭配啤酒。是否購買仍配合房間使用時間、冰箱空間與當天動線。",
+        "Day 1 優先 Bonus／順路就先買：努努鶏 博多マイング店。朋友推薦的福岡宵夜候選；經過博多站且方便時再買，配合房間可使用時間與當天動線。商品需依包裝標示冷凍保存，先確認 Minn 客房冷凍空間是否足夠；未確認前不預設一次買足幾晚。保存期限與攜帶方式以商品標示及店員說明為準。",
         "抵達延誤時，縮短博多與運河城停留；福岡塔是否改看夜景依當天情況決定。",
         "疲累或天候不佳時，縮短戶外行程，保留休息與晚餐。"
       ]
@@ -515,6 +562,7 @@
           "title": "博多もつ鍋 前田屋 総本店",
           "teaser": "第一候選・待預約",
           "note": "尚未預約。第一順位 21:00、第二順位 21:30，若回程或休息時間較長則以 22:00 為備案；最終依一日遊回程、2027 營業時間、5 人座位與訂位結果調整。晚餐後返回 Minn。",
+          "mapKey": "maedaya",
           "mapUrl": null
         }
       ],
@@ -565,6 +613,7 @@
           "title": "柳川鰻魚蒸籠飯",
           "teaser": "元祖 本吉屋・餐廳候選／待預約",
           "note": "元祖 本吉屋列為第一候選，目前尚未預約。營業時間、5 人座位、候位、價格與交通動線需行前確認；若候位過久，改選其他柳川鰻魚店。",
+          "mapKey": "motoyoshiya",
           "mapUrl": null
         },
         {
@@ -586,6 +635,7 @@
           "title": "太宰府 → 天神 → Maidcafe Maidreamin 天神西通り店",
           "teaser": "朋友想體驗的日本特色行程・待確認",
           "note": "回到天神後前往 Maidcafe Maidreamin 天神西通り店。5 位成人，目前尚未訂位；待確認 2027 營業時間、5 人訂位方式與是否需要預約。結束後返回 Minn。",
+          "mapKey": "maidreamin",
           "mapUrl": null
         }
       ],
@@ -646,6 +696,7 @@
           "title": "返回博多 → 焼肉の牛太 本陣 ヨドバシ博多店 → 回 Minn",
           "teaser": "晚餐第一候選／待預約",
           "note": "焼肉の牛太 本陣 ヨドバシ博多店（Yakiniku no Gyuta Honjin Yodobashi Hakata）位於博多站旁 Yodobashi Hakata，適合從天神購物結束後返回博多用餐。店內有燒肉吃到飽方案，目前尚未預約；實際 2027 價格、方案、營業時間及 5 人訂位方式需行前再確認。餐後返回 Minn。",
+          "mapKey": "gyuta",
           "mapUrl": null
         }
       ],
@@ -719,6 +770,7 @@
           "title": "前往福岡機場 → 回程",
           "teaser": "預留約 3 小時・報到・托運・安檢・出境",
           "note": "已確認搭乘中華航空 CI117，2027/02/25（四）福岡 20:35 出發、桃園 22:20 抵達。建議約 17:20～17:30 抵達福岡機場國際航廈，預留約 3 小時辦理報到、行李托運、安檢、出境，以及免稅／退稅相關事項。福岡機場地鐵站與國際航廈不是同一位置，需另外預留航廈接駁時間。",
+          "mapKey": "airport",
           "mapUrl": null
         }
       ],
@@ -822,11 +874,14 @@
     const list = items => `<ul>${items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>`;
     const dayStyle = day => `--day-accent:${day.accent};--card:${day.tint}`;
     function renderMap(stop) {
+      const place = TRIP.mapLocations[stop.mapKey];
+      const title = place ? place.title : stop.title;
+      const mapUrl = place ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.query)}` : stop.mapUrl;
       let url;
-      try { url = new URL(stop.mapUrl); } catch { /* An unset link is expected. */ }
+      try { url = new URL(mapUrl); } catch { /* An unset link is expected. */ }
       const allowed = url && url.protocol === 'https:' && /(^|\.)(google\.(com|co\.jp)|goo\.gl|maps\.app\.goo\.gl)$/.test(url.hostname);
       return allowed
-        ? `<a class="map-link" href="${escapeHTML(url.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(stop.title)}：開啟 Google Maps（需要網路，另開分頁）">${icon('pin')}Google Maps ↗</a>`
+        ? `<a class="map-link" href="${escapeHTML(url.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(title)}：開啟 Google Maps（需要網路，另開分頁）">${icon('pin')}${escapeHTML(place ? place.label : 'Google Maps ↗')}</a>`
         : `<button class="map-link" type="button" disabled aria-label="${escapeHTML(stop.title)}：Google Maps 連結待確認">${icon('pin')}Google Maps · 待確認</button>`;
     }
     function renderBooking(stop) {
@@ -845,11 +900,11 @@
     }
     function renderLodging(item) {
       const statusClass = item.confirmed ? 'confirmed' : 'pending';
-      return `<article class="lodging-item"><div class="planning-heading"><strong>${escapeHTML(item.name)}</strong><span class="pill ${statusClass}">${escapeHTML(item.status)}</span></div><p>${escapeHTML(item.period)}</p><p>${escapeHTML(item.detail)}</p></article>`;
+      return `<article class="lodging-item"><div class="planning-heading"><strong>${escapeHTML(item.name)}</strong><span class="pill ${statusClass}">${escapeHTML(item.status)}</span></div><p>${escapeHTML(item.period)}</p><p>${escapeHTML(item.detail)}</p>${item.mapKey ? renderMap(item) : ''}</article>`;
     }
     function renderTripDetails() {
       const transit = TRIP.transitTip;
-      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Confirmed & pending</p><h2 id="trip-details-title">行前資訊</h2><p>旅行日期、中華航空去回程與 2/21～2/25 四晚 Minn 住宿已確認；住宿方也已確認兩張連續訂單可使用同一間客房。Day 2 一日遊、部分餐廳與預約仍待確認。網站不保存訂位代號或個人資料。</p></div><span class="pill">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>旅行日期</dt><dd>${escapeHTML(TRIP.basics.dates)}・已確認</dd></div><div><dt>旅行人數／日程</dt><dd>${escapeHTML(TRIP.basics.travelers)}・${escapeHTML(TRIP.basics.duration)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><div class="planning-heading"><h3>${icon('arrow')}${escapeHTML(transit.title)}</h3><span class="pill pending">${escapeHTML(transit.status)}</span></div><ul class="transit-list">${transit.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card flight-overview"><h3>${icon('arrow')}已確認航班</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div></article><article class="trip-card lodging-overview"><h3>${icon('pin')}住宿總覽</h3><div class="lodging-grid">${TRIP.lodgingOverview.map(renderLodging).join('')}</div><ul class="transit-list">${TRIP.lodgingNotes.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article></div>`;
+      document.getElementById('trip-details').innerHTML = `<header class="trip-facts-heading"><div><p class="eyebrow">Travel plan / Confirmed & pending</p><h2 id="trip-details-title">行前資訊</h2><p>旅行日期、中華航空去回程與 2/21～2/25 四晚 Minn 住宿已確認；住宿方也已確認兩張連續訂單可使用同一間客房。Day 2 一日遊、部分餐廳與預約仍待確認。網站不保存訂位代號或個人資料。</p></div><span class="pill">${escapeHTML(TRIP.basics.status)}</span></header><div class="trip-facts-grid"><article class="trip-card"><h3>${icon('info')}旅行基本資料</h3><dl class="fact-list"><div><dt>旅行日期</dt><dd>${escapeHTML(TRIP.basics.dates)}・已確認</dd></div><div><dt>旅行人數／日程</dt><dd>${escapeHTML(TRIP.basics.travelers)}・${escapeHTML(TRIP.basics.duration)}</dd></div><div><dt>目前狀態</dt><dd>${escapeHTML(TRIP.basics.status)}</dd></div></dl></article><article class="trip-card"><div class="planning-heading"><h3>${icon('arrow')}${escapeHTML(transit.title)}</h3><span class="pill pending">${escapeHTML(transit.status)}</span></div><ul class="transit-list">${transit.items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card flight-overview"><h3>${icon('arrow')}已確認航班</h3><div class="flight-stack">${TRIP.flights.map(renderFlight).join('')}</div></article><article class="trip-card lodging-overview"><h3>${icon('pin')}住宿總覽</h3><div class="lodging-grid">${TRIP.lodgingOverview.map(renderLodging).join('')}</div><ul class="transit-list">${TRIP.lodgingNotes.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article><article class="trip-card pretrip-overview" aria-labelledby="pretrip-title"><div class="planning-heading"><h3 id="pretrip-title">${icon('info')}行前待辦</h3><span class="pill pending">待確認／待安排</span></div><ul class="transit-list">${TRIP.pretripTasks.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></article></div>`;
     }
     function renderDay(day) {
       return `<section id="day-${day.id}" class="day-section" style="${dayStyle(day)}" aria-labelledby="day-${day.id}-title">
